@@ -1,0 +1,150 @@
+@import '/src/styles/mixin.scss';
+@import '/src/styles/theme.scss';
+
+.comments {
+  &__container {
+    font-family: Gmarket Sans;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-family: Gmarket Sans;
+  }
+
+  &__input__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 818px;
+  }
+
+  &__input__text {
+    width: 610px;
+    height: 50px;
+    border-radius: 10px 0 0 10px;
+    border: 3px solid #000;
+    border-right: none;
+    background: #fff;
+    outline: none;
+    font-size: 18px;
+    flex-shrink: 0;
+    padding: 0 10px 0 17px;
+  }
+
+  &__length {
+    border: 3px solid #000;
+    border-left: none;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-right: 17px;
+    width: 100%;
+    justify-content: flex-end;
+    background-color: #fff;
+  }
+
+  &__length__max {
+    color: red;
+  }
+
+  &__input__btn {
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+    border: 3px solid #000;
+    background: #000;
+    width: 117px;
+    flex-shrink: 0;
+    height: 50px;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__input__btn:disabled {
+    cursor: not-allowed;
+    color: #999;
+  }
+
+  &__list__inner {
+    display: flex;
+    flex-direction: column;
+    width: 818px;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  &__list {
+    width: 818px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 5px 12px 5px 19px;
+    justify-content: space-between;
+  }
+
+  &__comment_list {
+    color: #000;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__right__side {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    line-height: 2;
+  }
+
+  &__right__side > span {
+    color: #bdbdbd;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  &__delete__btn {
+    width: 49px;
+    height: 27px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #f00;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.more__btn {
+  margin-top: 25px;
+  flex-shrink: 0;
+  width: 69px;
+  height: 27px;
+  border-radius: 4px;
+  background: #0f60ce;
+  color: #fff;
+  text-align: center;
+  font-family: Gmarket Sans;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+
+  &:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
+}

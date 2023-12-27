@@ -1,0 +1,24 @@
+.CommunityHeader {
+  gap: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+.CategoryButton {
+  width: 148px;
+  height: 28px;
+  display: flex;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  overflow: hidden;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e3e3e3;
+  background-color: #ffffff;
+}
+.Select {
+  color: #ffffff;
+  background-color: #0f60ce;
+}

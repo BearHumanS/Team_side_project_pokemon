@@ -1,0 +1,265 @@
+@import 'src/styles/theme.scss';
+
+.wrapper {
+  width: 350px;
+  height: 485px;
+  border-radius: 23px;
+  border: 3px solid #000;
+  padding: 15px;
+  position: relative;
+}
+
+.wrapper__my {
+  width: 183px;
+  height: 253px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2px solid #000;
+  padding: 8px;
+  position: relative;
+}
+
+.pokemon_number {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 74px;
+  height: 34px;
+  position: absolute;
+  border-radius: 23px 0px;
+}
+
+.pokemon_number__my {
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 17px;
+  position: absolute;
+  border-radius: 23px 0px;
+}
+
+.white_block {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.white_block__my {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    gap: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  &__bottom {
+    margin: 0 15px 15px 15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #eae6e6;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.container__my {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    gap: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  &__bottom {
+    margin: 0 8px 7px 8px;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #eae6e6;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.type_containter {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.type_containter__my {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pokemon_image {
+  width: 150px;
+  height: 150px;
+}
+
+.pokemon_image__my {
+  width: 78px;
+  height: 78px;
+}
+
+.pokemon_intro {
+  gap: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon_intro__my {
+  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon_name {
+  display: flex;
+  gap: 5px;
+}
+
+.pokemon_name__my {
+  display: flex;
+  gap: 3px;
+}
+
+.status {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+}
+
+.status__my {
+  font-size: 6px;
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+
+  & span {
+    color: #000;
+  }
+}
+
+.logo {
+  width: 70px;
+}
+
+.logo__my {
+  width: 35px;
+}
+
+.total_stat {
+  align-items: flex-end;
+  display: flex;
+  gap: 5px;
+}
+
+.text {
+  &__small {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  &__small__my {
+    font-size: 8px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &__large {
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  &__large__my {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+  }
+}
+
+@each $type, $color in $type-colors {
+  .wrapper.#{$type} {
+    background-color: $color;
+  }
+
+  .pokemon_number.#{$type} {
+    background-color: $color;
+  }
+
+  .container.#{$type} {
+    background-color: rgba($color, 0.3);
+  }
+
+  .wrapper__my.#{$type} {
+    background-color: $color;
+  }
+
+  .pokemon_number__my.#{$type} {
+    background-color: $color;
+    color: #fff;
+  }
+
+  .container__my.#{$type} {
+    background-color: rgba($color, 0.3);
+  }
+}

@@ -1,0 +1,358 @@
+// Introduce
+
+.intro {
+  &__container {
+    width: 1200px;
+    height: 222px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-top: 36px;
+  }
+
+  &__profile__img {
+    width: 162px;
+    height: 162px;
+    flex-shrink: 0;
+    position: relative;
+    margin-right: 30px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row-reverse;
+
+    img {
+      position: absolute;
+      left: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    &__edit {
+      position: absolute;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      font-family: Gmarket Sans;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      background-color: rgba(0, 0, 0, 0.4);
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      input {
+        display: none;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+
+    &__name {
+      color: #000;
+      font-family: Gmarket Sans;
+      font-size: 34px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .editModeOn input {
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #000;
+    }
+
+    &__talk {
+      width: 278px;
+      height: 33px;
+      flex-shrink: 0;
+      color: #000;
+      font-family: Gmarket Sans;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 22px;
+      white-space: pre-wrap;
+      display: flex;
+      width: 100%;
+      gap: 10px;
+
+      div {
+        display: flex;
+        height: 70px;
+        align-items: flex-end;
+      }
+    }
+
+    .editModeOn textarea {
+      resize: none;
+      width: 400px;
+      height: 70px;
+      outline: none;
+      white-space: pre-wrap;
+    }
+  }
+
+  &__info__edit {
+    position: relative;
+    right: 19px;
+    height: 100%;
+    top: 15px;
+
+    &__btn {
+      width: 80px;
+      height: 25px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      border: 1px solid #c6c6c6;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .editModeOff {
+      span {
+        width: 54px;
+        height: 10px;
+        flex-shrink: 0;
+        color: #c6c6c6;
+        text-align: center;
+        font-family: Gmarket Sans;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+
+    .editModeOn {
+      border: 1px solid #ff612c;
+
+      span {
+        color: #ff612c;
+        text-align: center;
+        font-family: Gmarket Sans;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+  }
+}
+
+// Mycard
+
+.mycard {
+  &__container {
+    width: 1200px;
+    height: 392px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    margin-top: 30px;
+    padding: 35px 22px 46px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__top__box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    color: #000;
+    font-family: Gmarket Sans;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    width: 100%;
+  }
+
+  &__make__btn {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 7px;
+
+    button {
+      width: 99px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: #0f60ce;
+      border: none;
+      color: #fff;
+      text-align: center;
+      font-family: Gmarket Sans;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+    }
+  }
+
+  &__layout__box {
+    display: flex;
+    gap: 13px;
+  }
+
+  &__layout {
+    width: 182px;
+    height: 253px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e3e3e3;
+    cursor: pointer;
+
+    div {
+      color: #a5a5a5;
+    }
+  }
+}
+
+// MyActive
+
+.myactive {
+  &__total__container {
+    margin-top: 30px;
+    display: flex;
+    width: 1200px;
+    height: 750px;
+    gap: 38px;
+  }
+
+  &__left__container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__posts {
+    width: 596px;
+    height: 360px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+  }
+
+  &__posts__favorite {
+    width: 596px;
+    height: 360px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+  }
+
+  &__right__container {
+    width: 568px;
+    height: 750px;
+    flex-shrink: 0;
+    border-radius: 10.067px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    overflow: auto;
+  }
+
+  &__liked__title {
+    padding: 22px 33px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+
+    span {
+      color: #000;
+      font-family: Gmarket Sans;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+
+  &__liked__box {
+    padding: 0 29px 22px 29px;
+    height: auto;
+    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+    span {
+      color: #000;
+      text-align: center;
+      font-family: Gmarket Sans;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  &__liked__pokemon__box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__liked__pokemon {
+    width: 121px;
+    height: 121px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  &__liked__cancel {
+    background-color: inherit;
+    border: none;
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    padding: 0;
+    cursor: pointer;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    color: #c6c6c6;
+  }
+
+  &__liked__cancel:hover {
+    color: #000;
+  }
+}

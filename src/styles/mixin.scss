@@ -1,0 +1,56 @@
+@mixin plate_style {
+  width: 95px;
+  height: 33px;
+  display: flex;
+  padding: 5px 0;
+  border-radius: 16.5px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 3px;
+
+  img {
+    width: 20px;
+  }
+}
+
+@mixin plate_click_style($color) {
+  @include plate_style;
+  color: #fff;
+  cursor: pointer;
+  background-color: $color;
+  transition: all 0.2s ease-in-out;
+}
+
+@mixin plate_unclick_style($color) {
+  @include plate_style;
+  color: $color;
+  cursor: pointer;
+  background-color: #fff;
+  border: 2px solid $color;
+  transition: all 0.2s ease-in-out;
+}
+
+@mixin plate_pokemon_type($color) {
+  border-radius: 8px;
+  align-items: center;
+  font-size: 10px;
+  justify-content: center;
+  color: #fff;
+  background-color: $color;
+  width: 60px;
+  height: 23px;
+
+  img {
+    width: 15px;
+  }
+}
+
+@mixin input_box_type($color) {
+  border: 3px solid $color;
+}
+
+@mixin cardWrapper($width, $height) {
+  width: $width;
+  height: $height;
+}

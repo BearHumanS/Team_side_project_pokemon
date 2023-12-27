@@ -1,0 +1,99 @@
+@import 'src/styles/mixin.scss';
+@import 'src/styles/theme.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.type_outer_container {
+  width: 100vw;
+  height: 100%;
+  border-bottom: 4px solid #000;
+}
+
+.type_plate {
+  display: flex;
+  gap: 10px;
+}
+
+.type_image {
+  width: 100%;
+  height: 100%;
+}
+
+.type_plate__my {
+  display: flex;
+  gap: 3px;
+}
+
+.type_container {
+  padding: 25px 0;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 500px;
+  opacity: 1;
+  transition: 0.3s ease-out;
+
+  &.closed {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  > span {
+    align-self: flex-start;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .type_plates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@each $type, $color in $type-colors {
+  .click_plate.#{$type} {
+    @include plate_click_style($color);
+  }
+
+  .unclick_plate.#{$type} {
+    @include plate_unclick_style($color);
+  }
+
+  .type_plate.#{$type} {
+    @include plate_pokemon_type($color);
+  }
+
+  .type_plate__my.#{$type} {
+    @include plate_pokemon_type($color);
+    width: 33px;
+    height: 11px;
+
+    img {
+      width: 7px;
+    }
+
+    span {
+      font-size: 7px;
+    }
+  }
+}
+
+.hide_button {
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 0px;
+  justify-self: center;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 24px solid #000;
+  width: 111px;
+}

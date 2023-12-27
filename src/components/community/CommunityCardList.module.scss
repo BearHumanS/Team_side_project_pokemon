@@ -1,0 +1,50 @@
+.container {
+    width: 100%;
+    height: auto;
+    display: grid;
+    justify-items: center;
+    column-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    justify-content: space-between;
+}
+
+.searchWritingBox {
+    width: 100%;
+    display: flex;
+    margin-top: 4px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.pagination{
+    display: flex;
+    justify-content: end;
+}
+
+.CommunityHeader {
+    gap: 6px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .CategoryButton {
+    width: 148px;
+    height: 28px;
+    display: flex;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    overflow: hidden;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e3e3e3;
+    background-color: #ffffff;
+  }
+  .Select {
+    color: #ffffff;
+    background-color: #0f60ce;
+  }
+  
