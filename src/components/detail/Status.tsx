@@ -12,7 +12,7 @@ const Status = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
   return (
     <>
       <div className={styles.stats__main}>
-        <LikePokemon pokemonId={pokemonId || ''} />
+        <LikePokemon pokemonId={pokemonId || ''} isLoading={isLoading} />
         <div className={styles.stats__container}>
           <div className={styles.stats}>
             <div className={styles.stats__top}>

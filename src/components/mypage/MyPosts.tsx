@@ -52,7 +52,7 @@ const MyPosts = () => {
     };
 
     fetchData();
-  }, [user?.uid]);
+  }, [user?.uid, posts]);
 
   const onEdit = (data: PostData, id: string) => {
     navigate(`/community/edit`, { state: { data, id } });
@@ -64,7 +64,12 @@ const MyPosts = () => {
     if (confirm && user?.uid) {
       try {
         await deleteCommunity(`community/${postId}`);
-        navigate(`/community`);
+
+        const newTotal = posts.length - 1;
+        const maxPage = Math.ceil(newTotal / itemsPerPage);
+        if (currentPage > maxPage) {
+          setCurrentPage(maxPage > 0 ? maxPage : 1);
+        }
         console.log('글이 삭제 되었습니다.');
       } catch (error) {
         console.error(error);
@@ -77,20 +82,31 @@ const MyPosts = () => {
   };
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <div className={styles.myactive__posts__title}>
         <span>작성한 게시물</span>
       </div>
-      <div className={styles.myactive__posts__box}>
-        {currentItems.map((post) => (
-          <RenderPost
-            key={post.id}
-            post={post}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
-      </div>
+      {posts.length === 0 ? (
+        <>
+          <div className={styles.myactive__posts__box__none}>
+            작성한 게시물이 없습니다.
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={styles.myactive__posts__box}>
+            {currentItems.map((post) => (
+              <RenderPost
+                key={post.id}
+                post={post}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
       <div className={styles.pagination}>
         <Pagination
           defaultCurrent={currentPage}

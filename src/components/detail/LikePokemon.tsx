@@ -7,9 +7,10 @@ import { getDocument, setDocument } from '@/lib/firebaseQuery';
 
 interface LikePokemonProps {
   pokemonId: string | number;
+  isLoading: boolean;
 }
 
-const LikePokemon = ({ pokemonId }: LikePokemonProps) => {
+const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [animate, setAnimate] = useState(false);
 
@@ -18,37 +19,47 @@ const LikePokemon = ({ pokemonId }: LikePokemonProps) => {
   const fetchLikeState = async () => {
     if (!user?.uid) return;
 
-    const docSanp = await getDocument(`/likes/${user.uid}`);
+    try {
+      const docSanp = await getDocument(`/likes/${user.uid}`);
 
-    if (docSanp) {
-      const likes = docSanp.data().pokemons || [];
-      setIsLiked(likes.includes(pokemonId));
+      if (docSanp) {
+        const likes = docSanp.data().pokemons || [];
+        setIsLiked(likes.includes(pokemonId));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const onToggleLike = async () => {
     if (!user?.uid) return;
-
     setAnimate(true);
+    try {
+      const docSnap = await getDocument(`/likes/${user.uid}`);
+      let likes = [];
 
-    const docSnap = await getDocument(`/likes/${user.uid}`);
-    let likes = [];
+      setTimeout(() => setAnimate(false), 1000);
 
-    setTimeout(() => setAnimate(false), 1000);
-
-    if (docSnap) {
-      likes = docSnap.data().pokemons || [];
-      if (likes.includes(pokemonId)) {
-        likes = likes.filter((id: string) => id !== pokemonId);
+      if (docSnap) {
+        likes = docSnap.data().pokemons || [];
+        if (likes.includes(pokemonId)) {
+          likes = likes.filter((id: string) => id !== pokemonId);
+        } else {
+          likes.push(pokemonId);
+        }
       } else {
-        likes.push(pokemonId);
+        likes = [pokemonId];
       }
-    } else {
-      likes = [pokemonId];
-    }
 
-    await setDocument(`/likes/${user.uid}`, { uid: user.uid, pokemons: likes });
-    setIsLiked((prev) => !prev);
+      await setDocument(`/likes/${user.uid}`, {
+        uid: user.uid,
+        pokemons: likes,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLiked((prev) => !prev);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +72,7 @@ const LikePokemon = ({ pokemonId }: LikePokemonProps) => {
       <button
         className={styles.stats__like}
         onClick={onToggleLike}
-        disabled={!user}
+        disabled={isLoading || !user}
       >
         {isLiked ? (
           <FaHeart
@@ -72,7 +83,10 @@ const LikePokemon = ({ pokemonId }: LikePokemonProps) => {
             }`}
           />
         ) : (
-          <FaRegHeart size={18} color={user ? '#FF5050' : '#999'} />
+          <FaRegHeart
+            size={18}
+            color={isLoading || !user ? '#999' : '#FF5050'}
+          />
         )}
         <span>찜하기</span>
       </button>

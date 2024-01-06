@@ -30,16 +30,26 @@ const MyLikedPokemon = () => {
         <div className={styles.myactive__liked__title}>
           <span>찜한 포켓몬</span>
         </div>
-        <div className={styles.myactive__liked__box}>
-          {pokemonData.map((pokemon) => (
-            <RenderPokemon
-              key={pokemon.id}
-              pokemon={pokemon}
-              onCancelLiked={onCancelLiked}
-              onMoveToPokemonDetail={onMoveToPokemonDetail}
-            />
-          ))}
-        </div>
+        {pokemonData.length === 0 ? (
+          <>
+            <div className={styles.myactive__liked__box__none}>
+              찜한 포켓몬이 없습니다.
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.myactive__liked__box}>
+              {pokemonData.map((pokemon) => (
+                <RenderPokemon
+                  key={pokemon.id}
+                  pokemon={pokemon}
+                  onCancelLiked={onCancelLiked}
+                  onMoveToPokemonDetail={onMoveToPokemonDetail}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

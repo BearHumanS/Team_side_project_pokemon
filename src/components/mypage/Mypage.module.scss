@@ -307,6 +307,13 @@
       flex-direction: column;
       align-items: center;
 
+      &__none {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 77%;
+      }
+
       &__item {
         width: 549px;
         display: flex;
@@ -403,6 +410,13 @@
 
     img {
       cursor: pointer;
+    }
+
+    &__none {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 77%;
     }
   }
 
