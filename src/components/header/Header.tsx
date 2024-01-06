@@ -35,14 +35,14 @@ const Header = () => {
       <header className={styles.main__header}>
         <div className={styles.header__section}>
           <div>
-            <Link to="/" className={styles.logo}>
+            <a href="/" className={styles.logo}>
               <img
                 src="/src/assets/logo-pokehub.png"
                 alt="logo"
                 width={132}
                 height={59}
               />
-            </Link>
+            </a>
             <div className={styles.menu__group}>
               <SearchInput />
               <nav className={styles.nav__box}>

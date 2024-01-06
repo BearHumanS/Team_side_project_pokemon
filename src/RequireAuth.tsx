@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { childrenProps } from './lib/type';
 
 const RequireAuth = ({ children }: childrenProps) => {
-  const { user, isLoading } = useUserStore();
+  const { user } = useUserStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user && !isLoading) {
-      console.log('asgdasd');
-      navigate('/', { replace: true });
+    if (!user) {
+      alert('로그인 해주세요.');
+      navigate('/');
     }
-  }, [user, navigate, isLoading]);
+  }, [user, navigate]);
   return user ? children : null;
 };
 

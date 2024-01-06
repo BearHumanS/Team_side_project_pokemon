@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Mypage.module.scss';
 import { FiPlus } from '@react-icons/all-files/fi/FiPlus';
 import { Modalportal } from '@/portal';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import CardModal from '../modal/CardModal';
-import { getAllDocument } from '@/lib/firebaseQuery';
+import { deleteDocument, getAllDocument } from '@/lib/firebaseQuery';
 import useUserStore from '@/store/useUsersStore';
 import { DocumentData } from 'firebase/firestore';
 import PokemonCard from '../card/PokemonCard';
@@ -56,7 +56,7 @@ const Mycard = () => {
   }, []);
 
   const onMoveMakeCard = () => {
-    navigate('/');
+    navigate('/cardEdit');
   };
 
   const onModalToggle = (card?: Card) => {
@@ -67,21 +67,47 @@ const Mycard = () => {
     setSelectedCard(card);
   };
 
+  const onDeleteCard = (cardId: string | number) => async (e: MouseEvent) => {
+    e.stopPropagation();
+    const confirm = window.confirm('해당 카드를 삭제하시겠습니까?');
+    if (confirm && user) {
+      try {
+        await deleteDocument(`/cards/${user.uid}/pokemonCards/${cardId}`);
+
+        setCards((currentCards) =>
+          currentCards.filter((card) => card.id !== cardId),
+        );
+
+        console.log('카드가 삭제되었습니다.');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const cardLayout = [];
-  for (let i = 0; i < 6; i++) {
+  const maxCards = 6;
+  for (let i = 0; i < maxCards; i++) {
     if (i < cards.length) {
       const card = cards[i];
       const pokemonNickName = {
         pokemonNickName1: card?.data.pokemonCardData[1],
         pokemonNickName2: card?.data.pokemonCardData[2],
+        pokemonName: card?.data.pokemonCardData[3],
       };
 
       cardLayout.push(
         <div
-          className={styles.mycard__layout}
+          className={styles.mycard__layout__data}
           key={card.id}
           onClick={() => onModalToggle(card)}
         >
+          <div
+            className={styles.mycard__layout__data__delete}
+            onClick={onDeleteCard(card.id)}
+          >
+            <FiPlus size={24} color="#000" />
+          </div>
           <PokemonCard
             pokemonCardData={card?.data.pokemonCardData[0]}
             pokemonNickName={pokemonNickName}
@@ -91,7 +117,7 @@ const Mycard = () => {
       );
     } else {
       cardLayout.push(
-        <div className={styles.mycard__layout} key={i}>
+        <div className={styles.mycard__layout} key={i} onClick={onMoveMakeCard}>
           <FiPlus size={30} />
         </div>,
       );

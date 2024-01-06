@@ -15,8 +15,13 @@ import { useEffect } from 'react'; // 추가
 
 const CardPage = () => {
   const { user } = useUserStore();
-  const { pokemonData, pokemonNickName1, pokemonNickName2, setPokemonData } =
-    useSelectedPokemonForCard();
+  const {
+    pokemonData,
+    pokemonNickName1,
+    pokemonNickName2,
+    setPokemonData,
+    pokemonName,
+  } = useSelectedPokemonForCard();
   const { data } = useGetAllPokemon(1017);
   const filteredPokemonData = {} as filteredPokemonData;
 
@@ -53,6 +58,7 @@ const CardPage = () => {
           filteredPokemonData,
           pokemonNickName1,
           pokemonNickName2,
+          pokemonName,
         ],
         createdAt: new Date().toISOString(),
         uid: user.uid,

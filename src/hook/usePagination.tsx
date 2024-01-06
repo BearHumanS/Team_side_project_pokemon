@@ -1,5 +1,5 @@
 import { CommentProps } from '@/components/comment/Comments';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   QueryDocumentSnapshot,
   DocumentData,
@@ -18,6 +18,12 @@ const usePagination = (collectionPath: string, pageSize: number) => {
   const [hasMoreData, setHasMoreData] = useState(true);
   const [nextDocument, setNextDocument] =
     useState<QueryDocumentSnapshot<DocumentData> | null>(null);
+
+  useEffect(() => {
+    setDataList([]);
+    setNextDocument(null);
+    setHasMoreData(true);
+  }, [collectionPath]);
 
   const fetchData = async (pageCursor?: string) => {
     setIsLoading(true);

@@ -60,10 +60,12 @@ const Introduce = () => {
       return;
     }
 
-    let newImgUrl = null;
+    let newImgUrl = imgUrl;
 
     try {
-      if (imgUrl && imgUrl.startsWith('data:')) {
+      if (imgUrl === PROFILE_DEFAULT_IMG) {
+        newImgUrl = PROFILE_DEFAULT_IMG;
+      } else if (imgUrl && imgUrl.startsWith('data:')) {
         const key = `${user?.uid}/${uuidv4()}`;
         const storageRef = ref(storage, key);
 
@@ -140,7 +142,7 @@ const Introduce = () => {
   };
 
   const onDeleteProfileImg = () => {
-    setImgUrl(null);
+    setImgUrl(PROFILE_DEFAULT_IMG);
   };
 
   return (

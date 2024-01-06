@@ -58,7 +58,11 @@ const LikePokemon = ({ pokemonId }: LikePokemonProps) => {
 
   return (
     <div className={styles.stats__like__box}>
-      <button className={styles.stats__like} onClick={onToggleLike}>
+      <button
+        className={styles.stats__like}
+        onClick={onToggleLike}
+        disabled={!user}
+      >
         {isLiked ? (
           <FaHeart
             size={18}
@@ -68,7 +72,7 @@ const LikePokemon = ({ pokemonId }: LikePokemonProps) => {
             }`}
           />
         ) : (
-          <FaRegHeart size={18} color="#FF5050" />
+          <FaRegHeart size={18} color={user ? '#FF5050' : '#999'} />
         )}
         <span>찜하기</span>
       </button>

@@ -11,6 +11,7 @@ interface PokemonCardProp {
   pokemonNickName?: {
     pokemonNickName1: string;
     pokemonNickName2: string;
+    pokemonName: string;
   };
   isOpen?: boolean;
 }
@@ -134,7 +135,7 @@ const PokemonCard = ({
                     : `${styles.text__large}`
                 }
               >
-                {pokemonName}
+                {pokemonNickName?.pokemonName || pokemonName}
               </span>
             </div>
           </div>

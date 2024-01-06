@@ -218,6 +218,7 @@
     gap: 13px;
   }
 
+  &__layout__data,
   &__layout {
     width: 182px;
     height: 253px;
@@ -229,9 +230,34 @@
     align-items: center;
     border: 1px solid #e3e3e3;
     cursor: pointer;
+    position: relative;
 
     div {
       color: #a5a5a5;
+    }
+
+    &__delete {
+      display: none;
+    }
+
+    &:hover {
+      .mycard__layout__data__delete {
+        display: flex;
+        position: absolute;
+        z-index: 9999;
+        color: black;
+        top: -8px;
+        right: -8px;
+        border-radius: 50%;
+        border: 2px solid #000;
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        justify-content: center;
+        align-items: center;
+        background-color: inherit;
+        transform: rotate(45deg);
+      }
     }
   }
 }
@@ -260,6 +286,66 @@
     border-radius: 10px;
     border: 1px solid #ebebeb;
     background: #fff;
+
+    &__title {
+      padding: 21px 394px 22px 22px;
+
+      span {
+        color: #000;
+        font-family: Gmarket Sans;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+
+    &__box {
+      height: 222px;
+      gap: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__item {
+        width: 549px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+        border-radius: 8px;
+        border: 1px solid #e3e3e3;
+        background-color: inherit;
+        padding: 8px 10px 8px 16px;
+      }
+
+      &__btn__group {
+        display: flex;
+        gap: 9px;
+
+        button {
+          border: none;
+          width: 53px;
+          height: 34px;
+          border-radius: 8px;
+          color: #fff;
+          text-align: center;
+          font-family: Gmarket Sans;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+
+          &:first-child {
+            background-color: #0f60ce;
+          }
+
+          &:last-child {
+            background-color: #ff5050;
+          }
+        }
+      }
+    }
   }
 
   &__posts__favorite {
@@ -355,4 +441,11 @@
   &__liked__cancel:hover {
     color: #000;
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  height: 46px;
+  align-items: end;
 }

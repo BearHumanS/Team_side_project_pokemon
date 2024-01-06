@@ -20,6 +20,7 @@ const CardModal = ({ onModalToggle, cardData, isOpen }: CardModalProps) => {
   const pokemonNickName = {
     pokemonNickName1: card?.pokemonCardData[1],
     pokemonNickName2: card?.pokemonCardData[2],
+    pokemonName: card?.pokemonCardData[3],
   };
 
   const handleContentClick = (e: MouseEvent<HTMLDivElement>) => {

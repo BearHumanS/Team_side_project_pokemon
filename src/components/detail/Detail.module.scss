@@ -157,6 +157,12 @@
     font-weight: 600;
     line-height: normal;
   }
+
+  &:disabled,
+  &:disabled span {
+    color: #999;
+    cursor: not-allowed;
+  }
 }
 
 .stats__like__animate.animateHeart {
