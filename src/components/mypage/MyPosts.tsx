@@ -52,7 +52,7 @@ const MyPosts = () => {
     };
 
     fetchData();
-  }, [user?.uid, posts]);
+  }, [user?.uid]);
 
   const onEdit = (data: PostData, id: string) => {
     navigate(`/community/edit`, { state: { data, id } });
@@ -64,6 +64,7 @@ const MyPosts = () => {
     if (confirm && user?.uid) {
       try {
         await deleteCommunity(`community/${postId}`);
+        setPosts((prev) => prev.filter((post) => post.id !== postId));
 
         const newTotal = posts.length - 1;
         const maxPage = Math.ceil(newTotal / itemsPerPage);

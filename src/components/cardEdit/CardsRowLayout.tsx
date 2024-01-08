@@ -6,43 +6,50 @@ import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
 import { useCallback } from 'react';
 
 interface CardsRowLayoutProps {
-  pokemonArray: PokemonType[];
+  pokemonArray: (PokemonType | null)[];
 }
 
 const CardsRowLayout = ({ pokemonArray }: CardsRowLayoutProps) => {
   const { setPokemonData } = useSelectedPokemonForCard();
 
   const handlePokemonSelection = useCallback(
-    (pokemon: PokemonType) => {
-      setPokemonData(pokemon);
+    (pokemon: PokemonType | null) => {
+      pokemon && setPokemonData(pokemon);
     },
     [setPokemonData],
   );
 
   return (
     <div className={styles.cards__row_cards}>
-      {pokemonArray.map((pokemonData) =>
-        pokemonData ? (
-          <div key={pokemonData.id} className={styles.cards__row_cards__column}>
-            <div className={styles.cards__row_cards__card}>
+      {pokemonArray.map((pokemonData, index) => (
+        <div
+          key={pokemonData ? pokemonData.id : index}
+          className={styles.cards__row_cards__column}
+        >
+          <div className={styles.cards__row_cards__card}>
+            {pokemonData ? (
               <img
                 src={
-                  pokemonData.sprites?.other?.['official-artwork']
+                  pokemonData?.sprites?.other?.['official-artwork']
                     ?.front_default
                 }
                 alt="포켓몬 이미지"
               />
-            </div>
-            <span>{reverseObject(POKEMON_NAME)[pokemonData.name]}</span>
+            ) : null}
+          </div>
+          <span>
+            {pokemonData ? reverseObject(POKEMON_NAME)[pokemonData.name] : ''}
+          </span>
+          {pokemonData ? (
             <button
               className={styles.border_button}
               onClick={() => handlePokemonSelection(pokemonData)}
             >
               포켓몬 사용
             </button>
-          </div>
-        ) : null,
-      )}
+          ) : null}
+        </div>
+      ))}
     </div>
   );
 };

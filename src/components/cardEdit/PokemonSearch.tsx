@@ -1,4 +1,4 @@
-import { FormEvent, useState, useMemo } from 'react';
+import { FormEvent, useState, useMemo, useRef, useEffect } from 'react';
 import styles from './cards.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
@@ -11,10 +11,28 @@ import SearchDropdown from './SearchDropdown';
 const PokemonSearch = () => {
   const [text, setText] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [foundPokemon, setFoundPokemon] = useState<
     (PokemonType | undefined)[] | null
   >(null);
   const { data } = useGetAllPokemon(1017);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as HTMLElement)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [wrapperRef]);
 
   const searchedPokemonName = useMemo(() => POKEMON_NAME[text], [text]);
   const searchedPokemonType = useMemo(
@@ -57,7 +75,12 @@ const PokemonSearch = () => {
           </button>
         </label>
         {isOpen && foundPokemon && (
-          <SearchDropdown searchResults={foundPokemon} setIsOpen={setIsOpen} />
+          <div ref={wrapperRef}>
+            <SearchDropdown
+              searchResults={foundPokemon}
+              setIsOpen={setIsOpen}
+            />
+          </div>
         )}
       </form>
     </div>
