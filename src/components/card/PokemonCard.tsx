@@ -150,7 +150,7 @@ const PokemonCard = ({
             <div>
               <img
                 className={isMyPage ? `${styles.logo__my}` : `${styles.logo}`}
-                src="/src/assets/logo-pokehub.png"
+                src="/logo-pokehub.png"
                 alt="PoketHub"
               />
               <div className={styles.total_stat}>
