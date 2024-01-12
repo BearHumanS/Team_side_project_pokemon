@@ -10,14 +10,14 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
   const { pokemon, selectedFormName } = pokemonState;
 
   const pokemonOfficialImage =
-    pokemon?.sprites.other?.['official-artwork'].front_default ||
-    pokemon?.sprites.other?.home?.front_default;
+    pokemon?.sprites.other?.['official-artwork'].front_default; /* ||
+    pokemon?.sprites.other?.home?.front_default; */
 
   const getLocalImagePath = (name: string | undefined) => {
     if (!name) {
       return;
     }
-    return `/pokemonImg/${name}.png`;
+    return `/pokemonImg/${name}.webp`;
   };
 
   const getKoreanName = (englishName: string | undefined) => {
