@@ -111,7 +111,7 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
               >
                 <img
                   className={styles.socialLogin__icon}
-                  src="/src/assets/socialLoginIcons/google_icon.svg"
+                  src="/socialLoginIcons/google_icon.svg"
                   alt="구글 로그인"
                 />
                 <span>구글 로그인 </span>
@@ -124,7 +124,7 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
               >
                 <img
                   className={styles.socialLogin__icon}
-                  src="/src/assets/socialLoginIcons/github_icon.svg"
+                  src="/socialLoginIcons/github_icon.svg"
                   alt="깃허브 로그인"
                 />
                 <span>깃허브 로그인</span>

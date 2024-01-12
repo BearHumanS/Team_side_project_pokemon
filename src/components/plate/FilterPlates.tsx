@@ -28,9 +28,7 @@ const FilterPlates = () => {
         >
           <img
             className={styles.type_image}
-            src={`/src/assets/icons/${koreanType}_${
-              isPlateSelected ? 'on' : 'off'
-            }.svg`}
+            src={`/icons/${koreanType}_${isPlateSelected ? 'on' : 'off'}.svg`}
             alt={`${koreanType}타입 아이콘`}
           />
           <span>{koreanType}</span>

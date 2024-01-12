@@ -72,12 +72,7 @@ const PokemonInfo = ({
           <div className={styles.pokemon__info__top}>
             <span>정보</span>
           </div>
-          <img
-            src="/src/assets/Rectangle 47.png"
-            alt=""
-            width={13}
-            height={425}
-          />
+          <img src="/Rectangle 47.png" alt="" width={13} height={425} />
           <div className={styles.pokemon__info}>
             <div className={styles.pokemon__info__title}>ID</div>
             <div className={styles.pokemon__info__data}>

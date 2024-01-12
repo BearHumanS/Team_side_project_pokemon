@@ -17,7 +17,7 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
     if (!name) {
       return;
     }
-    return `/src/assets/pokemonImg/${name}.png`;
+    return `/pokemonImg/${name}.png`;
   };
 
   const getKoreanName = (englishName: string | undefined) => {
@@ -65,7 +65,7 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
     <>
       <div className={styles.detail__center}>
         <div className={styles.detail__nameBox}>
-          <img src="/src/assets/pokemon_name_box.svg" alt="name_box" />
+          <img src="/pokemon_name_box.svg" alt="name_box" />
           <span className={styles.detail__name}>{koreanName}</span>
         </div>
 
@@ -101,7 +101,7 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
                     className={`${styles.detail__plate} ${styles[koreanPokemonName]}`}
                   >
                     <img
-                      src={`/src/assets/icons/${koreanPokemonName}_on.svg`}
+                      src={`/icons/${koreanPokemonName}_on.svg`}
                       alt={`${koreanPokemonName}타입 아이콘`}
                     />
                     <div>{koreanPokemonName}</div>

@@ -126,7 +126,7 @@ const EvolutionChain = ({
                             </div>
                             <img
                               className={styles.evolves__pre__evolution__arrow}
-                              src="/src/assets/arrow.svg"
+                              src="/arrow.svg"
                               alt="우측 화살표"
                               width={24}
                               height={38}
@@ -207,7 +207,7 @@ const EvolutionChain = ({
                                 className={
                                   styles.evolves__pre__evolution__arrow
                                 }
-                                src="/src/assets/arrow.svg"
+                                src="/arrow.svg"
                                 alt="우측 화살표"
                                 width={24}
                                 height={38}
@@ -288,7 +288,7 @@ const EvolutionChain = ({
                           </div>
                           {index < evovlutionPokemonData.length - 1 && (
                             <img
-                              src="/src/assets/arrow.svg"
+                              src="/arrow.svg"
                               alt="우측 화살표"
                               width={24}
                               height={38}

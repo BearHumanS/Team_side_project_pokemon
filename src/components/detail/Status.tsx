@@ -18,12 +18,7 @@ const Status = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
             <div className={styles.stats__top}>
               <span>스탯</span>
             </div>
-            <img
-              src="/src/assets/Rectangle 47.png"
-              alt=""
-              width={13}
-              height={425}
-            />
+            <img src="/Rectangle 47.png" alt="" width={13} height={425} />
             <div>
               <div className={`${styles.status}`}>
                 <span>체력</span>

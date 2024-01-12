@@ -12,13 +12,17 @@ import { MdRemoveRedEye } from '@react-icons/all-files/md/MdRemoveRedEye';
 export const fetchProfileImages = async (userId: any) => {
   const fileRef = ref(storage, `${userId}`);
   const result = await listAll(fileRef);
-  const valData = await Promise.all(result.items.map(async (item) => await getDownloadURL(item)));
+  const valData = await Promise.all(
+    result.items.map(async (item) => await getDownloadURL(item)),
+  );
   return valData;
 };
 
 const CommunityCardItem = ({ data }: any) => {
   const navigate = useNavigate();
-  const { data: imageUrl }: any = useQuery(['profileImages', data.userId], () => fetchProfileImages(data.userId));
+  const { data: imageUrl }: any = useQuery(['profileImages', data.userId], () =>
+    fetchProfileImages(data.userId),
+  );
 
   const likeCount = data.likes ? data.likes.length : 0;
 
@@ -29,7 +33,7 @@ const CommunityCardItem = ({ data }: any) => {
   return (
     <div className={styles.container} onClick={handleToDetail}>
       <div className={styles.titleImg}>
-        <img src={`src/assets/${data.postImg}`} />
+        <img src={`/${data.postImg}`} />
       </div>
       <div className={styles.innerBox}>
         <div className={styles.titleItem}>{data.title}</div>

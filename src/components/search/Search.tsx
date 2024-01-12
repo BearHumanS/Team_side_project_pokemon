@@ -59,7 +59,7 @@ const SearchInput = () => {
           className={styles.main__search__bar}
         />
         <button type="submit" className={styles.search__btn}>
-          <img src="/src/assets/search_icon.png" alt="검색버튼" />
+          <img src="/search_icon.png" alt="검색버튼" />
         </button>
       </label>
     </form>

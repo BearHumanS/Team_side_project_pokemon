@@ -36,12 +36,7 @@ const Header = () => {
         <div className={styles.header__section}>
           <div>
             <a href="/" className={styles.logo}>
-              <img
-                src="/src/assets/logo-pokehub.png"
-                alt="logo"
-                width={132}
-                height={59}
-              />
+              <img src="/logo-pokehub.png" alt="logo" width={132} height={59} />
             </a>
             <div className={styles.menu__group}>
               <SearchInput />
