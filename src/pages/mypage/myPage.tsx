@@ -6,7 +6,7 @@ import Mycard from '@/components/mypage/Mycard';
 const myPage = () => {
   return (
     <>
-      <Inner>
+      <Inner style={{ marginBottom: '100px' }}>
         <Introduce />
         <Mycard />
         <MyActive />

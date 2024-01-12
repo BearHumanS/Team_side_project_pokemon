@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import useUserStore from '@/store/useUsersStore';
 import { getDocument } from '@/lib/firebaseQuery';
@@ -9,15 +10,16 @@ import CommunityCommentItemReply from './CommunityCommentItemReply';
 import {
   addReplies,
   deleteCommunity,
-  editCommunity,
+  editComment,
 } from '@/lib/firebaseQueryCommunity';
-// import CommunityCommentItemReply from './CommunityCommentItemReply';
+import { storage } from '@/firebase';
+import { ref, listAll, getDownloadURL } from 'firebase/storage';
 
 interface CommunityData {
   id: string;
   category: string;
 }
-const CommunityCommentItem = ({ value, id }: any) => {
+const CommunityCommentItem = ({ value, id, onDel }: any) => {
   const { user } = useUserStore();
   const [loading, setLoading] = useState(false);
   const [comment, setComment] = useState('댓글을 작성해주세요.');
@@ -25,8 +27,27 @@ const CommunityCommentItem = ({ value, id }: any) => {
   const [toggleReplies, setToggleReplies] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editText, setEditText] = useState('');
-
+  const [imageUrl, setImageUrl] = useState('');
   const communityId = id;
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const fileRef = ref(storage, `${value.userId}`);
+        const result = await listAll(fileRef);
+        const valData: any = await Promise.all(
+          result.items.map(async (item) => await getDownloadURL(item)),
+        );
+
+        // 중복된 이미지 URL을 필터링하여 새로운 이미지만 추가
+        setImageUrl(valData);
+      } catch (error) {
+        console.error('이미지를 가져오는 중 오류 발생:', error);
+      }
+    };
+    fetchImages();
+  }, []);
+
 
   /** 대댓글 내용 받아오기 */
   const { repliesList } = useCommunityDataList(
@@ -34,34 +55,62 @@ const CommunityCommentItem = ({ value, id }: any) => {
   );
 
   /** ID값의 댓글 상세내용 받아오기 */
-  const fetchData = async () => {
-    try {
-      const commentsItem = await getDocument(
-        `/community/${communityId}/comments/${value.id}`,
-      );
-      if (commentsItem) {
-        // 문서 스냅샷에서 데이터 추출 data()는 파이어스토어 제공 메서드, description 값을 가져온다.
-        setEditText(commentsItem.data().description);
-        console.log('상세 내용 확인', editText);
+  useEffect(() => {
+    setReplyList(repliesList.reverse());
+    const fetchData = async () => {
+      try {
+        const commentsItem = await getDocument(
+          `/community/${communityId}/comments/${value.id}`,
+        );
+        if (commentsItem) {
+          // 문서 스냅샷에서 데이터 추출 data()는 파이어스토어 제공 메서드, description 값을 가져온다.
+          setEditText(commentsItem.data().description);
+        }
+      } catch (error) {
+        console.error(error);
       }
+    };
+
+    fetchData();
+  }, [repliesList, communityId, value.id]);
+
+  /** 댓글 수정 요청 */
+  const onEditSubmit = async (value: any) => {
+    setLoading(true);
+
+    if (!user?.uid) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      const newEditComment = {
+        description: editText,
+        updateAt: new Date().toISOString(),
+      };
+
+      await editComment(
+        `community/${communityId}/comments/${value.id}`,
+        newEditComment,
+      );
+
+      // 수정한 댓글 값을 editText에 전달
+      setEditText(newEditComment.description);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
+      setComment('');
+      setEditMode(false);
     }
   };
 
-  fetchData();
-
-  /** 최초 대댓글 리스트 감지  */
-  useEffect(() => {
-    setReplyList(repliesList);
-  }, [repliesList]);
-
-  /** 댓글 내용 상태 */
+  /** 대댓글 내용 상태 */
   const handleChangeComment = (e: any) => {
     setComment(e.target.value);
   };
 
-  /** 게시글 추가 기능 */
+  /** 대댓글 추가 기능 */
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -87,29 +136,24 @@ const CommunityCommentItem = ({ value, id }: any) => {
 
       setReplyList(
         (prevComments: CommunityData[]) =>
-          [newComment, ...prevComments] as CommunityData[],
+          [...prevComments, newComment] as CommunityData[],
       );
-      console.log('Community List:', replyList);
       setComment('');
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
+      toggleHandler();
     }
   };
 
   /** 대댓글 삭제 기능 */
   const onDelete = async (item: any) => {
     const confirm = window.confirm('해당 글을 삭제하시겠습니까?');
-    console.log('대댓글 삭제 요청', item.id);
 
     if (confirm && user?.uid) {
       try {
         await deleteCommunity(
-          `community/${communityId}/comments/${value.id}/replies/${item.id}`,
-        );
-        console.log(
-          '대댓글이 삭제 되었습니다.',
           `community/${communityId}/comments/${value.id}/replies/${item.id}`,
         );
         setReplyList(replyList.filter((comment) => comment.id !== item.id));
@@ -124,6 +168,7 @@ const CommunityCommentItem = ({ value, id }: any) => {
     setToggleReplies((prevToggleReplies) => !prevToggleReplies);
   };
 
+  /** 댓글 내용 상태 */
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
     const {
@@ -132,53 +177,99 @@ const CommunityCommentItem = ({ value, id }: any) => {
     setEditText(value);
   };
 
-  const onEditModeOff = async (item: any) => {
-    try {
-      if (user) {
-        await editCommunity(`community/${communityId.id}/comments/${item.id}`, {
-          description: editText,
-        });
-      }
-      setEditMode(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const onEditModeOn = () => {
     setEditMode(true);
+    setEditText(value.description);
+  };
+
+  const handleSetReplyList = (newReplyList: any) => {
+    setReplyList((prevReplyList) => {
+      const updatedReplies = prevReplyList.map((reply: any) =>
+        reply.id === newReplyList.id
+          ? { ...reply, description: newReplyList.description }
+          : reply,
+      );
+      return updatedReplies;
+    });
   };
 
   return (
     <div className={styles.container}>
-      <button onClick={editMode ? onEditModeOff : onEditModeOn}>수정</button>
-      <button onClick={() => setEditMode(false)}>최소</button>
+      <div className={styles.infoBox}>
+        <div className={styles.userBox}>
+          <div className={styles.usersImg}>
+            {/* 이미지 넣기 */}
+            <img src={imageUrl} alt="사용자 이미지" />
+          </div>
+          <div>{value.userName}</div>
+        </div>
+        <div className={styles.userBox} style={{ display: 'flex', gap: '6px' }}>
+          <div className={styles.createdAtText}>
+            <ConvertTimes data={value.createdAt} />
+          </div>
+          {communityId && user?.uid ? (
+            <div>
+              <div
+                className={styles.deleteText}
+                onClick={() => onDel(value)}
+              >
+                삭제
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
+
       {editMode ? (
-        <>
+        <div className={styles.commentTextBox}>
           <textarea
             required
             maxLength={300}
             value={editText}
             onChange={onChangeText}
-            placeholder="수정할 내용을 입력해주세요."
+            placeholder="수정할 내용을 입력해주세요"
           />
-        </>
-      ) : (
-        <>
-          <div className={styles.commentTextBox}>{value.description}</div>
-        </>
-      )}
-      {/* <div className={styles.commentTextBox}>{value.description}</div> */}
-      <div className={styles.userBox}>
-        <div
-          className={styles.replyText}
-          onClick={() => {
-            toggleHandler();
-          }}
-        >
-          답글 달기
         </div>
-      </div>
+      ) : (
+        <div className={styles.commentTextBox}>
+          {editText || value.description}
+          {/* editMode가 true일 때 editText를 사용 */}
+        </div>
+      )}
+
+      {editMode ? (
+        <div className={styles.ButtonStyleBox}>
+          <div
+            className={styles.ButtonStyle}
+            onClick={() => setEditMode(false)}
+          >
+            취소
+          </div>
+          <div
+            className={styles.ButtonStyle}
+            onClick={() => onEditSubmit(value)}
+          >
+            저장
+          </div>
+        </div>
+      ) : (
+        <div className={styles.editBox}>
+          <div
+            className={styles.replyText}
+            onClick={() => {
+              toggleHandler();
+            }}
+          >
+            답글 달기
+          </div>
+          <div className={styles.editText} onClick={() => onEditModeOn()}>
+            수정
+          </div>
+        </div>
+      )}
+
       {/* 대댓글 추가 영역 */}
       {loading ? <div>등록 중..</div> : ''}
       {toggleReplies ? (
@@ -208,37 +299,14 @@ const CommunityCommentItem = ({ value, id }: any) => {
             <div className={styles.infoBox}>
               <div className={styles.replyBox}>
                 <div className={styles.replyIcons}>L</div>
-                <div className={styles.userBox}>
-                  <div className={styles.usersImg}>
-                    {/* <img src={`/${value.userImg}`} /> */}
-                  </div>
-                  <div>{value.userName}</div>
-                </div>
               </div>
-
-              <div
-                className={styles.userBox}
-                style={{ display: 'flex', gap: '6px' }}
-              >
-                <div className={styles.createdAtText}>
-                  <ConvertTimes data={value.createdAt} />
-                </div>
-                {communityId && user?.uid ? (
-                  <div className={styles.editBox}>
-                    <div className={styles.editText}>수정</div>
-                    <div
-                      className={styles.deleteText}
-                      onClick={() => onDelete(val)}
-                    >
-                      삭제
-                    </div>
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div>
+            <CommunityCommentItemReply
+              data={val}
+              val={value.id}
+              setReplyList={handleSetReplyList}
+              onDel={onDelete}
+            />
             </div>
-            <CommunityCommentItemReply data={val} />
           </div>
         ))}
       </div>

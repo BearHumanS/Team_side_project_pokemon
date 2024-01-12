@@ -1,3 +1,4 @@
+import LikedPosts from './LikedPosts';
 import MyLikedPokemon from './MyLikedPokemon';
 import MyPosts from './MyPosts';
 import styles from './Mypage.module.scss';
@@ -9,7 +10,9 @@ const MyActive = () => {
           <div className={styles.myactive__posts}>
             <MyPosts />
           </div>
-          <div className={styles.myactive__posts__favorite}></div>
+          <div className={styles.myactive__posts__favorite}>
+            <LikedPosts />
+          </div>
         </div>
         <MyLikedPokemon />
       </div>

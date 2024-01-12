@@ -52,7 +52,7 @@ const MyPosts = () => {
     };
 
     fetchData();
-  }, [user?.uid, posts]);
+  }, [user?.uid]);
 
   const onEdit = (data: PostData, id: string) => {
     navigate(`/community/edit`, { state: { data, id } });
@@ -64,6 +64,7 @@ const MyPosts = () => {
     if (confirm && user?.uid) {
       try {
         await deleteCommunity(`community/${postId}`);
+        setPosts((prev) => prev.filter((post) => post.id !== postId));
 
         const newTotal = posts.length - 1;
         const maxPage = Math.ceil(newTotal / itemsPerPage);
@@ -75,10 +76,16 @@ const MyPosts = () => {
         console.error(error);
       }
     }
+
+    return;
   };
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+  };
+
+  const onMovetoDocument = (postId: string) => {
+    navigate(`/community/detail/${postId}`);
   };
 
   return (
@@ -101,6 +108,7 @@ const MyPosts = () => {
                 post={post}
                 onEdit={onEdit}
                 onDelete={onDelete}
+                onMovetoDocument={onMovetoDocument}
               />
             ))}
           </div>

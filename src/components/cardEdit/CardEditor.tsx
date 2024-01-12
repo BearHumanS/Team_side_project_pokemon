@@ -29,13 +29,12 @@ const CardEditor = () => {
       setPokemonName(reverseObject(POKEMON_NAME)[pokemonData?.name]);
   }, [pokemonData, setPokemonName]);
 
-  const getRandomNickName = (NickNames: string[], index: number) => {
-    const randomIndex = Math.floor(Math.random() * NickNames.length);
-    const randomNickName = NickNames[randomIndex];
-    index === 1
-      ? setPokemonNickName1(randomNickName)
-      : setPokemonNickName2(randomNickName);
-  };
+  useEffect(() => {
+    const randomIndex1 = Math.floor(Math.random() * POKEMON_NICKNAME1.length);
+    const randomIndex2 = Math.floor(Math.random() * POKEMON_NICKNAME2.length);
+    setPokemonNickName1(POKEMON_NICKNAME1[randomIndex1]);
+    setPokemonNickName2(POKEMON_NICKNAME2[randomIndex2]);
+  }, [setPokemonNickName1, setPokemonNickName2]);
 
   const renderStatusBar = (baseStat: Stat, index: number, statName: string) => (
     <li key={index}>
@@ -62,28 +61,12 @@ const CardEditor = () => {
             <span className={styles.list_name}>별칭 1</span>
             <div>
               <span>{pokemonNickName1}</span>
-              <button
-                className={styles.border_button}
-                onClick={() => {
-                  getRandomNickName(POKEMON_NICKNAME1, 1);
-                }}
-              >
-                랜덤
-              </button>
             </div>
           </li>
           <li>
             <span className={styles.list_name}>별칭 2</span>
             <div>
               <span>{pokemonNickName2}</span>
-              <button
-                className={styles.border_button}
-                onClick={() => {
-                  getRandomNickName(POKEMON_NICKNAME2, 2);
-                }}
-              >
-                랜덤
-              </button>
             </div>
           </li>
           <li>
