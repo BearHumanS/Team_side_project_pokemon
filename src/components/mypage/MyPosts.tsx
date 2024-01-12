@@ -76,10 +76,16 @@ const MyPosts = () => {
         console.error(error);
       }
     }
+
+    return;
   };
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+  };
+
+  const onMovetoDocument = (postId: string) => {
+    navigate(`/community/detail/${postId}`);
   };
 
   return (
@@ -102,6 +108,7 @@ const MyPosts = () => {
                 post={post}
                 onEdit={onEdit}
                 onDelete={onDelete}
+                onMovetoDocument={onMovetoDocument}
               />
             ))}
           </div>

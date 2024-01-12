@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { Pagination } from 'antd';
+import Search from 'antd/es/input/Search';
 import { Button } from '../button/Button';
+import { useState, useEffect } from 'react';
+import useUserStore from '@/store/useUsersStore';
 import CommunityCardItem from './CommunityCardItem';
 import styles from './CommunityCardList.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { Pagination } from 'antd';
 import useCommunityDataList from '@/hook/useCommunityDataList';
-import useUserStore from '@/store/useUsersStore';
-import Search from 'antd/es/input/Search';
 
 interface CommunityData {
   id: string;
@@ -33,6 +33,7 @@ const CommunityCardList = () => {
   }, [dataList]);
 
   const CategoryList = [
+    '전체',
     '자유게시판',
     '공지사항',
     '질문/답변',
@@ -44,9 +45,16 @@ const CommunityCardList = () => {
   const setTabHandler = (index: number) => {
     setCurrentTab(index);
     const selectedCategory = CategoryList[index];
-    const filteredData = communityList.filter(
-      (item) => item.category === selectedCategory,
-    );
+    let filteredData;
+  
+    if (selectedCategory === '전체') {
+      filteredData = communityList;
+    } else {
+      filteredData = communityList.filter(
+        (item) => item.category === selectedCategory,
+      );
+    }
+  
     setFilteredItems(filteredData);
     setCurrentPage(1);
   };
@@ -66,7 +74,6 @@ const CommunityCardList = () => {
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
-    console.log('확인',communityList)
     const filteredData = communityList.filter(
       (item) => item.category === CategoryList[currentTab] && item.title.includes(value)
     );

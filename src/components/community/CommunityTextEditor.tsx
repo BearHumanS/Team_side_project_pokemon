@@ -1,31 +1,27 @@
-/* 'use client'; */
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input, Select } from 'antd';
-import { Editor } from '@toast-ui/react-editor';
 import useUserStore from '@/store/useUsersStore';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import styles from './CommunityTextEditor.module.scss';
 import { addCommunity } from '@/lib/firebaseQueryCommunity';
 import { useNavigate } from 'react-router-dom';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const CommunityTextEditor = () => {
   const { user } = useUserStore();
-  const [title, setTitle] = useState('제목을 작성해주세요.');
-  const editorRef = useRef<Editor | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState('자유게시판');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [editorRef, setEditorRef] = useState('');
+  const [category, setCategory] = useState('자유게시판');
+  const [title, setTitle] = useState('제목을 작성해주세요.');
 
   const handleChange = (value: string) => {
     setCategory(value);
-    console.log(`카테고리 ${value}`);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChangeTitle = (e: any) => {
     setTitle(e.target.value);
-    console.log(`타이틀 ${e.target.value}`);
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -40,12 +36,12 @@ const CommunityTextEditor = () => {
 
     try {
       let content = '';
-      if (editorRef.current) {
-        content = await editorRef.current.getInstance().getMarkdown();
+      if (editorRef) {
+        content = editorRef;
       }
       await addCommunity(`community/`, {
-        likes: 10,
-        views: 80,
+        likes: [],
+        views: 0,
         description: content,
         title: title,
         userId: user?.uid,
@@ -63,6 +59,10 @@ const CommunityTextEditor = () => {
       setLoading(false);
       navigate(`/community`);
     }
+  };
+
+  const handleChanges = (value: any) => {
+    setEditorRef(value);
   };
 
   return (
@@ -91,20 +91,18 @@ const CommunityTextEditor = () => {
             <Input
               count={{ show: true, max: 50 }}
               style={{ minWidth: '1000px', display: 'flex' }}
-              defaultValue="제목을 작성해주세요."
+              value={title}
               onChange={handleChangeTitle}
             />
           </div>
         </div>
-        <Editor
-          ref={editorRef}
-          initialValue="글을 작성해주세요."
-          placeholder="글을 작성해주세요."
-          previewStyle="vertical"
-          height="40rem"
-          initialEditType="wysiwyg"
-          useCommandShortcut={true}
-        />
+        <div>
+          <ReactQuill
+            style={{ height: '400px' }}
+            value={editorRef}
+            onChange={handleChanges}
+          />
+        </div>
         <div className={styles.textEditerSubmitButton}>
           <button className={styles.ButtonLgStyle} type="submit">
             저장

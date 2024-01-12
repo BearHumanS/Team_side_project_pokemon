@@ -60,15 +60,16 @@
   align-items: center;
   justify-content: center;
   background-color: black;
-  font-family: "GmarketSansMedium";
+  font-family: 'GmarketSansMedium';
   &:hover {
-      color: white;
-      background-color: #0f60ce;
+    color: white;
+    background-color: #0f60ce;
   }
 }
 
 .replyBox {
   display: flex;
+  height: 100px;
 }
 
 .infoBox {
@@ -78,8 +79,24 @@
   justify-content: space-between;
 }
 
-.userBox {
+.editBox {
   gap: 8px;
+  display: flex;
+  font-size: 12px;
+  align-items: center;
+  justify-content: end;
+  .replyText {
+    // margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .editText {
+    cursor: pointer;
+    color: #0f60ce;
+    // margin-bottom: 10px;
+  }
+}
+
+.userBox {
   display: flex;
   font-size: 12px;
   align-items: center;
@@ -87,17 +104,38 @@
   .createdAtText {
     color: #b0b0b0;
   }
-  .replyText {
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  .editText {
-    cursor: pointer;
-    color: #0f60ce;
-  }
+
   .deleteText {
     cursor: pointer;
     color: #ff5050;
+  }
+}
+
+.ButtonStyleBox {
+  gap: 6px;
+  display: flex;
+  justify-content: end;
+}
+
+.ButtonStyle {
+  width: 80px;
+  height: 30px;
+  display: flex;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+  border-style: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  font-family: 'GmarketSansMedium';
+  &:hover {
+    color: white;
+    background-color: #0f60ce;
   }
 }
 
@@ -123,4 +161,21 @@
   gap: 8px;
   display: flex;
   padding-right: 5px;
+}
+
+.commentTextBox {
+  width: 100%;
+  height: 146px;
+  display: flex;
+  padding: 24px;
+  border-radius: 4px;
+  border: 1px solid #e1e1e1;
+  textarea {
+    width: 100%;
+    resize: none;
+    display: flex;
+    font-size: 14px;
+    border-style: none;
+    font-family: 'GmarketSansMedium';
+  }
 }

@@ -17,7 +17,7 @@ const CommunityDetail = () => {
     <div>
       <CommunityDetailHeader data={value} id={currentUrl} />
       <CommunityTextViewer data={value} />
-      <CommunityComment id={currentUrl} />
+      <CommunityComment id={currentUrl} data={value} />
     </div>
   );
 };
