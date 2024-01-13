@@ -24,7 +24,11 @@ const PokemonListElement = ({ data }: PokemonListElementProp) => {
       <img
         loading="lazy"
         className={styles.pokemon_image}
-        src={data.sprites?.other?.['official-artwork']?.front_default}
+        src={
+          data.id !== 1013
+            ? data.sprites?.other?.['official-artwork']?.front_default
+            : '/pokemonImg/그우린차.webp'
+        }
         alt="포켓몬 이미지"
       />
       <span className={styles.pokemon_name}>

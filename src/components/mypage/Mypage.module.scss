@@ -373,7 +373,6 @@
     border-radius: 10.067px;
     border: 1px solid #ebebeb;
     background: #fff;
-    overflow: auto;
   }
 
   &__liked__title {
@@ -395,7 +394,7 @@
 
   &__liked__box {
     padding: 0 29px 22px 29px;
-    height: auto;
+    height: 75%;
     gap: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));

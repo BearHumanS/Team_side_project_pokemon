@@ -98,7 +98,9 @@ const PokemonCard = ({
                   ? `${styles.pokemon_image__my}`
                   : `${styles.pokemon_image}`
               }
-              src={data.sprites}
+              src={
+                data.id !== 1013 ? data.sprites : '/pokemonImg/그우린차.webp'
+              }
               alt="포켓몬 이미지"
             />
             <div className={styles.pokemon_intro}>

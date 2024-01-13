@@ -21,6 +21,7 @@
     "dompurify": "^3.0.6",
     "file-saver": "^2.0.5",
     "firebase": "^10.5.2",
+    "framer-motion": "^10.18.0",
     "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",

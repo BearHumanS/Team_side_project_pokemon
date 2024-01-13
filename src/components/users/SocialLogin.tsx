@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { app } from '@/firebase';
 import {
   signInWithPopup,
@@ -6,6 +6,8 @@ import {
   GithubAuthProvider,
   getAuth,
   signOut,
+  browserSessionPersistence,
+  setPersistence,
 } from 'firebase/auth';
 import styles from './SocialLogin.module.scss';
 import useUserStore from '@/store/useUsersStore';
@@ -22,6 +24,18 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
   const { user, setUser } = useUserStore();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const setAuthPersistence = async () => {
+      try {
+        await setPersistence(auth, browserSessionPersistence);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    setAuthPersistence();
+  }, [auth]);
+
   const onlLogin = async (e: MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     let name = target.name;
@@ -35,6 +49,9 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
 
     if (name === 'google') {
       provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: 'select_account',
+      });
     } else if (name === 'github') {
       provider = new GithubAuthProvider();
     } else {

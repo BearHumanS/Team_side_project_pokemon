@@ -30,8 +30,10 @@ const CardsRowLayout = ({ pokemonArray }: CardsRowLayoutProps) => {
             {pokemonData ? (
               <img
                 src={
-                  pokemonData?.sprites?.other?.['official-artwork']
-                    ?.front_default
+                  pokemonData.id !== 1013
+                    ? pokemonData.sprites?.other?.['official-artwork']
+                        ?.front_default
+                    : '/pokemonImg/그우린차.webp'
                 }
                 alt="포켓몬 이미지"
               />
