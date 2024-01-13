@@ -90,7 +90,6 @@ const EvolutionChain = ({
               <EvolutionImgSkeleton />
             ) : (
               <>
-                {' '}
                 {evolvesChain.length > 1 && commonEvolution.length < 2 ? (
                   <>
                     <div className={styles.evolves}>
@@ -273,7 +272,7 @@ const EvolutionChain = ({
                                 src={
                                   pokemonData.sprites?.other?.[
                                     'official-artwork'
-                                  ].front_default
+                                  ].front_default || '/pokemonImg/그우린차.webp'
                                 }
                                 alt={`${pokemonData.name} 포켓몬 이미지`}
                                 width={141}
