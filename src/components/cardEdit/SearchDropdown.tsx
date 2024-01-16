@@ -83,7 +83,12 @@ const SearchDropdown = ({ searchResults, setIsOpen }: SearchDropdownProps) => {
           >
             <div>
               <img
-                src={pokemon?.sprites.other?.['official-artwork'].front_default}
+                src={
+                  pokemon?.id !== 1013
+                    ? pokemon?.sprites?.other?.['official-artwork']
+                        ?.front_default
+                    : '/pokemonImg/그우린차.webp'
+                }
                 alt="포켓몬 이미지"
               />
             </div>

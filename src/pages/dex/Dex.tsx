@@ -3,10 +3,10 @@ import FilterPlates from '@/components/plate/FilterPlates';
 
 const Dex = () => {
   return (
-    <>
+    <section>
       <FilterPlates />
       <PokemonList />
-    </>
+    </section>
   );
 };
 

@@ -13,6 +13,7 @@ import { updateProfile } from 'firebase/auth';
 import { PROFILE_DEFAULT_IMG, STORAGE_DOWNLOAD_URL } from '@/lib/constants';
 import useUserInfoChangeStore from '@/store/useUserInfoChangeStore';
 import { getDocument, setDocument } from '@/lib/firebaseQuery';
+import { IoIosCloseCircle } from '@react-icons/all-files/io/IoIosCloseCircle';
 
 const Introduce = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -163,7 +164,7 @@ const Introduce = () => {
               <input type="file" accept="image/*" onChange={onProfileUpload} />
             </label>
             <button type="button" onClick={onDeleteProfileImg}>
-              x
+              <IoIosCloseCircle size="24" />
             </button>
           </>
         ) : (

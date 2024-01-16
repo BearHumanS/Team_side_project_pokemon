@@ -5,13 +5,13 @@ import Mycard from '@/components/mypage/Mycard';
 
 const myPage = () => {
   return (
-    <>
+    <section>
       <Inner style={{ marginBottom: '100px' }}>
         <Introduce />
         <Mycard />
         <MyActive />
       </Inner>
-    </>
+    </section>
   );
 };
 

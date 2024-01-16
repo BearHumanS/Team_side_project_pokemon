@@ -26,7 +26,14 @@ const RenderPost = memo(
           >
             수정
           </button>
-          <button onClick={() => onDelete(post.id)}>삭제</button>
+          <button
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              onDelete(post.id);
+            }}
+          >
+            삭제
+          </button>
         </div>
       </div>
     );

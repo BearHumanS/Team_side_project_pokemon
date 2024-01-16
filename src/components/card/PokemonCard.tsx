@@ -3,7 +3,6 @@ import styles from './pokemonCard.module.scss';
 import Plate from '../plate/Plate';
 import { POKEMON_STATS, POKEMON_TYPES } from '@/lib/constants';
 import StatusBar from '../detail/StatusBar';
-import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
 import { useLocation } from 'react-router-dom';
 
 interface PokemonCardProp {
@@ -23,8 +22,6 @@ const PokemonCard = ({
 }: PokemonCardProp) => {
   const location = useLocation();
   const isMyPage = location.pathname.includes('mypage');
-  const { pokemonName, pokemonNickName1, pokemonNickName2 } =
-    useSelectedPokemonForCard();
 
   if (!data || Object.keys(data).length === 0) {
     // 임시로 null처리
@@ -118,7 +115,7 @@ const PokemonCard = ({
                       : `${styles.text__small}`
                   }
                 >
-                  {pokemonNickName1 || pokemonNickName?.pokemonNickName1}
+                  {pokemonNickName?.pokemonNickName1}
                 </span>
                 <span
                   className={
@@ -127,7 +124,7 @@ const PokemonCard = ({
                       : `${styles.text__small}`
                   }
                 >
-                  {pokemonNickName2 || pokemonNickName?.pokemonNickName2}
+                  {pokemonNickName?.pokemonNickName2}
                 </span>
               </div>
               <span
@@ -137,7 +134,7 @@ const PokemonCard = ({
                     : `${styles.text__large}`
                 }
               >
-                {pokemonNickName?.pokemonName || pokemonName}
+                {pokemonNickName?.pokemonName}
               </span>
             </div>
           </div>

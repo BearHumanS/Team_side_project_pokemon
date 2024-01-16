@@ -5,7 +5,7 @@ import StatsSkeleton from '../skeleton/StatsSkeleton';
 import StatusBar from './StatusBar';
 
 const Status = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
-  const { baseStats, pokemon } = pokemonState;
+  const { pokemon } = pokemonState;
 
   const pokemonId = pokemon?.id;
 
@@ -118,7 +118,7 @@ const Status = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
 
             <div className={styles.stats__total}>
               Total:{' '}
-              {baseStats?.reduce(
+              {pokemon?.stats.reduce(
                 (acc, baseStat) => acc + baseStat.base_stat,
                 0,
               )}

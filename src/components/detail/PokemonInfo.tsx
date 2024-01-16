@@ -19,8 +19,6 @@ const PokemonInfo = ({
 }: PokemonInfoExtendsProps) => {
   const { pokemon, selectedFormId, genus, flavorText } = pokemonState;
 
-  console.log(isLoading);
-
   const pokemonHeight = useMemo(() => {
     if (pokemon) {
       const feet = Math.floor((pokemon.height * 10) / 2.54 / 12);

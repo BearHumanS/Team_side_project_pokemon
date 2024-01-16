@@ -11,7 +11,6 @@
     display: flex;
     align-items: center;
     padding-left: 20px;
-    margin-top: 36px;
   }
 
   &__profile__img {
@@ -29,6 +28,10 @@
       left: 0;
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    button {
+      padding: 0;
     }
 
     &__edit {
@@ -77,6 +80,7 @@
       border: none;
       outline: none;
       border-bottom: 1px solid #000;
+      padding-bottom: 4px;
     }
 
     &__talk {
