@@ -125,12 +125,21 @@
       height: 25px;
       flex-shrink: 0;
       border-radius: 4px;
-      border: 1px solid #c6c6c6;
-      background: #fff;
+      background-color: #fff;
       cursor: pointer;
     }
 
     .editModeOff {
+      border: 1px solid #c6c6c6;
+
+      &:hover {
+        background-color: #c6c6c6;
+
+        span {
+          color: #fff;
+        }
+      }
+
       span {
         width: 54px;
         height: 10px;
@@ -147,6 +156,14 @@
 
     .editModeOn {
       border: 1px solid #ff612c;
+
+      &:hover {
+        background-color: #ff612c;
+
+        span {
+          color: #fff;
+        }
+      }
 
       span {
         color: #ff612c;
@@ -204,9 +221,9 @@
       height: 34px;
       flex-shrink: 0;
       border-radius: 8px;
-      background: #0f60ce;
+      background: #fff;
       border: none;
-      color: #fff;
+      color: #0f60ce;
       text-align: center;
       font-family: Gmarket Sans;
       font-size: 13px;
@@ -214,6 +231,12 @@
       font-weight: 600;
       line-height: normal;
       cursor: pointer;
+      border: 1px solid #0f60ce;
+
+      &:hover {
+        background-color: #0f60ce;
+        color: #fff;
+      }
     }
   }
 
@@ -245,6 +268,8 @@
     }
 
     &:hover {
+      transform: scale(1.02);
+
       .mycard__layout__data__delete {
         display: flex;
         position: absolute;
@@ -261,6 +286,10 @@
         align-items: center;
         background-color: inherit;
         transform: rotate(45deg);
+
+        &:hover {
+          background-color: #ff5050;
+        }
       }
     }
   }
@@ -330,6 +359,11 @@
         border: 1px solid #e3e3e3;
         background-color: inherit;
         padding: 8px 10px 8px 16px;
+
+        &:hover {
+          background-color: #000;
+          color: #fff;
+        }
       }
 
       &__btn__group {
@@ -397,7 +431,7 @@
   }
 
   &__liked__box {
-    padding: 0 29px 22px 29px;
+    padding: 10px 29px 22px 29px;
     height: 75%;
     gap: 10px;
     display: grid;
@@ -442,6 +476,11 @@
     justify-content: center;
     align-items: center;
     position: relative;
+
+    &:hover {
+      transform: scale(1.05);
+      border: 1px solid #090909;
+    }
   }
 
   &__liked__cancel {
@@ -458,7 +497,8 @@
   }
 
   &__liked__cancel:hover {
-    color: #000;
+    color: #ff5050;
+    transform: rotate(45deg) scale(1.05);
   }
 }
 
