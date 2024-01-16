@@ -4,11 +4,17 @@ import useSelectedStore from '@/store/useSelectedStore';
 import PlateHideButton from './PlateHideButton';
 import { useState } from 'react';
 import Inner from '../Inner';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const FilterPlates = () => {
   const koreanTypes = Object.values(POKEMON_TYPES);
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const { selectedPlate, setSelectedPlate } = useSelectedStore();
+
+  const variants = {
+    open: { height: '200px' },
+    closed: { height: 0 },
+  };
 
   const renderTypes = (types: string[]) =>
     types.map((koreanType) => {
@@ -38,19 +44,26 @@ const FilterPlates = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.type_outer_container}>
-        <Inner>
-          <div
-            className={`${styles.type_container} ${
-              isOpen ? '' : styles.closed
-            }`}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={variants}
+            transition={{ duration: 0.6 }}
+            className={styles.container}
           >
-            <span>*속성을 선택해주세요.</span>
-            <div className={styles.type_plates}>{renderTypes(koreanTypes)}</div>
-          </div>
-        </Inner>
-      </div>
-      <PlateHideButton setIsOpen={setIsOpen} />
+            <Inner>
+              <motion.span>*속성을 선택해주세요.</motion.span>
+              <motion.div className={styles.type_plates}>
+                {renderTypes(koreanTypes)}
+              </motion.div>
+            </Inner>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <PlateHideButton isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

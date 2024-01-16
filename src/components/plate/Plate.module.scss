@@ -2,15 +2,38 @@
 @import 'src/styles/theme.scss';
 
 .wrapper {
+  position: relative;
+  height: 100%;
+  margin-top: -30px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin-bottom: 60px;
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    border-bottom: 3px solid #000;
+    overflow: hidden;
+
+    .type_plates {
+      margin-top: 20px;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  }
 }
 
-.type_outer_container {
-  width: 100%;
-  height: 100%;
-  border-bottom: 4px solid #000;
+.plate_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .type_plate {
@@ -26,36 +49,6 @@
 .type_plate__my {
   display: flex;
   gap: 3px;
-}
-
-.type_container {
-  padding: 25px 0;
-  gap: 15px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  max-height: 500px;
-  opacity: 1;
-  transition: 0.3s ease-out;
-
-  &.closed {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    padding: 0;
-  }
-
-  > span {
-    align-self: flex-start;
-    font-size: 13px;
-    font-weight: 400;
-  }
-
-  .type_plates {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
 }
 
 @each $type, $color in $type-colors {
@@ -87,6 +80,9 @@
 }
 
 .hide_button {
+  position: absolute;
+  top: unset;
+  bottom: -25px;
   cursor: pointer;
   outline: none;
   background-color: transparent;
@@ -96,4 +92,17 @@
   border-right: 15px solid transparent;
   border-top: 24px solid #000;
   width: 111px;
+
+  div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -18px;
+    margin: auto;
+    scale: 1.5;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

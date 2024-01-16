@@ -29,7 +29,9 @@ const Plate = ({ pokemonTypeProp }: PlateProp) => {
     </div>
   );
 
-  return <div className={styles.wrapper}>{renderTypes(pokemonTypeProp)}</div>;
+  return (
+    <div className={styles.plate_wrapper}>{renderTypes(pokemonTypeProp)}</div>
+  );
 };
 
 export default Plate;
