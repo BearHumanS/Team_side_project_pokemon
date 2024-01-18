@@ -1,22 +1,28 @@
 import { ReactNode } from 'react';
-import styles from './PokemonList.module.scss';
+import styles from './PokemonDex.module.scss';
 import { PokemonType } from '@/lib/type';
+import { motion } from 'framer-motion';
 
-interface PokemonListElementLayoutProp {
+interface PokemonDexElementLayoutProp {
   children: ReactNode;
   data: PokemonType;
   onClick?: () => void;
   className?: string;
 }
 
-const PokemonListElementLayout = ({
+const PokemonDexElementLayout = ({
   children,
   data,
   onClick,
   className,
-}: PokemonListElementLayoutProp) => {
+}: PokemonDexElementLayoutProp) => {
   return (
-    <li
+    <motion.li
+      whileHover={{
+        scale: 1.02,
+        boxShadow: `rgba(0, 0, 0, 0.24) 0px 3px 8px`,
+      }}
+      transition={{ duration: 0.3 }}
       className={`${styles.pokemon_list_element} ${className || ''}`}
       onClick={onClick}
     >
@@ -24,8 +30,8 @@ const PokemonListElementLayout = ({
         <span>{`No.${data.id}`}</span>
       </div>
       {children}
-    </li>
+    </motion.li>
   );
 };
 
-export default PokemonListElementLayout;
+export default PokemonDexElementLayout;

@@ -1,5 +1,5 @@
 import { PokemonType } from '@/lib/type';
-import PokemonListElementLayout from '../list/PokemonListElementLayout';
+import PokemonDexElementLayout from '../dex/PokemonDexElementLayout';
 import styles from './Detail.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
@@ -96,7 +96,7 @@ const EvolutionChain = ({
                       {preEvolutionPokemon && (
                         <>
                           <div className={styles.evolves__pre__evolution}>
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={preEvolutionPokemon}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -113,7 +113,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__pre__evolution__name}
                             >
@@ -139,7 +139,7 @@ const EvolutionChain = ({
                             className={styles.evolves__final__evolution__box}
                             key={pokemonData.id}
                           >
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -156,7 +156,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__final__evolution__name}
                             >
@@ -178,7 +178,7 @@ const EvolutionChain = ({
                             key={pokemonData.id}
                             className={styles.evolves__common__evolution}
                           >
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -195,7 +195,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__pre__evolution__name}
                             >
@@ -223,7 +223,7 @@ const EvolutionChain = ({
                               key={pokemonData.id}
                               className={styles.evolves__pre__evolution}
                             >
-                              <PokemonListElementLayout
+                              <PokemonDexElementLayout
                                 data={pokemonData}
                                 className={styles.evolves__list}
                                 onClick={() =>
@@ -240,7 +240,7 @@ const EvolutionChain = ({
                                   width={141}
                                   height={141}
                                 />
-                              </PokemonListElementLayout>
+                              </PokemonDexElementLayout>
                               <div
                                 className={styles.evolves__pre__evolution__name}
                               >
@@ -261,7 +261,7 @@ const EvolutionChain = ({
                           className={styles.evolves__pre__evolution__box}
                         >
                           <div className={styles.evolves__pre__evolution}>
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -278,7 +278,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__pre__evolution__name}
                             >

@@ -1,20 +1,20 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './PokemonList.module.scss';
+import styles from './PokemonDex.module.scss';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { POKEMON_TYPES } from '@/lib/constants';
 import Plate from '../plate/Plate';
 import { PokemonType, TypesType } from '@/lib/type';
-import PokemonListElementLayout from './PokemonListElementLayout';
+import PokemonDexElementLayout from './PokemonDexElementLayout';
 
-interface PokemonListElementProp {
+interface PokemonDexElementProp {
   data: PokemonType;
 }
 
-const PokemonListElement = ({ data }: PokemonListElementProp) => {
+const PokemonDexElement = ({ data }: PokemonDexElementProp) => {
   const navigate = useNavigate();
   return (
-    <PokemonListElementLayout
+    <PokemonDexElementLayout
       data={data}
       onClick={() => {
         navigate(`/pokemon/${data.id}`);
@@ -42,8 +42,8 @@ const PokemonListElement = ({ data }: PokemonListElementProp) => {
           />
         ))}
       </div>
-    </PokemonListElementLayout>
+    </PokemonDexElementLayout>
   );
 };
 
-export default PokemonListElement;
+export default PokemonDexElement;

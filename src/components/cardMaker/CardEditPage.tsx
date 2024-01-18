@@ -1,7 +1,7 @@
 import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
-import CardsRowLike from '@/components/cardEdit/CardsRowLike';
-import CardsRowRandom from '@/components/cardEdit/CardsRowRandom';
-import styles from './cards.module.scss';
+import SelectPokemonLike from '@/components/cardMaker/selectPokemon/SelectPokemonLike';
+import SelectPokemonRandom from '@/components/cardMaker/selectPokemon/SelectPokemonRandom';
+import styles from './cardEditPage.module.scss';
 import PokemonCard from '../card/PokemonCard';
 import CardEditor from './CardEditor';
 import Inner from '../Inner';
@@ -10,10 +10,10 @@ import useUserStore from '@/store/useUsersStore';
 import { MouseEvent } from 'react';
 import { filteredPokemonData } from '@/lib/type';
 import { useGetAllPokemon } from '@/query/qeuries';
-import PokemonSearch from './PokemonSearch';
-import { useEffect } from 'react'; // 추가
+import SearchPokemon from './searchPokemon/SearchPokemon';
+import { useEffect } from 'react';
 
-const CardPage = () => {
+const CardEditPage = () => {
   const { user } = useUserStore();
   const {
     pokemonData,
@@ -66,29 +66,38 @@ const CardPage = () => {
     }
   };
 
+  const pokemonNickName = {
+    pokemonNickName1,
+    pokemonNickName2,
+    pokemonName,
+  };
+
   return (
     <Inner>
-      <div className={styles.card_page_wrapper}>
-        <PokemonSearch />
-        <div className={styles.product_card_wrapper}>
+      <div className={styles.wrapper}>
+        <SearchPokemon />
+        <div className={styles.card_wrapper}>
           <span className={styles.title}>카드 제작</span>
-          <div className={styles.product_card_container_decoration__top}></div>
-          <div className={styles.product_card_container}>
-            <PokemonCard pokemonCardData={filteredPokemonData} />
-            <CardEditor />
+          <div className={styles.card_decoration}>
+            <div className={styles.card_container}>
+              <PokemonCard
+                pokemonCardData={filteredPokemonData}
+                pokemonNickName={pokemonNickName}
+              />
+              <CardEditor />
+            </div>
           </div>
-          <div
-            className={styles.product_card_container_decoration__bottom}
-          ></div>
         </div>
         <div className={styles.select_wrapper}>
-          <CardsRowLike />
-          <CardsRowRandom />
+          <SelectPokemonLike />
+          <SelectPokemonRandom />
         </div>
+        <button className={styles.save_button} onClick={onSave}>
+          저장하기
+        </button>
       </div>
-      <button onClick={onSave}>저장하기</button>
     </Inner>
   );
 };
 
-export default CardPage;
+export default CardEditPage;

@@ -1,11 +1,11 @@
-import PokemonList from '@/components/list/PokemonList';
+import PokemonDex from '@/components/dex/PokemonDex';
 import FilterPlates from '@/components/plate/FilterPlates';
 
 const Dex = () => {
   return (
     <section>
       <FilterPlates />
-      <PokemonList />
+      <PokemonDex />
     </section>
   );
 };

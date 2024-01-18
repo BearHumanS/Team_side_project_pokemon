@@ -1,38 +1,34 @@
 import { PokemonType } from '@/lib/type';
-import styles from './cards.module.scss';
+import styles from './select.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
 import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
 import { useCallback } from 'react';
-import { POKEMON_NICKNAME1, POKEMON_NICKNAME2 } from '@/lib/constants';
 
-interface CardsRowLayoutProps {
+interface SelectPokemonLayoutProps {
   pokemonArray: (PokemonType | null)[];
 }
 
-const CardsRowLayout = ({ pokemonArray }: CardsRowLayoutProps) => {
-  const { setPokemonNickName1, setPokemonNickName2, setPokemonData } =
+const SelectPokemonLayout = ({ pokemonArray }: SelectPokemonLayoutProps) => {
+  const { setPokemonData, generateRandomNicknames } =
     useSelectedPokemonForCard();
 
   const handlePokemonSelection = useCallback(
     (pokemon: PokemonType | null) => {
+      generateRandomNicknames();
       pokemon && setPokemonData(pokemon);
-      const randomIndex1 = Math.floor(Math.random() * POKEMON_NICKNAME1.length);
-      const randomIndex2 = Math.floor(Math.random() * POKEMON_NICKNAME2.length);
-      setPokemonNickName1(POKEMON_NICKNAME1[randomIndex1]);
-      setPokemonNickName2(POKEMON_NICKNAME2[randomIndex2]);
     },
-    [setPokemonData, setPokemonNickName1, setPokemonNickName2],
+    [setPokemonData, generateRandomNicknames],
   );
 
   return (
-    <div className={styles.cards__row_cards}>
+    <div className={styles.layout_wrapper}>
       {pokemonArray.map((pokemonData, index) => (
         <div
           key={pokemonData ? pokemonData.id : index}
-          className={styles.cards__row_cards__column}
+          className={styles.layout_container}
         >
-          <div className={styles.cards__row_cards__card}>
+          <div className={styles.image}>
             {pokemonData ? (
               <img
                 src={
@@ -62,4 +58,4 @@ const CardsRowLayout = ({ pokemonArray }: CardsRowLayoutProps) => {
   );
 };
 
-export default CardsRowLayout;
+export default SelectPokemonLayout;

@@ -1,9 +1,9 @@
-import CardPage from '@/components/cardEdit/CardPage';
+import CardEditPage from '@/components/cardMaker/CardEditPage';
 
 const Card = () => {
   return (
     <section>
-      <CardPage />
+      <CardEditPage />
     </section>
   );
 };

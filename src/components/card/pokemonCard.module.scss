@@ -1,25 +1,37 @@
 @import 'src/styles/theme.scss';
 
-.wrapper {
+.wrapper,
+.wrapper__my {
   width: 350px;
   height: 485px;
   border-radius: 23px;
   border: 3px solid #000;
   padding: 15px;
   position: relative;
+
+  &__my {
+    width: 183px;
+    height: 253px;
+    border-radius: 12px;
+    border: 2px solid #000;
+    padding: 8px;
+  }
 }
 
-.wrapper__my {
-  width: 183px;
-  height: 253px;
-  flex-shrink: 0;
-  border-radius: 12px;
-  border: 2px solid #000;
-  padding: 8px;
-  position: relative;
+.monster_ball_left {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-.pokemon_number {
+.monster_ball_right {
+  position: absolute;
+  top: 40%;
+  right: 5%;
+}
+
+.pokemon_number,
+.pokemon_number__my {
   font-size: 15px;
   font-weight: 700;
   color: #fff;
@@ -32,124 +44,97 @@
   height: 34px;
   position: absolute;
   border-radius: 23px 0px;
+
+  &__my {
+    font-size: 8px;
+    width: 38px;
+    height: 17px;
+  }
 }
 
-.pokemon_number__my {
-  font-size: 8px;
-  font-weight: 700;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  width: 38px;
-  height: 17px;
-  position: absolute;
-  border-radius: 23px 0px;
-}
-
-.white_block {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background-color: #fff;
-}
-
+.white_block,
 .white_block__my {
   width: 100%;
   height: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #fff;
+
+  &__my {
+    border-radius: 5px;
+  }
 }
 
-.container {
+.container,
+.container__my {
   width: 100%;
   height: 100%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
 
-  &__top {
-    gap: 10px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-  }
-
-  &__bottom {
-    margin: 0 15px 15px 15px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #eae6e6;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-
-    > div {
-      display: flex;
-      justify-content: space-between;
-    }
+  &__my {
+    border-radius: 5px;
   }
 }
 
-.container__my {
-  width: 100%;
+.container__top,
+.container__top__my {
+  gap: 10px;
   height: 100%;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 
-  &__top {
+  &__my {
     gap: 5px;
-    height: 100%;
+  }
+}
+
+.container__bottom,
+.container__bottom__my {
+  margin: 0 15px 15px 15px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #eae6e6;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  > div {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    justify-content: space-between;
   }
 
-  &__bottom {
+  &__my {
     margin: 0 8px 7px 8px;
     padding: 8px;
     border-radius: 3px;
-    border: 1px solid #eae6e6;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-
-    > div {
-      display: flex;
-      justify-content: space-between;
-    }
   }
 }
 
-.type_containter {
+.type_containter,
+.type_containter__my {
   position: absolute;
   top: 15px;
   right: 15px;
   display: flex;
   flex-direction: column;
   gap: 5px;
-}
 
-.type_containter__my {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  &__my {
+    top: 6px;
+    right: 6px;
+    gap: 3px;
+  }
 }
 
 .pokemon_image {
   width: 150px;
   height: 150px;
+  z-index: 1;
 }
 
 .pokemon_image__my {
@@ -157,45 +142,41 @@
   height: 78px;
 }
 
-.pokemon_intro {
+.pokemon_intro,
+.pokemon_intro__my {
   gap: 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  &__my {
+    gap: 4px;
+  }
 }
 
-.pokemon_intro__my {
-  gap: 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.pokemon_name {
-  display: flex;
-  gap: 5px;
-}
-
+.pokemon_name,
 .pokemon_name__my {
   display: flex;
-  gap: 3px;
+  gap: 5px;
+
+  &__my {
+    gap: 3px;
+  }
 }
 
-.status {
+.status,
+.status__my {
   font-size: 13px;
   display: flex;
   flex-direction: column;
   width: 49%;
-}
 
-.status__my {
-  font-size: 6px;
-  display: flex;
-  flex-direction: column;
-  width: 49%;
+  &__my {
+    font-size: 6px;
 
-  & span {
-    color: #000;
+    & span {
+      color: #000;
+    }
   }
 }
 
@@ -213,26 +194,281 @@
   gap: 5px;
 }
 
-.text {
-  &__small {
-    font-size: 13px;
-    font-weight: 500;
-  }
+.text_small,
+.text_small__my {
+  font-weight: 500;
+  font-size: 13px;
 
-  &__small__my {
+  &__my {
     font-size: 8px;
-    font-weight: 500;
     color: #000;
   }
+}
 
-  &__large {
-    font-size: 25px;
-    font-weight: 700;
+.text_large,
+.text_large__my {
+  font-size: 25px;
+  font-weight: 700;
+
+  &__my {
+    font-size: 13px;
+    color: #000;
+  }
+}
+
+@each $type, $color in $type-colors {
+  .wrapper.#{$type} {
+    background-color: $color;
   }
 
-  &__large__my {
+  .pokemon_number.#{$type} {
+    background-color: $color;
+  }
+
+  .container.#{$type} {
+    background-color: rgba($color, 0.3);
+  }
+
+  .wrapper__my.#{$type} {
+    background-color: $color;
+  }
+
+  .pokemon_number__my.#{$type} {
+    background-color: $color;
+    color: #fff;
+  }
+
+  .container__my.#{$type} {
+    background-color: rgba($color, 0.3);
+  }
+}
+@import 'src/styles/theme.scss';
+
+.wrapper,
+.wrapper__my {
+  width: 350px;
+  height: 485px;
+  border-radius: 23px;
+  border: 3px solid #000;
+  padding: 15px;
+  position: relative;
+
+  &__my {
+    width: 183px;
+    height: 253px;
+    border-radius: 12px;
+    border: 2px solid #000;
+    padding: 8px;
+  }
+}
+
+.pokemon_number,
+.pokemon_number__my {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 74px;
+  height: 34px;
+  position: absolute;
+  border-radius: 23px 0px;
+  z-index: 1;
+
+  &__my {
+    font-size: 8px;
+    width: 38px;
+    height: 17px;
+  }
+}
+
+.white_block,
+.white_block__my {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #fff;
+  position: relative;
+
+  &__my {
+    border-radius: 5px;
+  }
+}
+
+.monster_ball_left,
+.monster_ball_left__my {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &__my {
+    transform: scale(0.5) translate(-50%, -50%);
+  }
+}
+
+.monster_ball_right,
+.monster_ball_right__my {
+  position: absolute;
+  top: 40%;
+  right: 0;
+
+  &__my {
+    transform: scale(0.5) translate(50%, -50%);
+  }
+}
+
+.container,
+.container__my {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &__my {
+    border-radius: 5px;
+  }
+}
+
+.container__top,
+.container__top__my {
+  gap: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &__my {
+    gap: 5px;
+  }
+}
+
+.container__bottom,
+.container__bottom__my {
+  margin: 0 15px 15px 15px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #eae6e6;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__my {
+    margin: 0 8px 7px 8px;
+    padding: 8px;
+    border-radius: 3px;
+  }
+}
+
+.type_containter,
+.type_containter__my {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &__my {
+    top: 6px;
+    right: 6px;
+    gap: 3px;
+  }
+}
+
+.pokemon_image {
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+}
+
+.pokemon_image__my {
+  width: 78px;
+  height: 78px;
+  z-index: 1;
+}
+
+.pokemon_intro,
+.pokemon_intro__my {
+  gap: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__my {
+    gap: 4px;
+  }
+}
+
+.pokemon_name,
+.pokemon_name__my {
+  display: flex;
+  gap: 5px;
+
+  &__my {
+    gap: 3px;
+  }
+}
+
+.status,
+.status__my {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+
+  &__my {
+    font-size: 6px;
+
+    & span {
+      color: #000;
+    }
+  }
+}
+
+.logo {
+  width: 70px;
+}
+
+.logo__my {
+  width: 35px;
+}
+
+.total_stat {
+  align-items: flex-end;
+  display: flex;
+  gap: 5px;
+}
+
+.text_small,
+.text_small__my {
+  font-weight: 500;
+  font-size: 13px;
+
+  &__my {
+    font-size: 8px;
+    color: #000;
+  }
+}
+
+.text_large,
+.text_large__my {
+  font-size: 25px;
+  font-weight: 700;
+
+  &__my {
     font-size: 13px;
-    font-weight: 700;
     color: #000;
   }
 }

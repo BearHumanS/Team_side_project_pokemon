@@ -1,11 +1,11 @@
-import CardsRowLayout from './CardsRowLayout';
-import styles from './cards.module.scss';
+import SelectPokemonLayout from './SelectPokemonLayout';
+import styles from './select.module.scss';
 import { IoChevronForward } from '@react-icons/all-files/io5/IoChevronForward';
 import { IoChevronBack } from '@react-icons/all-files/io5/IoChevronBack';
 import useLikedStore from '@/store/useLikedStore';
 import { useState, useMemo, useCallback } from 'react';
 
-const CardsRowLike = () => {
+const SelectPokemonLike = () => {
   const { pokemonData } = useLikedStore();
   const [index, setIndex] = useState(0);
 
@@ -39,7 +39,7 @@ const CardsRowLike = () => {
   }, [pokemonData, index]);
 
   return (
-    <div className={styles.pokemon_select_wrapper}>
+    <div className={styles.select_wrapper}>
       <span className={styles.title}>내가 찜한 포켓몬</span>
       <div>
         <button
@@ -49,7 +49,7 @@ const CardsRowLike = () => {
         >
           <IoChevronBack />
         </button>
-        <CardsRowLayout pokemonArray={likePokemonArray} />
+        <SelectPokemonLayout pokemonArray={likePokemonArray} />
         <button
           className={styles.page_button}
           onClick={nextSlide}
@@ -62,4 +62,4 @@ const CardsRowLike = () => {
   );
 };
 
-export default CardsRowLike;
+export default SelectPokemonLike;

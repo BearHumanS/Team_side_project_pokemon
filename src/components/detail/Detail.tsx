@@ -54,31 +54,22 @@ const Detail = () => {
     const fetchDataAPI = async () => {
       setIsLoading(true);
       try {
-        const pokemonDataPromise = getPokemonData(params.id ?? '');
-
-        const [pokemonData, speciesDetailData, evolvesChainData] =
-          await Promise.all([
-            pokemonDataPromise,
-            pokemonDataPromise.then((data) =>
-              getPokemonSpecies(data.species.url),
-            ),
-            pokemonDataPromise.then((data) =>
-              getPokemonSpecies(data.species.url).then((speciesData) =>
-                getEvolvesDatas(speciesData.evolution_chain.url),
-              ),
-            ),
-          ]);
+        const pokemonData = await getPokemonData(params.id ?? '');
+        const speciesData = await getPokemonSpecies(pokemonData.species.url);
+        const evolvesChainData = await getEvolvesDatas(
+          speciesData.evolution_chain.url,
+        );
 
         const chain = evolutionChains(evolvesChainData.chain);
 
-        const koreanSpeciesData = speciesDetailData.flavor_text_entries.find(
-          (flavor_text_entries: { language: { name: string } }) =>
-            flavor_text_entries.language.name === 'ko',
+        const koreanSpeciesData = speciesData.flavor_text_entries.find(
+          (entry: { language: { name: string } }) =>
+            entry.language.name === 'ko',
         );
 
-        const koreanGenusData = speciesDetailData.genera.find(
-          (genera: { language: { name: string } }) =>
-            genera.language.name === 'ko',
+        const koreanGenusData = speciesData.genera.find(
+          (genus: { language: { name: string } }) =>
+            genus.language.name === 'ko',
         );
 
         setPokemonState((prev) => ({

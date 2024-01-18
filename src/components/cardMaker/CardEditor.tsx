@@ -1,10 +1,5 @@
-import {
-  POKEMON_NICKNAME1,
-  POKEMON_NICKNAME2,
-  POKEMON_STATS,
-  POKEMON_TYPES,
-} from '@/lib/constants';
-import styles from './cards.module.scss';
+import { POKEMON_STATS, POKEMON_TYPES } from '@/lib/constants';
+import styles from './cardEditor.module.scss';
 import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
 import StatusBar from '../detail/StatusBar';
 import Plate from '../plate/Plate';
@@ -19,9 +14,8 @@ const CardEditor = () => {
     pokemonNickName1,
     pokemonNickName2,
     pokemonName,
-    setPokemonNickName1,
-    setPokemonNickName2,
     setPokemonName,
+    generateRandomNicknames,
   } = useSelectedPokemonForCard();
 
   useEffect(() => {
@@ -30,11 +24,8 @@ const CardEditor = () => {
   }, [pokemonData, setPokemonName]);
 
   useEffect(() => {
-    const randomIndex1 = Math.floor(Math.random() * POKEMON_NICKNAME1.length);
-    const randomIndex2 = Math.floor(Math.random() * POKEMON_NICKNAME2.length);
-    setPokemonNickName1(POKEMON_NICKNAME1[randomIndex1]);
-    setPokemonNickName2(POKEMON_NICKNAME2[randomIndex2]);
-  }, [setPokemonNickName1, setPokemonNickName2]);
+    generateRandomNicknames();
+  }, [generateRandomNicknames]);
 
   const renderStatusBar = (baseStat: Stat, index: number, statName: string) => (
     <li key={index}>
@@ -53,10 +44,10 @@ const CardEditor = () => {
   );
 
   return (
-    <div className={styles.editor_wrapper}>
-      <div className={styles.editor_wrapper__top}>
+    <div className={styles.wrapper}>
+      <div className={styles.wrapper__top}>
         <span className={styles.title}>몬스터 이름</span>
-        <ul className={styles.pokemon_name_editor}>
+        <ul className={styles.name_editor}>
           <li>
             <span className={styles.list_name}>별칭 1</span>
             <div>
@@ -82,7 +73,7 @@ const CardEditor = () => {
           </li>
         </ul>
       </div>
-      <div className={styles.editor_wrapper__bottom}>
+      <div className={styles.wrapper__bottom}>
         <div className={styles.status_title}>
           <span className={styles.title}>스테이터스</span>
           <div>{pokemonData?.types.map(renderPlate)}</div>

@@ -1,5 +1,5 @@
 import { FormEvent, useState, useMemo, useRef, useEffect } from 'react';
-import styles from './cards.module.scss';
+import styles from './search.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { POKEMON_TYPES } from '@/lib/constants';
@@ -8,7 +8,7 @@ import { IoSearch } from '@react-icons/all-files/io5/IoSearch';
 import { PokemonType, TypesType } from '@/lib/type';
 import SearchDropdown from './SearchDropdown';
 
-const PokemonSearch = () => {
+const SearchPokemon = () => {
   const [text, setText] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -61,16 +61,16 @@ const PokemonSearch = () => {
   return (
     <div className={styles.search_form_wrapper}>
       <span className={styles.title}>포켓몬 검색하기</span>
-      <form className={styles.search__wrapper} onSubmit={onSubmit}>
-        <label className={styles.search__inner}>
+      <form className={styles.search_wrapper} onSubmit={onSubmit}>
+        <label className={styles.search_container}>
           <input
             onChange={(event) => setText(event.target.value)}
             value={text}
             type="text"
             placeholder="포켓몬 이름, 타입을 입력해 주세요"
-            className={styles.search__input}
+            className={styles.input}
           />
-          <button type="submit" className={styles.search__button}>
+          <button type="submit" className={styles.submit_button}>
             <IoSearch />
           </button>
         </label>
@@ -87,4 +87,4 @@ const PokemonSearch = () => {
   );
 };
 
-export default PokemonSearch;
+export default SearchPokemon;

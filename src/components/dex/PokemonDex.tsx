@@ -1,10 +1,10 @@
-import styles from './PokemonList.module.scss';
-import PokemonListElement from './PokemonListElement';
+import styles from './PokemonDex.module.scss';
+import PokemonDexElement from './PokemonDexElement';
 import Inner from '../Inner';
 import useFilteredPokemonData from '@/hook/useFilteredPokemonData';
 import useVisibleDataByScroll from '@/hook/useVisibleDataByScroll';
 
-const PokemonList = () => {
+const PokemonDex = () => {
   const filteredData = useFilteredPokemonData();
   const visibleData = useVisibleDataByScroll(filteredData);
 
@@ -13,7 +13,7 @@ const PokemonList = () => {
       <ul className={styles.pokemon_grid}>
         {visibleData.length
           ? visibleData.map((data) => (
-              <PokemonListElement data={data} key={data.name} />
+              <PokemonDexElement data={data} key={data.name} />
             ))
           : null}
       </ul>
@@ -21,4 +21,4 @@ const PokemonList = () => {
   );
 };
 
-export default PokemonList;
+export default PokemonDex;

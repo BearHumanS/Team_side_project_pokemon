@@ -1,3 +1,6 @@
+// useSelectedPokemonForCard.ts
+
+import { POKEMON_NICKNAME1, POKEMON_NICKNAME2 } from '@/lib/constants';
 import { PokemonType } from '@/lib/type';
 import { create } from 'zustand';
 
@@ -10,6 +13,7 @@ interface useSelectedPokemonForCard {
   setPokemonNickName1: (nickName: string) => void;
   pokemonNickName2: string | null;
   setPokemonNickName2: (nickName: string) => void;
+  generateRandomNicknames: () => void; // New function for generating random nicknames
 }
 
 const useSelectedPokemonForCard = create<useSelectedPokemonForCard>((set) => ({
@@ -21,5 +25,14 @@ const useSelectedPokemonForCard = create<useSelectedPokemonForCard>((set) => ({
   setPokemonNickName1: (nickName) => set({ pokemonNickName1: nickName }),
   pokemonNickName2: null,
   setPokemonNickName2: (nickName) => set({ pokemonNickName2: nickName }),
+
+  generateRandomNicknames: () => {
+    const randomIndex1 = Math.floor(Math.random() * POKEMON_NICKNAME1.length);
+    const randomIndex2 = Math.floor(Math.random() * POKEMON_NICKNAME2.length);
+
+    set({ pokemonNickName1: POKEMON_NICKNAME1[randomIndex1] });
+    set({ pokemonNickName2: POKEMON_NICKNAME2[randomIndex2] });
+  },
 }));
+
 export default useSelectedPokemonForCard;

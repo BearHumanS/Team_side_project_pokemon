@@ -1,14 +1,12 @@
 import { PokemonType } from '@/lib/type';
 import { useGetAllPokemon } from '@/query/qeuries';
 import { useCallback, useEffect, useState } from 'react';
-import CardsRowLayout from './CardsRowLayout';
-import styles from './cards.module.scss';
+import SelectPokemonLayout from './SelectPokemonLayout';
+import styles from './select.module.scss';
 
-const CardsRowRandom = () => {
+const SelectPokemonRandom = () => {
   const { data } = useGetAllPokemon(1017);
-  const [randomPokemonArray, setRandomPokemonArray] = useState<PokemonType[]>(
-    [],
-  );
+  const [randomPokemons, setRandomPokemons] = useState<PokemonType[]>([]);
 
   const getRandomPokemon = useCallback(() => {
     if (data && data.length > 0) {
@@ -20,7 +18,7 @@ const CardsRowRandom = () => {
         const randomPokemon = data[randomIndex];
         tempArray.push(randomPokemon);
       }
-      setRandomPokemonArray(tempArray);
+      setRandomPokemons(tempArray);
     }
   }, [data]);
 
@@ -29,10 +27,10 @@ const CardsRowRandom = () => {
   }, [getRandomPokemon]);
 
   return (
-    <div className={styles.pokemon_select_wrapper}>
+    <div className={styles.select_wrapper}>
       <span className={styles.title}>랜덤 포켓몬</span>
       <div>
-        <CardsRowLayout pokemonArray={randomPokemonArray} />
+        <SelectPokemonLayout pokemonArray={randomPokemons} />
         <button className={styles.border_button} onClick={getRandomPokemon}>
           랜덤
         </button>
@@ -41,4 +39,4 @@ const CardsRowRandom = () => {
   );
 };
 
-export default CardsRowRandom;
+export default SelectPokemonRandom;
