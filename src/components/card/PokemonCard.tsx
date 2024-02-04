@@ -34,7 +34,9 @@ const PokemonCard = ({
   const setClassName = (mainClassName: string) => {
     const typeClass = firstType ? styles[POKEMON_TYPES[firstType]] : '';
     return isMyPage
-      ? `${styles[`${mainClassName}__my`]} ${typeClass}`
+      ? isOpen
+        ? `${styles[`${mainClassName}__my`]} ${styles.isOpen} ${typeClass}`
+        : `${styles[`${mainClassName}__my`]} ${typeClass}`
       : `${styles[mainClassName]} ${typeClass}`;
   };
 
@@ -71,10 +73,7 @@ const PokemonCard = ({
   };
 
   return (
-    <div
-      className={setClassName('wrapper')}
-      style={{ transform: isOpen ? 'scale(2.33)' : undefined }}
-    >
+    <div className={setClassName('wrapper')}>
       <div className={setClassName('pokemon_number')}>{`No.${data?.id}`}</div>
       <div className={styles.white_block}>
         <img

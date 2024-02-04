@@ -3,12 +3,11 @@ import styles from './Plate.module.scss';
 import useSelectedStore from '@/store/useSelectedStore';
 import PlateHideButton from './PlateHideButton';
 import { useState } from 'react';
-import Inner from '../Inner';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const FilterPlates = () => {
   const koreanTypes = Object.values(POKEMON_TYPES);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { selectedPlate, setSelectedPlate } = useSelectedStore();
 
   const variants = {
@@ -51,15 +50,17 @@ const FilterPlates = () => {
             animate="open"
             exit="closed"
             variants={variants}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             className={styles.container}
           >
-            <Inner>
-              <motion.span>*속성을 선택해주세요.</motion.span>
+            <div className={styles.inner}>
+              <motion.span className={styles.description}>
+                속성을 선택해주세요. (중복 선택 가능)
+              </motion.span>
               <motion.div className={styles.type_plates}>
                 {renderTypes(koreanTypes)}
               </motion.div>
-            </Inner>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

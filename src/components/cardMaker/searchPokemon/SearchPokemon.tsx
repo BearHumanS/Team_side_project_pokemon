@@ -75,7 +75,7 @@ const SearchPokemon = () => {
           </button>
         </label>
         {isOpen && foundPokemon && (
-          <div ref={wrapperRef}>
+          <div className={styles.dropdown_ref_box} ref={wrapperRef}>
             <SearchDropdown
               searchResults={foundPokemon}
               setIsOpen={setIsOpen}

@@ -6,6 +6,7 @@ import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { IoChevronForward } from '@react-icons/all-files/io5/IoChevronForward';
 import { IoChevronBack } from '@react-icons/all-files/io5/IoChevronBack';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
 
 interface SearchDropdownProps {
   searchResults: (PokemonType | undefined)[] | null;
@@ -16,8 +17,12 @@ const SearchDropdown = ({ searchResults, setIsOpen }: SearchDropdownProps) => {
   const { setPokemonData, generateRandomNicknames } =
     useSelectedPokemonForCard();
   const [currentPage, setCurrentPage] = useState(1);
-  const POKEMONS_PER_PAGE = 12;
+  const windowWidth = useCalculateInnerWidth();
+  let POKEMONS_PER_PAGE = 12;
 
+  if (windowWidth < 768) {
+    POKEMONS_PER_PAGE = 6;
+  }
   const handleClick = (pokemon: PokemonType | null) => {
     generateRandomNicknames();
     setPokemonData(pokemon);
@@ -83,7 +88,7 @@ const SearchDropdown = ({ searchResults, setIsOpen }: SearchDropdownProps) => {
             key={pokemon?.id}
             onClick={() => handleClick(pokemon ? pokemon : null)}
           >
-            <div>
+            <div className={styles.img_wrapper}>
               <img
                 src={
                   pokemon?.id !== 1013

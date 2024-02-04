@@ -1,5 +1,6 @@
-//SelectPokemonLayout
+@import 'src/styles/mixin.scss';
 
+//SelectPokemonLayout
 .layout_wrapper {
   display: flex;
   gap: 15px;
@@ -42,7 +43,6 @@
 }
 
 // SelectPokemonLike, SelectPokemonRandom
-
 .select_wrapper {
   display: flex;
   flex-direction: column;
@@ -54,10 +54,25 @@
   width: fit-content;
   gap: 10px;
 
-  div {
-    display: flex;
-    gap: 15px;
+  @include mobile {
+    gap: 30px;
+    align-items: center;
   }
+}
+
+.random_container {
+  display: flex;
+  gap: 15px;
+
+  @include mobile {
+    gap: 30px;
+    flex-direction: column;
+  }
+}
+
+.like_container {
+  display: flex;
+  gap: 15px;
 }
 
 .select_wrapper > div > .border_button {
@@ -67,6 +82,12 @@
   border: 3px solid #0f60ce;
   font-size: 21px;
   font-weight: 500;
+
+  @include mobile {
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+  }
 }
 
 .select_wrapper > div > .page_button {
@@ -81,6 +102,11 @@
   align-items: center;
   justify-content: center;
   font-size: 20px;
+
+  @include mobile {
+    background-color: transparent;
+    transform: translateY(-20%);
+  }
 }
 
 .select_wrapper > div > .title {
@@ -97,7 +123,7 @@
   color: #0f60ce;
   font-weight: 500;
   font-family: GmarketSansMedium;
-  transition: 0.2s ease;
+  transition: background-color 0.2s ease;
 
   &:hover {
     background-color: #0f60ce;
@@ -108,4 +134,61 @@
 .title {
   font-size: 28px;
   font-weight: 700;
+}
+
+//SelectPokemonMobile
+.mobile_wrapper {
+  gap: 20px;
+  max-width: 345px;
+  display: none;
+  margin: 40px 0;
+
+  @include mobile {
+    display: flex;
+  }
+
+  .selector_button {
+    width: 100%;
+    height: 190px;
+    display: flex;
+    padding: 12px 15px;
+    flex-direction: column;
+    border: 3px solid #000;
+    border-radius: 15px;
+    justify-content: space-between;
+    align-items: center;
+
+    .img_wrapper {
+      position: relative;
+      flex: 2;
+
+      img {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        width: 152px;
+        height: 152px;
+      }
+    }
+
+    .text_wrapper {
+      font-family: GmarketSansMedium;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span {
+        text-align: center;
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      p {
+        color: #939393;
+        text-align: center;
+        font-size: 10px;
+        line-height: 13px;
+      }
+    }
+  }
 }

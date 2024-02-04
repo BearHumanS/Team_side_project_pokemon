@@ -12,6 +12,7 @@ import { filteredPokemonData } from '@/lib/type';
 import { useGetAllPokemon } from '@/query/qeuries';
 import SearchPokemon from './searchPokemon/SearchPokemon';
 import { useEffect } from 'react';
+import SelectPokemonMobile from './selectPokemon/SelectPokemonMobile';
 
 const CardEditPage = () => {
   const { user } = useUserStore();
@@ -76,6 +77,7 @@ const CardEditPage = () => {
     <Inner>
       <div className={styles.wrapper}>
         <SearchPokemon />
+        <SelectPokemonMobile />
         <div className={styles.card_wrapper}>
           <span className={styles.title}>카드 제작</span>
           <div className={styles.card_decoration}>

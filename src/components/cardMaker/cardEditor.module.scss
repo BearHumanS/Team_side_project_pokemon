@@ -1,9 +1,15 @@
+@import 'src/styles/mixin.scss';
+
 .wrapper {
   justify-content: space-between;
   display: flex;
   flex-direction: column;
   width: 350px;
   height: 485px;
+
+  @include mobile {
+    height: 100%;
+  }
 }
 
 .wrapper__top,
@@ -13,20 +19,28 @@
   gap: 15px;
   height: 100%;
 
-  &__bottom {
-    justify-content: flex-end;
-  }
-
   ul {
     margin-left: 10%;
   }
 }
 
+.wrapper__bottom {
+  @include mobile {
+    display: none;
+  }
+}
+
 .name_editor {
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex: 0.8;
   justify-content: space-between;
+
+  @include mobile {
+    gap: 30px;
+    flex: none;
+  }
 
   > li {
     display: flex;

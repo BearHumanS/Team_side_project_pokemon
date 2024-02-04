@@ -287,6 +287,7 @@ const EvolutionChain = ({
                           </div>
                           {index < evovlutionPokemonData.length - 1 && (
                             <img
+                              className={styles.arrow}
                               src="/arrow.svg"
                               alt="우측 화살표"
                               width={24}

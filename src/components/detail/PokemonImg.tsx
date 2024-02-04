@@ -5,13 +5,17 @@ import { POKEMON_TYPES } from '@/lib/constants';
 import DetailImgSkeleton from '../skeleton/DetailImgSkeleton';
 import TypeSkeleton from '../skeleton/TypeSkeleton';
 import { PokemonInfoExtendsProps } from './PokemonInfo';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
+import LikePokemon from './LikePokemon';
 
 const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
   const { pokemon, selectedFormName } = pokemonState;
+  const pokemonId = pokemon?.id;
+
+  const windowWidth = useCalculateInnerWidth();
 
   const pokemonOfficialImage =
-    pokemon?.sprites.other?.['official-artwork'].front_default; /* ||
-    pokemon?.sprites.other?.home?.front_default; */
+    pokemon?.sprites.other?.['official-artwork'].front_default;
 
   const getLocalImagePath = (name: string | undefined) => {
     if (!name) {
@@ -41,21 +45,6 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
     getKoreanName(pokemon?.name) ||
     getKoreanFormName(pokemon?.name);
 
-  /*   let someFormName = null;
-  if (formName?.includes('-거다이맥스')) {
-    someFormName = '거다이맥스';
-  } else if (formName?.includes('-무한다이맥스')) {
-    someFormName = '무한다이맥스';
-  } else if (formName?.includes('-팔데아')) {
-    someFormName = '팔데아';
-  } else if (formName?.includes('-가라르')) {
-    someFormName = '가라르';
-  } else if (formName?.includes('-히스이')) {
-    someFormName = '히스이';
-  } else if (formName?.includes('-알로라')) {
-    someFormName = '알로라';
-  } */
-
   const formNameMatch = selectedFormName?.match(
     /-(거다이맥스|무한다이맥스|팔데아|가라르|히스이|알로라)/,
   );
@@ -65,8 +54,13 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
     <>
       <div className={styles.detail__center}>
         <div className={styles.detail__nameBox}>
-          <img src="/pokemon_name_box.svg" alt="name_box" />
-          <span className={styles.detail__name}>{koreanName}</span>
+          <div
+            className={`${styles.detail__name} ${
+              koreanName?.length > 5 ? styles.longName : styles.shortName
+            }`}
+          >
+            {koreanName}
+          </div>
         </div>
 
         <div className={styles.detail__some__form}>{someFormName}</div>
@@ -74,17 +68,19 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
           {isLoading ? (
             <DetailImgSkeleton />
           ) : (
-            <img
-              className={styles.official__img}
-              src={
-                pokemonOfficialImage
-                  ? pokemonOfficialImage
-                  : getLocalImagePath(selectedFormName || koreanName)
-              }
-              alt="Official Artwork"
-              width={280}
-              height={280}
-            />
+            <>
+              <img
+                className={styles.official__img}
+                src={
+                  pokemonOfficialImage
+                    ? pokemonOfficialImage
+                    : getLocalImagePath(selectedFormName || koreanName)
+                }
+                alt="Official Artwork"
+                width={280}
+                height={280}
+              />
+            </>
           )}
         </div>
         <div className={styles.detail__type}>
@@ -112,6 +108,41 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
           )}
         </div>
       </div>
+      {windowWidth <= 768 && (
+        <>
+          <div className={styles.mobile__detail__container__top}>
+            <div className={styles.mobile__detail__nameBox}>
+              <div
+                className={`${styles.mobile__detail__name} ${
+                  koreanName?.length > 5 ? styles.longName : styles.shortName
+                }`}
+              >
+                {koreanName}
+              </div>
+            </div>
+            <div>
+              {isLoading ? (
+                <DetailImgSkeleton />
+              ) : (
+                <div className={styles.mobile__official__img}>
+                  <img
+                    className={styles.mobile__official__img}
+                    src={
+                      pokemonOfficialImage
+                        ? pokemonOfficialImage
+                        : getLocalImagePath(selectedFormName || koreanName)
+                    }
+                    alt="Official Artwork"
+                    width={204}
+                    height={204}
+                  />
+                </div>
+              )}
+            </div>
+            <LikePokemon pokemonId={pokemonId || ''} isLoading={isLoading} />
+          </div>
+        </>
+      )}
     </>
   );
 };

@@ -1,6 +1,7 @@
 @import 'src/styles/mixin.scss';
 @import 'src/styles/theme.scss';
 
+// FilterPlates
 .wrapper {
   position: relative;
   height: 100%;
@@ -11,25 +12,53 @@
   width: 100%;
   margin-bottom: 60px;
 
+  @include mobile {
+    height: auto;
+  }
+
   .container {
+    height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     background-color: #fff;
     border-bottom: 3px solid #000;
     overflow: hidden;
 
-    .type_plates {
-      margin-top: 20px;
-      height: 100%;
+    @include mobile {
+      height: auto;
+      width: auto;
+      flex: 1;
+      padding: 30px 0;
+    }
+
+    .inner {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      gap: 30px;
+
+      @include mobile {
+        align-items: center;
+      }
+
+      .type_plates {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        @include mobile {
+          justify-content: center;
+          gap: 20px;
+        }
+      }
     }
   }
 }
 
+// Plate
 .plate_wrapper {
   display: flex;
   flex-direction: column;
@@ -79,6 +108,7 @@
   }
 }
 
+//PlateHideButton
 .hide_button {
   position: absolute;
   top: unset;
@@ -93,7 +123,30 @@
   border-top: 24px solid #000;
   width: 111px;
 
-  div {
+  @include mobile {
+    bottom: -38px;
+    transform: scale(2);
+  }
+
+  .mobile_button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -21px;
+    margin: auto;
+    color: #fff;
+    display: none;
+    align-items: center;
+    font-size: 12px;
+    justify-content: center;
+
+    @include mobile {
+      display: flex;
+      font-family: GmarketSansMedium;
+    }
+  }
+
+  .pc_button {
     position: absolute;
     left: 0;
     right: 0;
@@ -104,5 +157,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include mobile {
+      display: none;
+    }
   }
 }

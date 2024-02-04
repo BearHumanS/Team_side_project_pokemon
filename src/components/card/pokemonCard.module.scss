@@ -18,6 +18,14 @@
   }
 }
 
+.wrapper__my.isOpen {
+  transform: scale(2.33);
+
+  @media (max-width: 769px) {
+    transform: scale(1.6);
+  }
+}
+
 .monster_ball_left {
   position: absolute;
   left: 0;

@@ -7,12 +7,14 @@ import RenderPokemon from './RenderPokemon';
 import { updateDocument } from '@/lib/firebaseQuery';
 import { Pagination } from 'antd';
 import { useState } from 'react';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
 
 const MyLikedPokemon = () => {
   const { user } = useUserStore();
   const { pokemonData } = useLikedStore();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const windowWidth = useCalculateInnerWidth();
+  const itemsPerPage = windowWidth <= 768 ? 6 : 12;
 
   const navigate = useNavigate();
 

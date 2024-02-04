@@ -20,12 +20,14 @@ const PlateHideButton = ({ isOpen, setIsOpen }: PlateHideButtonProp) => {
       className={styles.hide_button}
     >
       <motion.div
+        className={styles.pc_button}
         variants={variant}
         animate={isOpen ? 'open' : 'close'}
         transition={{ duration: 0.4 }}
       >
         <IoChevronUp />
       </motion.div>
+      <span className={styles.mobile_button}>속성 선택</span>
     </button>
   );
 };

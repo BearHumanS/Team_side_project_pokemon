@@ -1,6 +1,11 @@
 .main__search {
   margin-right: 22px;
   flex-shrink: 0;
+  display: flex;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
 }
 
 .main__search__bar {

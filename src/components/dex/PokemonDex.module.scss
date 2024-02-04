@@ -1,7 +1,13 @@
+@import 'src/styles/mixin.scss';
+
 .pokemon_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
+
+  @include mobile {
+    padding: 0 20px;
+  }
 }
 
 .pokemon_list_element {

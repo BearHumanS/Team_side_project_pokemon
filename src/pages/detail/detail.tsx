@@ -1,9 +1,12 @@
+import Inner from '@/components/Inner';
 import Detail from '@/components/detail/Detail';
 
 const DetailPage = () => {
   return (
     <section>
-      <Detail />
+      <Inner>
+        <Detail />
+      </Inner>
     </section>
   );
 };
