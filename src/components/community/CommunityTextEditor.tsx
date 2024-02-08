@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import ReactQuill from 'react-quill';
 import { Input, Select } from 'antd';
-import useUserStore from '@/store/useUsersStore';
+import 'react-quill/dist/quill.snow.css';
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useUserStore from '@/store/useUsersStore';
 import styles from './CommunityTextEditor.module.scss';
 import { addCommunity } from '@/lib/firebaseQueryCommunity';
-import { useNavigate } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 const CommunityTextEditor = () => {
   const { user } = useUserStore();
@@ -66,13 +66,14 @@ const CommunityTextEditor = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {loading ? <div>등록 중..</div> : ''}
       <form onSubmit={onSubmit}>
         <div className={styles.inputBox}>
           <div>
             <div className={styles.inputTitle}>카테고리</div>
             <Select
+              className={styles.inputSelect}
               defaultValue="자유게시판"
               style={{ width: 130 }}
               onChange={handleChange}
@@ -89,8 +90,8 @@ const CommunityTextEditor = () => {
           <div>
             <div className={styles.inputTitle}>제목</div>
             <Input
+              className={styles.inputTextBox}
               count={{ show: true, max: 50 }}
-              style={{ minWidth: '1000px', display: 'flex' }}
               value={title}
               onChange={handleChangeTitle}
             />
@@ -98,6 +99,7 @@ const CommunityTextEditor = () => {
         </div>
         <div>
           <ReactQuill
+            className={styles.reactQuill}
             style={{ height: '400px' }}
             value={editorRef}
             onChange={handleChanges}

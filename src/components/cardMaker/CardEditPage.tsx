@@ -13,9 +13,11 @@ import { useGetAllPokemon } from '@/query/qeuries';
 import SearchPokemon from './searchPokemon/SearchPokemon';
 import { useEffect } from 'react';
 import SelectPokemonMobile from './selectPokemon/SelectPokemonMobile';
+import { useNavigate } from 'react-router-dom';
 
 const CardEditPage = () => {
   const { user } = useUserStore();
+  const navigate = useNavigate();
   const {
     pokemonData,
     pokemonNickName1,
@@ -65,6 +67,8 @@ const CardEditPage = () => {
         uid: user.uid,
       });
     }
+
+    navigate('/mypage');
   };
 
   const pokemonNickName = {

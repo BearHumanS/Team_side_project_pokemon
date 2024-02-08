@@ -53,7 +53,6 @@ const SelectPokemonLike = () => {
         >
           <IoChevronBack />
         </button>
-        t
         <SelectPokemonLayout pokemonArray={likePokemonArray} />
         <button
           className={styles.page_button}

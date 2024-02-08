@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import styles from './CommunityCommentItemReply.module.scss';
+import { storage } from '@/firebase';
+import { useParams } from 'react-router-dom';
 import useUserStore from '@/store/useUsersStore';
+import { ConvertTimes } from '@/lib/util/convertTime';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { editReplies } from '@/lib/firebaseQueryCommunity';
-import { useParams } from 'react-router-dom';
-import { storage } from '@/firebase';
+import styles from './CommunityCommentItemReply.module.scss';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
-import { ConvertTimes } from '@/lib/util/convertTime';
+import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
 
 const CommunityCommentItemReply = ({ data, val, setReplyList, onDel }: any) => {
   const value = data;
@@ -82,10 +83,19 @@ const CommunityCommentItemReply = ({ data, val, setReplyList, onDel }: any) => {
         <div className={styles.infoBox}>
           <div className={styles.userEditBox}>
             <div className={styles.userBox}>
-              <div className={styles.usersImg}>
-                <img src={imageUrl} alt="사용자 이미지" />
+              <div className={styles.userBoxMobile}>
+                <div className={styles.usersImg}>
+                  {imageUrl ? (
+                    <img src={imageUrl.toString()} alt="유저 이미지" />
+                  ) : (
+                    <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+                  )}
+                </div>
+                <div>{value.userName}</div>
               </div>
-              <div>{value.userName}</div>
+              <div className={styles.createdAtTextTop}>
+                <ConvertTimes data={value.createdAt} />
+              </div>
             </div>
 
             <div
@@ -95,7 +105,7 @@ const CommunityCommentItemReply = ({ data, val, setReplyList, onDel }: any) => {
               <div className={styles.createdAtText}>
                 <ConvertTimes data={value.createdAt} />
               </div>
-              {user?.uid ? (
+              {data.userId === user?.uid ? (
                 <div className={styles.editBox}>
                   <div
                     className={styles.replyText}

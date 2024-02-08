@@ -18,13 +18,13 @@ const CommunityHeader = () => {
   }
 
   return (
-    <div className={styles.CommunityHeader}>
+    <div className={styles.communityHeader}>
       {CategoryList.map((item, index) => (
         <div
           className={
             index === currentTeb
-              ? `${styles.CategoryButton} ${styles.Select}`
-              : styles.CategoryButton
+              ? `${styles.categoryButton} ${styles.select}`
+              : styles.categoryButton
           }
           onClick={() => {
             setTabHandler(index);

@@ -1,33 +1,48 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '@/store/useUsersStore';
+import { ConvertTimes } from '@/lib/util/convertTime';
+import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
 import styles from './CommunityDetailHeader.module.scss';
-import { deleteCommunity, viewCount } from '@/lib/firebaseQueryCommunity';
+import { useCommunityCommentQuery } from './CommunityComment';
 import { IoIosHeart } from '@react-icons/all-files/io/IoIosHeart';
 import { MdModeComment } from '@react-icons/all-files/md/MdModeComment';
 import { ButtonCategory, ButtonDel, ButtonEdit } from '../button/Button';
+import { deleteCommunity, viewCount } from '@/lib/firebaseQueryCommunity';
 import { MdRemoveRedEye } from '@react-icons/all-files/md/MdRemoveRedEye';
-import { useQuery } from 'react-query';
-import { ConvertTimes } from '@/lib/util/convertTime';
-import { useEffect } from 'react';
-import { useCommunityCommentQuery } from './CommunityComment';
-import { fetchProfileImages } from './CommunityCardItem';
-import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
+import { FetchProfileImages } from '@/lib/util/fetchProfileImages';
 
-// const fetchProfileImages = async (userId: any) => {
-//   const fileRef = ref(storage, `${userId}`);
-//   const result = await listAll(fileRef);
-//   const valData = await Promise.all(result.items.map(async (item) => await getDownloadURL(item)));
-//   return valData;
-// };
+interface DetailHeaderProps {
+  data: {
+    category?: string;
+    createdAt?: string;
+    description?: string;
+    id?: string;
+    likes?: string[];
+    postImg?: string;
+    title?: string;
+    updateAt?: string;
+    userId?: string;
+    userImg?: string;
+    userName?: string;
+    views?: number;
+  };
+  id: {
+    id?: string;
+  };
+}
 
-const CommunityDetailHeader = ({ data, id }: any) => {
+const CommunityDetailHeader = ({ data, id }: DetailHeaderProps) => {
   const { user } = useUserStore();
   const navigate = useNavigate();
 
-  const { data: imageUrl }: any = useQuery(['profileImages', data.userId], () =>
-    fetchProfileImages(data.userId),
+  const { data: imageUrl } = useQuery(
+    ['profileImages', data.userId],
+    async () => {
+      if (!data.userId) return '';
+      return FetchProfileImages(data.userId);
+    },
   );
 
   /** 뷰 카운트 전송 기능 */
@@ -35,7 +50,7 @@ const CommunityDetailHeader = ({ data, id }: any) => {
     const fetchData = async () => {
       try {
         // data.id가 존재하는지 확인하고 카운트 실행
-        if (data.id) {
+        if (data.id && typeof data.views !== 'undefined') {
           const newComment = {
             views: data.views + 1,
           };
@@ -48,9 +63,9 @@ const CommunityDetailHeader = ({ data, id }: any) => {
     };
 
     fetchData();
-  }, [data.id]);
+  }, [data.id, data.views]);
 
-  const { data: communityLists }: any = useCommunityCommentQuery(id);
+  const { data: communityLists = [] } = useCommunityCommentQuery(id);
 
   const likeCount = data.likes ? data.likes.length : 0;
 
@@ -75,13 +90,15 @@ const CommunityDetailHeader = ({ data, id }: any) => {
         <div className={styles.userBox}>
           <div className={styles.usersImg}>
             {imageUrl ? (
-              <img src={imageUrl} alt="유저 이미지" />
-            ) : <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />}
+              <img src={imageUrl.toString()} alt="유저 이미지" />
+            ) : (
+              <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+            )}
           </div>
           <div>{data.userName}</div>
         </div>
         {/* 게시물ID와 로그인한ID가 참이면 표시 */}
-        {id.id && user?.uid ? (
+        {data.userId === user?.uid ? (
           <div className={styles.editDelBox}>
             <div
               onClick={() => {

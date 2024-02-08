@@ -12,6 +12,23 @@
 
   @include mobile {
     align-items: center;
+
+    &::before {
+      content: '';
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.5);
+      top: 0;
+      z-index: 2;
+      display: none;
+    }
+
+    &.dropdown_open {
+      &::before {
+        display: block;
+      }
+    }
   }
 }
 
@@ -59,6 +76,7 @@
 }
 
 // SearchDropdown
+
 .dropdown_ref_box {
   display: flex;
   width: 100%;

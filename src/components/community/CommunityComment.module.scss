@@ -1,6 +1,12 @@
 .border {
   margin-top: 30px;
-  border-top: 1px solid #cfcfcf;
+}
+
+.commentContainer {
+  @media (max-width: 768px) {
+      width: 100%;
+      padding: 0 20px;
+  }
 }
 
 .heartButton {
@@ -13,16 +19,17 @@
   align-items: center;
   border-radius: 50px;
   justify-content: center;
+  background-color: #ffffff;
   border: 1px solid #ff5050;
   svg {
     font-size: 18px;
     color: #ff5050;
   }
   .heartText {
-    margin-left: 4px;
     font-size: 14px;
-    padding-top: 3px;
     color: #ff5050;
+    padding-top: 3px;
+    margin-left: 4px;
   }
 }
 .Outline {
@@ -37,11 +44,23 @@
 
 .container {
   margin: 40px 34px;
+  @media (max-width: 768px) {
+    margin: 40px 0px;
+  }
 }
 
 .commentBox {
   display: flex;
+  border-radius: 4px;
   flex-direction: column;
+  padding: 20px 34px 10px;
+  background-color: #fcfcfc;
+  border: 1px solid #e1e1e1;
+  @media (max-width: 768px) {
+    padding: 0;
+    border: none;
+    background-color: #ffffff00;
+  }
 }
 
 .commentTitle {
@@ -57,6 +76,7 @@
   padding: 24px;
   border-radius: 4px;
   border: 1px solid #e1e1e1;
+  background-color: #ffffff;
   textarea {
     width: 100%;
     resize: none;
@@ -64,6 +84,9 @@
     font-size: 14px;
     border-style: none;
     font-family: 'GmarketSansMedium';
+    &:focus {
+      outline: none;
+    }
   }
 }
 

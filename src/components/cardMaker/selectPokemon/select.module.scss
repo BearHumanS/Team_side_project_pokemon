@@ -57,6 +57,7 @@
   @include mobile {
     gap: 30px;
     align-items: center;
+    padding: 20px 10px;
   }
 }
 
@@ -66,6 +67,7 @@
 
   @include mobile {
     gap: 30px;
+    padding: 0 10px;
     flex-direction: column;
   }
 }
@@ -73,6 +75,10 @@
 .like_container {
   display: flex;
   gap: 15px;
+
+  @include mobile {
+    gap: 5px;
+  }
 }
 
 .select_wrapper > div > .border_button {
@@ -105,7 +111,8 @@
 
   @include mobile {
     background-color: transparent;
-    transform: translateY(-20%);
+    transform: translateY(130%);
+    height: 32px;
   }
 }
 

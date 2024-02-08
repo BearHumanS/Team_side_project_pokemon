@@ -1,15 +1,17 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { storage } from '@/firebase';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styles from './CommunityCardItem.module.scss';
 import { ConvertTime } from '@/lib/util/convertTime';
+import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { IoIosHeart } from '@react-icons/all-files/io/IoIosHeart';
+import { FetchProfileImages } from '@/lib/util/fetchProfileImages';
 import { MdRemoveRedEye } from '@react-icons/all-files/md/MdRemoveRedEye';
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const fetchProfileImages = async (userId: any) => {
+export const fetchProfileImages = async (userId: string) => {
   const fileRef = ref(storage, `${userId}`);
   const result = await listAll(fileRef);
   const valData = await Promise.all(
@@ -20,8 +22,12 @@ export const fetchProfileImages = async (userId: any) => {
 
 const CommunityCardItem = ({ data }: any) => {
   const navigate = useNavigate();
-  const { data: imageUrl }: any = useQuery(['profileImages', data.userId], () =>
-    fetchProfileImages(data.userId),
+  const { data: imageUrl }: any = useQuery(
+    ['profileImages', data.userId],
+    async () => {
+      if (!data.userId) return '';
+      return FetchProfileImages(data.userId);
+    },
   );
 
   const likeCount = data.likes ? data.likes.length : 0;
@@ -30,22 +36,35 @@ const CommunityCardItem = ({ data }: any) => {
     navigate(`/community/detail/${data.id}`);
   };
 
+  const maxLength = 15;
+
   return (
     <div className={styles.container} onClick={handleToDetail}>
       <div className={styles.titleImg}>
-        <img src={`/${data.postImg}`} />
+        <img src={`public/${data.postImg}`} />
       </div>
       <div className={styles.innerBox}>
-        <div className={styles.titleItem}>{data.title}</div>
+        <div className={styles.titleItem}>
+          {data.title.length > maxLength
+            ? data.title.slice(0, maxLength) + '...'
+            : data.title}
+        </div>
         <div className={styles.userBox}>
           <div className={styles.usersImg}>
-            <img src={imageUrl} />
+            {imageUrl ? (
+              <img src={imageUrl.toString()} alt="유저 이미지" />
+            ) : (
+              <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+            )}
           </div>
           <div>{data.userName}</div>
         </div>
-        {/* <div className={styles.descriptionItem}>{data.description}</div> */}
         <div className={styles.footer}>
           <div className={styles.likesViewsBox}>
+            {/* <div className={styles.comment}>
+            <MdModeComment />
+            {communityLists.length}
+          </div> */}
             <div className={styles.like}>
               <IoIosHeart />
               {likeCount}

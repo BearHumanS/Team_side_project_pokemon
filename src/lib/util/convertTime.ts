@@ -1,8 +1,9 @@
 interface reverseObject {
-  data: string;
+  data?: string;
 }
 
 export const ConvertTime = (value: reverseObject) => {
+  if (!value.data) return '';
   const utcDate = new Date(value.data);
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -10,13 +11,12 @@ export const ConvertTime = (value: reverseObject) => {
     day: 'numeric',
     timeZone: 'Asia/Seoul', // 시간대를 서울로 설정
   };
-
   const formattedKoreanDate = utcDate.toLocaleDateString('ko-KR', options);
-
   return formattedKoreanDate;
 };
 
 export const ConvertTimes = (value: reverseObject) => {
+  if (!value.data) return '';
   const utcDate = new Date(value.data);
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -27,8 +27,6 @@ export const ConvertTimes = (value: reverseObject) => {
     second: 'numeric',
     timeZone: 'Asia/Seoul', // 시간대를 서울로 설정
   };
-
   const formattedKoreanDate = utcDate.toLocaleDateString('ko-KR', options);
-
   return formattedKoreanDate;
 };

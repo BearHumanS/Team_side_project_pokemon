@@ -1,7 +1,6 @@
 .container {
-  display: flex;
   width: 100%;
-  // margin-left: 30px;
+  display: flex;
 }
 
 .replyIcon {
@@ -31,13 +30,18 @@
   border-radius: 4px;
   margin-bottom: 10px;
   border: 1px solid #e1e1e1;
+  background-color: #FBFBFB;
   textarea {
     width: 100%;
     resize: none;
     display: flex;
     font-size: 14px;
     border-style: none;
+    background-color: #ffffff00;
     font-family: 'GmarketSansMedium';
+    &:focus {
+      outline: none;
+    }
   }
 }
 
@@ -47,12 +51,6 @@
   font-size: 12px;
   margin-bottom: 8px;
   justify-content: space-between;
-}
-
-.userBox {
-  display: flex;
-  margin-right: 2px;
-  align-items: center;
 }
 
 .usersImg {
@@ -111,14 +109,35 @@
   }
 }
 
+.userBoxMobile {
+  display: flex;
+  align-items: center;
+}
+
 .userBox {
   display: flex;
   font-size: 12px;
-  align-items: center;
   justify-content: end;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  .createdAtTextTop {
+    display: none;
+    @media (max-width: 768px) {
+      display: flex;
+      font-size: 10px;
+      color: #cdcdcd;
+      margin-top: 10px;
+      margin-left: 2px;
+    }
+  }
   .createdAtText {
     display: flex;
     color: #b0b0b0;
+    align-items: center;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   .deleteText {

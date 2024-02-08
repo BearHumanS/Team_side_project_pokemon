@@ -59,7 +59,11 @@ const SearchPokemon = () => {
   };
 
   return (
-    <div className={styles.search_form_wrapper}>
+    <div
+      className={`${styles.search_form_wrapper} ${
+        isOpen ? styles.dropdown_open : ''
+      }`}
+    >
       <span className={styles.title}>포켓몬 검색하기</span>
       <form className={styles.search_wrapper} onSubmit={onSubmit}>
         <label className={styles.search_container}>

@@ -1,6 +1,13 @@
-.Container {
-    padding: 25px;
-    border-radius: 4px;
-    background-color: white;
-    border: 1px solid #CFCFCF;
+.container {
+  padding: 25px;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #cfcfcf;
+  @media (max-width: 768px) {
+    border: none;
+    padding: 0px;
+    border-radius: 0;
+    background-color: #ffffff00;
+    border: 1px 0 1px 0 solid #cfcfcf;
+  }
 }
