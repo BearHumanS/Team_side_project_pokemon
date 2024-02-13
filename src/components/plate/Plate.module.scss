@@ -3,14 +3,16 @@
 
 // FilterPlates
 .wrapper {
-  position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: 12px;
   padding-bottom: 60px;
+
+  @include mobile {
+    gap: 11px;
+  }
 
   .container {
     height: 100%;
@@ -106,6 +108,7 @@
 
 //PlateHideButton
 .hide_button {
+  position: relative;
   cursor: pointer;
   outline: none;
   background-color: transparent;
