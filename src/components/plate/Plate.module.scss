@@ -5,12 +5,12 @@
 .wrapper {
   position: relative;
   height: 100%;
-  margin-top: -30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 60px;
+  gap: 12px;
+  padding-bottom: 60px;
 
   .container {
     height: 100%;
@@ -106,14 +106,10 @@
 
 //PlateHideButton
 .hide_button {
-  position: absolute;
-  top: unset;
-  bottom: -25px;
   cursor: pointer;
   outline: none;
   background-color: transparent;
   border-bottom: 0px;
-  justify-self: center;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-top: 24px solid #000;
