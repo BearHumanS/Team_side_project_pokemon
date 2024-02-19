@@ -11,6 +11,7 @@ import { MouseEvent, useRef } from 'react';
 import { FiPlus } from '@react-icons/all-files/fi/FiPlus';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
 
 interface CardModalProps {
   tagName?: string;
@@ -21,6 +22,7 @@ interface CardModalProps {
 
 const CardModal = ({ onModalToggle, cardData, isOpen }: CardModalProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const windowWidth = useCalculateInnerWidth();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -30,7 +32,7 @@ const CardModal = ({ onModalToggle, cardData, isOpen }: CardModalProps) => {
   const controls = useAnimation();
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (cardRef.current) {
+    if (cardRef.current && windowWidth > 768) {
       const rect = cardRef.current.getBoundingClientRect();
       const offsetX = e.clientX - rect.left - rect.width / 2;
       const offsetY = e.clientY - rect.top - rect.height / 2;
@@ -43,10 +45,12 @@ const CardModal = ({ onModalToggle, cardData, isOpen }: CardModalProps) => {
     }
   };
   const handleMouseLeave = () => {
-    controls.start({
-      rotateX: 0,
-      rotateY: 0,
-    });
+    if (windowWidth > 768) {
+      controls.start({
+        rotateX: 0,
+        rotateY: 0,
+      });
+    }
   };
 
   const card = cardData?.data;
