@@ -7,7 +7,7 @@ import CardEditor from './CardEditor';
 import Inner from '../Inner';
 import { addDocument, getCountDocument } from '@/lib/firebaseQuery';
 import useUserStore from '@/store/useUsersStore';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import { filteredPokemonData } from '@/lib/type';
 import { useGetAllPokemon } from '@/query/qeuries';
 import SearchPokemon from './searchPokemon/SearchPokemon';
@@ -16,6 +16,7 @@ import SelectPokemonMobile from './selectPokemon/SelectPokemonMobile';
 import { useNavigate } from 'react-router-dom';
 
 const CardEditPage = () => {
+  const [isSaving, setIsSaving] = useState<boolean>(false);
   const { user } = useUserStore();
   const navigate = useNavigate();
   const {
@@ -48,6 +49,7 @@ const CardEditPage = () => {
 
   const onSave = async (event: MouseEvent) => {
     event.preventDefault();
+    setIsSaving(true);
     if (user) {
       const count = await getCountDocument(`cards/${user.uid}/pokemonCards`);
 
@@ -68,6 +70,7 @@ const CardEditPage = () => {
       });
     }
 
+    setIsSaving(false);
     navigate('/mypage');
   };
 
@@ -98,7 +101,11 @@ const CardEditPage = () => {
           <SelectPokemonLike />
           <SelectPokemonRandom />
         </div>
-        <button className={styles.save_button} onClick={onSave}>
+        <button
+          disabled={!pokemonName?.length || isSaving}
+          className={styles.save_button}
+          onClick={onSave}
+        >
           저장하기
         </button>
       </div>

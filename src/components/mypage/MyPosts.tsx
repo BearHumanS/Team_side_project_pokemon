@@ -1,4 +1,4 @@
-import { getAllDocument } from '@/lib/firebaseQuery';
+import { deleteDocument, getAllDocument } from '@/lib/firebaseQuery';
 import { deleteCommunity } from '@/lib/firebaseQueryCommunity';
 import useUserStore from '@/store/useUsersStore';
 import { useEffect, useState } from 'react';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import RenderPost from './RenderPost';
 import styles from './Mypage.module.scss';
 import { Pagination } from 'antd';
+import useLikesPostStore from '@/store/useLikesPostStore';
 
 export interface Posts {
   id: string;
@@ -30,6 +31,7 @@ const MyPosts = () => {
   const itemsPerPage = 4;
   const [posts, setPosts] = useState<Posts[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { removeLike } = useLikesPostStore();
   const navigate = useNavigate();
 
   const { user } = useUserStore();
@@ -61,20 +63,25 @@ const MyPosts = () => {
   const onDelete = async (postId: string) => {
     const confirm = window.confirm('해당 글을 삭제하시겠습니까?');
 
-    if (confirm && user?.uid) {
-      try {
+    try {
+      if (confirm && user) {
         await deleteCommunity(`community/${postId}`);
         setPosts((prev) => prev.filter((post) => post.id !== postId));
-
-        const newTotal = posts.length - 1;
-        const maxPage = Math.ceil(newTotal / itemsPerPage);
-        if (currentPage > maxPage) {
-          setCurrentPage(maxPage > 0 ? maxPage : 1);
-        }
-        console.log('글이 삭제 되었습니다.');
-      } catch (error) {
-        console.error(error);
       }
+
+      await deleteDocument(`/heart/${user?.uid}/like/${postId}`);
+
+      removeLike(postId);
+
+      const newTotal = posts.length - 1;
+      const maxPage = Math.ceil(newTotal / itemsPerPage);
+      if (currentPage > maxPage) {
+        setCurrentPage(maxPage > 0 ? maxPage : 1);
+      }
+
+      console.log('글이 삭제 되었습니다.');
+    } catch (error) {
+      console.error(error);
     }
 
     return;

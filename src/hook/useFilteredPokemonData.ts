@@ -8,12 +8,12 @@ import useSelectedStore from '@/store/useSelectedStore';
 import useSearchInputText from '@/store/useSearchInputText';
 
 const useFilteredPokemonData = () => {
-  const { data: allPokemonData } = useGetAllPokemon(1017);
+  const { data: allPokemonData, isLoading } = useGetAllPokemon(1017);
   const { selectedPlate } = useSelectedStore();
   const { inputText } = useSearchInputText();
   const reversedPokemonNameObject = reverseObject(POKEMON_NAME);
 
-  return useMemo(() => {
+  const filteredData = useMemo(() => {
     if (!allPokemonData) return [];
 
     return allPokemonData.filter((data: PokemonType) => {
@@ -21,7 +21,7 @@ const useFilteredPokemonData = () => {
         return reversedPokemonNameObject[data?.name]?.includes(inputText);
       }
       if (!selectedPlate.length) {
-        return data;
+        return true;
       }
       const { types } = data;
       return selectedPlate.every((plate: string) =>
@@ -32,6 +32,8 @@ const useFilteredPokemonData = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allPokemonData, inputText, selectedPlate]);
+
+  return { filteredData, isLoading };
 };
 
 export default useFilteredPokemonData;

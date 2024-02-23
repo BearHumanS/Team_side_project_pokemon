@@ -7,9 +7,13 @@ import { useCallback } from 'react';
 
 interface SelectPokemonLayoutProps {
   pokemonArray: (PokemonType | null)[];
+  range: number;
 }
 
-const SelectPokemonLayout = ({ pokemonArray }: SelectPokemonLayoutProps) => {
+const SelectPokemonLayout = ({
+  pokemonArray,
+  range,
+}: SelectPokemonLayoutProps) => {
   const { setPokemonData, generateRandomNicknames } =
     useSelectedPokemonForCard();
 
@@ -23,17 +27,17 @@ const SelectPokemonLayout = ({ pokemonArray }: SelectPokemonLayoutProps) => {
 
   return (
     <div className={styles.layout_wrapper}>
-      {pokemonArray.map((pokemonData, index) => (
+      {Array.from({ length: range }, (_, index) => (
         <div
-          key={pokemonData ? pokemonData.id : index}
+          key={pokemonArray[index] ? pokemonArray[index]?.id : index}
           className={styles.layout_container}
         >
           <div className={styles.image}>
-            {pokemonData ? (
+            {pokemonArray[index] ? (
               <img
                 src={
-                  pokemonData.id !== 1013
-                    ? pokemonData.sprites?.other?.['official-artwork']
+                  pokemonArray[index]?.id !== 1013
+                    ? pokemonArray[index]?.sprites?.other?.['official-artwork']
                         ?.front_default
                     : '/pokemonImg/그우린차.webp'
                 }
@@ -42,16 +46,17 @@ const SelectPokemonLayout = ({ pokemonArray }: SelectPokemonLayoutProps) => {
             ) : null}
           </div>
           <span>
-            {pokemonData ? reverseObject(POKEMON_NAME)[pokemonData.name] : ''}
+            {pokemonArray[index]
+              ? reverseObject(POKEMON_NAME)[pokemonArray[index]!.name]
+              : ''}
           </span>
-          {pokemonData ? (
-            <button
-              className={styles.border_button}
-              onClick={() => handlePokemonSelection(pokemonData)}
-            >
-              포켓몬 사용
-            </button>
-          ) : null}
+          <button
+            disabled={!pokemonArray[index]}
+            className={styles.border_button}
+            onClick={() => handlePokemonSelection(pokemonArray[index])}
+          >
+            포켓몬 사용
+          </button>
         </div>
       ))}
     </div>

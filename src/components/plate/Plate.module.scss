@@ -75,6 +75,7 @@
 
 .type_plate__my {
   display: flex;
+  width: 100%;
   gap: 3px;
 }
 
@@ -84,7 +85,7 @@
   }
 
   .unclick_plate.#{$type} {
-    @include plate_unclick_style($color);
+    @include plate_unclick_style(#d0d0d0);
   }
 
   .type_plate.#{$type} {
@@ -93,8 +94,9 @@
 
   .type_plate__my.#{$type} {
     @include plate_pokemon_type($color);
-    width: 33px;
+    width: 45px;
     height: 11px;
+    padding: 0 7px;
 
     img {
       width: 7px;
@@ -126,7 +128,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: -21px;
+    top: -20px;
     margin: auto;
     color: #fff;
     display: none;

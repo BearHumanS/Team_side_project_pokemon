@@ -40,7 +40,7 @@
     display: flex;
     font-size: 14px;
     border-style: none;
-    font-family: 'GmarketSansMedium';
+
     &:focus {
       outline: none;
     }
@@ -67,7 +67,7 @@
   align-items: center;
   justify-content: center;
   background-color: black;
-  font-family: 'GmarketSansMedium';
+
   &:hover {
     color: white;
     background-color: #0f60ce;
@@ -162,7 +162,7 @@
   align-items: center;
   justify-content: center;
   background-color: black;
-  font-family: 'GmarketSansMedium';
+
   &:hover {
     color: white;
     background-color: #0f60ce;
@@ -202,6 +202,5 @@
     display: flex;
     font-size: 14px;
     border-style: none;
-    font-family: 'GmarketSansMedium';
   }
 }

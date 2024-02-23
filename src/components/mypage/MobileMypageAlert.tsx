@@ -5,7 +5,7 @@ const MobileMypageAlert = ({ isOpen }: { isOpen: boolean }) => {
   const navigate = useNavigate();
 
   const onMovetoMakecard = () => {
-    navigate('/cardEdit');
+    navigate('/cardedit');
   };
   return (
     <>

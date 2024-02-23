@@ -197,7 +197,10 @@ const Comments = ({ pokemonState }: PokemonInfoProps) => {
                   ({ id, comment, displayName, createdAt, uid }) => {
                     const createdDate = FORMDATE(createdAt);
                     return (
-                      <li className={styles.mobile__comments__list}>
+                      <li
+                        className={styles.mobile__comments__list}
+                        key={createdAt}
+                      >
                         <div>
                           <div className={styles.mobile__comments__list__info}>
                             <span>{displayName}</span>

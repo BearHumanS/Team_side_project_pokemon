@@ -37,7 +37,10 @@ const SelectPokemonRandom = () => {
     <div className={styles.select_wrapper}>
       <span className={styles.title}>랜덤 포켓몬</span>
       <div className={styles.random_container}>
-        <SelectPokemonLayout pokemonArray={randomPokemons} />
+        <SelectPokemonLayout
+          pokemonArray={randomPokemons}
+          range={POKEMONS_PER_PAGE}
+        />
         <button className={styles.border_button} onClick={getRandomPokemon}>
           랜덤
         </button>

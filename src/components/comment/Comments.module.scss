@@ -3,8 +3,6 @@
 
 .comments {
   &__container {
-    font-family: Gmarket Sans;
-
     @media (max-width: 769px) {
       display: none;
     }
@@ -14,7 +12,6 @@
     display: block;
     margin-bottom: 10px;
     font-weight: 600;
-    font-family: Gmarket Sans;
   }
 
   &__input__box {
@@ -146,7 +143,7 @@
   background: #0f60ce;
   color: #fff;
   text-align: center;
-  font-family: Gmarket Sans;
+
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
@@ -196,7 +193,7 @@
       width: 100%;
       justify-content: flex-end;
       color: #000;
-      font-family: 'Gmarket Sans';
+
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
@@ -225,7 +222,7 @@
       border: none;
       color: #fff;
       text-align: center;
-      font-family: 'Gmarket Sans';
+
       font-size: 18px;
       font-style: normal;
       font-weight: 600;
@@ -254,7 +251,7 @@
 
         span:first-child {
           color: #000;
-          font-family: 'Gmarket Sans';
+
           font-size: 16px;
           font-style: normal;
           font-weight: 600;
@@ -265,7 +262,7 @@
         span:last-child {
           color: #000;
           text-align: right;
-          font-family: 'Gmarket Sans';
+
           font-size: 12px;
           font-style: normal;
           font-weight: 400;
@@ -298,7 +295,7 @@
         background: #ff5050;
         color: #fff;
         text-align: center;
-        font-family: 'Gmarket Sans';
+
         font-size: 12px;
         font-style: normal;
         font-weight: 600;

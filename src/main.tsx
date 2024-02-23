@@ -1,13 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import '@/styles/global.scss';
-import AuthGurad from './provider/AuthGurad';
+import AuthGuard from './provider/AuthGuard';
+import Meta from './Meta.tsx';
+import { HelmetProvider } from 'react-helmet-async';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <AuthGurad>
-      <App />
-    </AuthGurad>
-  </React.StrictMode>,
-);
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  const app = (
+    <React.StrictMode>
+      <HelmetProvider>
+        <Meta />
+        <AuthGuard>
+          <App />
+        </AuthGuard>
+      </HelmetProvider>
+    </React.StrictMode>
+  );
+
+  if (rootElement.hasChildNodes()) {
+    hydrateRoot(rootElement, app);
+  } else {
+    const root = createRoot(rootElement);
+    root.render(app);
+  }
+}

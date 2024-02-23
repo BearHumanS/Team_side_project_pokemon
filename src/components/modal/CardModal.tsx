@@ -81,7 +81,7 @@ const CardModal = ({ onModalToggle, cardData, isOpen }: CardModalProps) => {
       <div className={styles.modal__overlay} onClick={onModalToggle}>
         <div onClick={handleContentClick}>
           <div className={styles.download__box}>
-            <button style={{ zIndex: '9999' }} onClick={onDownloadBtn}>
+            <button style={{ zIndex: '20' }} onClick={onDownloadBtn}>
               다운로드
             </button>
           </div>

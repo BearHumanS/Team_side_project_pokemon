@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@prerenderer/renderer-puppeteer": "^1.2.3",
     "@react-icons/all-files": "^4.1.0",
     "@types/dom-to-image": "^2.6.7",
     "@types/dompurify": "^3.0.5",
@@ -24,12 +25,15 @@
     "framer-motion": "^10.18.0",
     "react-content-loader": "^6.2.1",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.4",
     "react-query": "^3.39.3",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.17.0",
+    "react-toastify": "^10.0.4",
     "sass": "^1.69.5",
     "swiper": "10",
     "uuid": "^9.0.1",
+    "vite-plugin-prerender": "^1.0.8",
     "zustand": "^4.4.4"
   },
   "devDependencies": {

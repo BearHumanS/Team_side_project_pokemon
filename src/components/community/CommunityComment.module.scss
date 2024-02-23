@@ -4,8 +4,8 @@
 
 .commentContainer {
   @media (max-width: 768px) {
-      width: 100%;
-      padding: 0 20px;
+    width: 100%;
+    padding: 0 20px;
   }
 }
 
@@ -28,10 +28,35 @@
   .heartText {
     font-size: 14px;
     color: #ff5050;
-    padding-top: 3px;
+    padding-top: 1px;
     margin-left: 4px;
   }
 }
+
+.heartButtonUn {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  cursor: pointer;
+  color: #ffffff;
+  margin: 50px auto;
+  align-items: center;
+  border-radius: 50px;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #cfcfcf;
+  svg {
+    font-size: 18px;
+    color: #cfcfcf;
+  }
+  .heartTextUn {
+    font-size: 14px;
+    color: #cfcfcf;
+    padding-top: 1px;
+    margin-left: 4px;
+  }
+}
+
 .Outline {
   background-color: #ff5050;
   svg {
@@ -83,7 +108,7 @@
     display: flex;
     font-size: 14px;
     border-style: none;
-    font-family: 'GmarketSansMedium';
+
     &:focus {
       outline: none;
     }
@@ -111,7 +136,7 @@
   background-color: black;
   margin-top: 10px;
   margin-bottom: 20px;
-  font-family: 'GmarketSansMedium';
+
   &:hover {
     color: white;
     background-color: #0f60ce;

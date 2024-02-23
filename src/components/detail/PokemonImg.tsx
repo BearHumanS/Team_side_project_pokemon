@@ -100,7 +100,7 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
                       src={`/icons/${koreanPokemonName}_on.svg`}
                       alt={`${koreanPokemonName}타입 아이콘`}
                     />
-                    <div>{koreanPokemonName}</div>
+                    <div className={styles.plate__name}>{koreanPokemonName}</div>
                   </div>
                 );
               })}

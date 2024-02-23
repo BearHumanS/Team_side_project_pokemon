@@ -18,10 +18,10 @@
     top: 100%;
     min-width: 135px;
     border-radius: 8px;
-    border: 1px solid #000;
-    background: #fff;
+    border: 1px solid #cecece;
+    background-color: #fff;
     z-index: 100;
-    margin-top: 20px;
+    margin-top: 10px;
 
     &__box {
       display: flex;
@@ -66,6 +66,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 4px;
 
       @media (max-width: 769px) {
         gap: 12px;
@@ -80,7 +81,7 @@
       height: 32px;
       flex-shrink: 0;
       text-align: center;
-      font-family: Gmarket Sans;
+
       font-size: 12px;
       font-style: normal;
       font-weight: 600;
@@ -109,7 +110,7 @@
         border-radius: 5px;
         color: #fff;
         text-align: center;
-        font-family: 'Gmarket Sans';
+
         font-size: 18px;
         font-style: normal;
         font-weight: 600;
@@ -182,16 +183,17 @@
       height: 32px;
       flex-shrink: 0;
       text-align: center;
-      font-family: Gmarket Sans;
+
       font-size: 12px;
       font-style: normal;
-      font-family: 'Gmarket Sans';
+
       font-weight: 600;
       line-height: normal;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 5px;
+      border: 1px solid #eee;
       gap: 10px;
       box-shadow: 0px 18px 30px 0px rgba(14, 13, 15, 0.11);
       cursor: pointer;
@@ -291,7 +293,7 @@
       align-items: center;
       color: #ffca06;
       text-align: center;
-      font-family: 'Gmarket Sans';
+
       font-size: 22px;
       font-style: normal;
       font-weight: 600;

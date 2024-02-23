@@ -36,12 +36,12 @@
 /*Pokemon - info*/
 .pokemon__info__title {
   text-align: left;
-  width: 57px;
+  width: 64px;
   font-weight: bold;
 
   &.id,
   &.title {
-    width: 39px;
+    width: 43px;
   }
 }
 
@@ -182,7 +182,7 @@
 
   span {
     color: #ff5050;
-    font-family: Gmarket Sans;
+
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -277,6 +277,7 @@
   &__barBg {
     width: 100%;
     position: relative;
+    inset: 0;
     height: 20px;
     border-radius: 4px;
     margin-top: 5px;
@@ -330,11 +331,17 @@
   }
 
   &__value {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-44%);
+    inset: 0;
     z-index: 2;
+    padding-right: 2px;
+    display: flex;
+    position: absolute;
+    justify-content: end;
+    align-items: center;
+    // padding-right: 10px;
+    // right: 14px;
+    // top: 50%;
+    // transform: translateY(-44%);
     color: #000000;
     line-height: initial;
   }
@@ -393,7 +400,7 @@
     color: #ffca06;
     padding: 5px;
     text-align: center;
-    font-family: 'Gmarket Sans';
+
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -453,8 +460,13 @@
         height: 33px;
         flex-shrink: 0;
         cursor: none;
-        padding: 5px;
+        // padding: 5px;
         border-radius: 16px;
+        .plate__name {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+        }
       }
     }
   }
@@ -546,7 +558,7 @@
       color: #fff;
       padding: 5px;
       text-align: center;
-      font-family: 'Gmarket Sans';
+
       font-size: 18px;
       font-style: normal;
       font-weight: 600;
@@ -696,7 +708,7 @@
       color: #ffca06;
       padding: 5px;
       text-align: center;
-      font-family: 'Gmarket Sans';
+
       font-style: normal;
       font-weight: 600;
       line-height: normal;
@@ -750,7 +762,7 @@
         align-items: center;
         color: #fff;
         text-align: center;
-        font-family: 'Gmarket Sans';
+
         font-size: 26px;
         font-style: normal;
         font-weight: 600;
@@ -809,7 +821,7 @@
 
       & > div {
         color: #fff;
-        font-family: 'Gmarket Sans';
+
         font-size: 30px;
         font-style: normal;
         font-weight: 600;

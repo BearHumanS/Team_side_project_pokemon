@@ -41,7 +41,7 @@ const CommunityCardItem = ({ data }: any) => {
   return (
     <div className={styles.container} onClick={handleToDetail}>
       <div className={styles.titleImg}>
-        <img src={`public/${data.postImg}`} />
+        <img src={`/${data.postImg}`} />
       </div>
       <div className={styles.innerBox}>
         <div className={styles.titleItem}>

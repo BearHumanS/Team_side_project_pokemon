@@ -2,9 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './Header.module.scss';
 import SocialLogin from '../users/SocialLogin';
 import { FaRegAddressCard } from '@react-icons/all-files/fa/FaRegAddressCard';
-import { BsFilePlus } from '@react-icons/all-files/bs/BsFilePlus';
-import { RiUserVoiceFill } from '@react-icons/all-files/ri/RiUserVoiceFill';
-import { FiLogIn } from '@react-icons/all-files/fi/FiLogIn';
+// import { BsFilePlus } from '@react-icons/all-files/bs/BsFilePlus';
+// import { RiUserVoiceFill } from '@react-icons/all-files/ri/RiUserVoiceFill';
+// import { FiLogIn } from '@react-icons/all-files/fi/FiLogIn';
+import { RiLoginBoxLine } from '@react-icons/all-files/ri/RiLoginBoxLine';
+import { FiPlusSquare } from '@react-icons/all-files/fi/FiPlusSquare';
+import { MdRecordVoiceOver } from '@react-icons/all-files/md/MdRecordVoiceOver';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import useUserStore from '@/store/useUsersStore';
 import SearchInput from '../search/Search';
@@ -105,15 +108,15 @@ const Header = () => {
                     도감
                   </div>
                 </Link>
-                <Link to="cardEdit">
+                <Link to="cardedit">
                   <div className={styles.nav__item}>
-                    <BsFilePlus size={31} />
+                    <FiPlusSquare size={31} />
                     카드 제작
                   </div>
                 </Link>
                 <Link to="community">
                   <div className={styles.nav__item}>
-                    <RiUserVoiceFill size={31} />
+                    <MdRecordVoiceOver size={31} />
                     커뮤니티
                   </div>
                 </Link>
@@ -129,15 +132,13 @@ const Header = () => {
                           style={{ borderRadius: '50%' }}
                           src={user?.photoURL || undefined}
                           alt="프로필 사진"
-                          width={31}
-                          height={31}
                         />
                       </div>
                       나의 메뉴
                     </div>
                   ) : (
                     <div className={styles.nav__item}>
-                      <FiLogIn size={31} />
+                      <RiLoginBoxLine size={31} />
                       로그인
                     </div>
                   )}

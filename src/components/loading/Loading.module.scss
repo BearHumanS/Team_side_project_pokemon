@@ -1,0 +1,28 @@
+.container {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  background-color: #ffffff7c;
+  .imgBox {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    span {
+      margin: auto;
+      font-weight: 700;
+    }
+    img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}

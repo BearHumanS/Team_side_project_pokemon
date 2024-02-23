@@ -34,7 +34,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex: 0.8;
+  flex: 0.6;
+  padding-top: 20px;
   justify-content: space-between;
 
   @include mobile {
@@ -63,15 +64,17 @@
 
 .name_input {
   cursor: text;
-  text-align: end;
-  outline: none;
-  border: none;
   color: #000;
+  outline: none;
+  padding: 5px;
+  display: flex;
+  text-align: end;
   font-size: 18px;
   font-weight: 500;
-  font-family: GmarketSansMedium;
-  width: auto;
-  max-width: 150px;
+  max-width: 200px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  border: 1px solid #cfcfcf;
 }
 
 .status_title {

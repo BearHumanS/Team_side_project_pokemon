@@ -6,6 +6,7 @@ import RenderLikedPosts from './RenderLikedPosts';
 import styles from './Mypage.module.scss';
 import { Pagination } from 'antd';
 import { DocumentData } from 'firebase/firestore';
+import useLikesPostStore from '@/store/useLikesPostStore';
 
 export interface Liked {
   id: string;
@@ -14,8 +15,8 @@ export interface Liked {
 
 const MyPosts = () => {
   const itemsPerPage = 4;
-  const [likes, setLikes] = useState<Liked[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { likes, setLikes, removeLike } = useLikesPostStore();
   const navigate = useNavigate();
 
   const { user } = useUserStore();
@@ -38,7 +39,7 @@ const MyPosts = () => {
     };
 
     fetchData();
-  }, [user]);
+  }, [setLikes, user]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -51,7 +52,7 @@ const MyPosts = () => {
       try {
         await deleteDocument(`/heart/${user.uid}/like/${likeId}`);
 
-        setLikes((prev) => prev.filter((like) => like.id !== likeId));
+        removeLike(likeId);
 
         const newTotal = likes.length - 1;
         const maxPage = Math.ceil(newTotal / itemsPerPage);

@@ -280,7 +280,9 @@
   justify-content: center;
   top: 0;
   left: 0;
-  width: 74px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 12px;
   height: 34px;
   position: absolute;
   border-radius: 23px 0px;
@@ -288,7 +290,7 @@
 
   &__my {
     font-size: 8px;
-    width: 38px;
+    // width: 38px;
     height: 17px;
   }
 }

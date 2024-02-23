@@ -81,7 +81,7 @@
       color: #fff;
       text-align: center;
       text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-      font-family: Gmarket Sans;
+
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
@@ -118,7 +118,7 @@
 
     &__name {
       color: #000;
-      font-family: Gmarket Sans;
+
       font-size: 34px;
       font-style: normal;
       font-weight: 700;
@@ -127,7 +127,6 @@
       @media (max-width: 769px) {
         font-size: 24px;
         max-width: 350px;
-        width: 80vw;
         margin-top: 28px;
       }
     }
@@ -141,7 +140,7 @@
         width: 100%;
         background-color: transparent;
         color: #000;
-        font-family: Gmarket Sans;
+
         font-size: 24px;
         font-style: normal;
         font-weight: 700;
@@ -154,7 +153,7 @@
       height: 56px;
       flex-shrink: 0;
       color: #000;
-      font-family: Gmarket Sans;
+
       font-size: 12px;
       font-style: normal;
       font-weight: 400;
@@ -208,7 +207,6 @@
     position: relative;
     padding-top: 15px;
     height: 100%;
-    right: 158px;
 
     &__btn {
       width: 80px;
@@ -240,7 +238,7 @@
         flex-shrink: 0;
         color: #c6c6c6;
         text-align: center;
-        font-family: Gmarket Sans;
+
         font-size: 10px;
         font-style: normal;
         font-weight: 600;
@@ -262,7 +260,7 @@
       span {
         color: #ff612c;
         text-align: center;
-        font-family: Gmarket Sans;
+
         font-size: 10px;
         font-style: normal;
         font-weight: 600;
@@ -303,7 +301,7 @@
 
   &__title {
     color: #000;
-    font-family: Gmarket Sans;
+
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
@@ -330,7 +328,7 @@
       border: none;
       color: #0f60ce;
       text-align: center;
-      font-family: Gmarket Sans;
+
       font-size: 13px;
       font-style: normal;
       font-weight: 600;
@@ -395,7 +393,7 @@
       .mycard__layout__data__delete {
         display: flex;
         position: absolute;
-        z-index: 9999;
+        z-index: 20;
         color: black;
         top: -8px;
         right: -8px;
@@ -468,7 +466,7 @@
 
       span {
         color: #000;
-        font-family: Gmarket Sans;
+
         font-size: 24px;
         font-style: normal;
         font-weight: 600;
@@ -525,7 +523,7 @@
           border-radius: 8px;
           color: #fff;
           text-align: center;
-          font-family: Gmarket Sans;
+
           font-size: 13px;
           font-style: normal;
           font-weight: 600;
@@ -584,7 +582,7 @@
 
     span {
       color: #000;
-      font-family: Gmarket Sans;
+
       font-size: 28px;
       font-style: normal;
       font-weight: 600;
@@ -608,7 +606,7 @@
     span {
       color: #000;
       text-align: center;
-      font-family: Gmarket Sans;
+
       font-size: 18px;
       font-style: normal;
       font-weight: 400;

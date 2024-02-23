@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaRegAddressCard } from '@react-icons/all-files/fa/FaRegAddressCard';
-import { BsFilePlus } from '@react-icons/all-files/bs/BsFilePlus';
-import { RiUserVoiceFill } from '@react-icons/all-files/ri/RiUserVoiceFill';
-import { FiLogIn } from '@react-icons/all-files/fi/FiLogIn';
+// import { BsFilePlus } from '@react-icons/all-files/bs/BsFilePlus';
+// import { RiUserVoiceFill } from '@react-icons/all-files/ri/RiUserVoiceFill';
+// import { FiLogIn } from '@react-icons/all-files/fi/FiLogIn';
+import { RiLoginBoxLine } from '@react-icons/all-files/ri/RiLoginBoxLine';
+import { FiPlusSquare } from '@react-icons/all-files/fi/FiPlusSquare';
+import { MdRecordVoiceOver } from '@react-icons/all-files/md/MdRecordVoiceOver';
 import styles from './Header.module.scss';
 import useUserStore from '@/store/useUsersStore';
 import { Modalportal } from '@/portal';
@@ -35,11 +38,11 @@ const MobileNavMenu = () => {
           </div>
         </NavLink>
         <NavLink
-          to="cardEdit"
+          to="cardedit"
           className={({ isActive }) => (isActive ? styles.active : '')}
         >
           <div className={styles.nav__item__mobile}>
-            <BsFilePlus size={24} />
+            <FiPlusSquare size={24} />
             카드 제작
           </div>
         </NavLink>
@@ -48,7 +51,7 @@ const MobileNavMenu = () => {
           className={({ isActive }) => (isActive ? styles.active : '')}
         >
           <div className={styles.nav__item__mobile}>
-            <RiUserVoiceFill size={24} />
+            <MdRecordVoiceOver size={24} />
             커뮤니티
           </div>
         </NavLink>
@@ -69,7 +72,7 @@ const MobileNavMenu = () => {
             </>
           ) : (
             <>
-              <FiLogIn size={24} />
+              <RiLoginBoxLine size={24} />
               로그인
             </>
           )}

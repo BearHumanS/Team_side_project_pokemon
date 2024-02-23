@@ -15,15 +15,17 @@
   width: 100%;
   height: auto;
   display: grid;
-  flex-wrap: wrap;
   margin-top: 30px;
   column-gap: 20px;
+  row-gap: 20px;
   justify-items: center;
-  justify-content: space-between;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  @media (max-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr;
+  // justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  @media (max-width: 1200px) {
+    padding: 30px;
+    padding: 30px;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
 
@@ -45,35 +47,40 @@
 }
 
 .searchWritingBox {
-  width: 100%;
+  // width: 100%;
   display: flex;
   margin-top: 4px;
   margin-bottom: 20px;
   justify-content: space-between;
+  @media (max-width: 1200px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 
 .pagination {
   display: flex;
   justify-content: end;
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     justify-content: center;
   }
 }
 
 .CommunityHeader {
   gap: 6px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   justify-content: center;
-  @media (max-width: 768px) {
-    place-items: center;
-    display: grid;
+  @media (max-width: 1200px) {
+    // place-items: center;
+    // display: grid;
     margin: 0 30px;
-    grid-template-columns: 1fr 1fr;
+    // grid-template-columns: 1fr 1fr;
   }
 }
 
 .CategoryButton {
-  width: 148px;
+  width: 100%;
   height: 28px;
   display: flex;
   font-size: 12px;
@@ -85,9 +92,9 @@
   justify-content: center;
   border: 1px solid #e3e3e3;
   background-color: #ffffff;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  // @media (max-width: 768px) {
+  //   width: 100%;
+  // }
 }
 .Select {
   color: #ffffff;

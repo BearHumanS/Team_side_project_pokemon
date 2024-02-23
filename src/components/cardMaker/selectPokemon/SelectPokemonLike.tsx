@@ -53,7 +53,10 @@ const SelectPokemonLike = () => {
         >
           <IoChevronBack />
         </button>
-        <SelectPokemonLayout pokemonArray={likePokemonArray} />
+        <SelectPokemonLayout
+          pokemonArray={likePokemonArray}
+          range={POKEMONS_PER_PAGE}
+        />
         <button
           className={styles.page_button}
           onClick={nextSlide}

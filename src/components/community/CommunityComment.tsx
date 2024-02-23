@@ -199,19 +199,32 @@ const CommunityComment = ({ id, data }: any) => {
     setHeart((prev) => !prev);
   };
 
+  const onUnHeart = () => {
+    return alert('로그인이 필요합니다.');
+  };
+
   return (
     <div className={styles.commentContainer}>
-      <div
-        className={
-          heart
-            ? `${styles.heartButton} ${styles.Outline}`
-            : `${styles.heartButton}`
-        }
-        onClick={onToggleHeart}
-      >
-        {heart ? <AiFillHeart /> : <AiOutlineHeart />}
-        <div className={styles.heartText}>좋아요</div>
-      </div>
+      {/* 좋아요 영역 */}
+      {!user?.uid ? (
+        <div className={styles.heartButtonUn} onClick={onUnHeart}>
+          <AiOutlineHeart />
+          <div className={styles.heartTextUn}>좋아요</div>
+        </div>
+      ) : (
+        <div
+          className={
+            heart
+              ? `${styles.heartButton} ${styles.Outline}`
+              : `${styles.heartButton}`
+          }
+          onClick={onToggleHeart}
+        >
+          {heart ? <AiFillHeart /> : <AiOutlineHeart />}
+          <div className={styles.heartText}>좋아요</div>
+        </div>
+      )}
+
       {/* 댓글 입력 영역 */}
       <div className={styles.commentBox}>
         <div className={styles.commentTitle}>댓글 쓰기</div>

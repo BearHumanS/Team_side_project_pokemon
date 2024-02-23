@@ -30,7 +30,7 @@
   border-radius: 4px;
   margin-bottom: 10px;
   border: 1px solid #e1e1e1;
-  background-color: #FBFBFB;
+  background-color: #fbfbfb;
   textarea {
     width: 100%;
     resize: none;
@@ -38,7 +38,7 @@
     font-size: 14px;
     border-style: none;
     background-color: #ffffff00;
-    font-family: 'GmarketSansMedium';
+
     &:focus {
       outline: none;
     }
@@ -89,7 +89,7 @@
   align-items: center;
   justify-content: center;
   background-color: black;
-  font-family: 'GmarketSansMedium';
+
   &:hover {
     color: white;
     background-color: #0f60ce;
