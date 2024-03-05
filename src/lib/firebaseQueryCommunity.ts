@@ -13,7 +13,7 @@ import {
 interface DataObject {
   uid?: string;
   views?: number;
-  likes?: [];
+  likes?: string[];
   title?: string;
   postId?: string;
   userId?: string;

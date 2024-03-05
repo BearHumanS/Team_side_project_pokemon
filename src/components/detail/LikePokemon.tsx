@@ -4,6 +4,7 @@ import { FaRegHeart } from '@react-icons/all-files/fa/FaRegHeart';
 import { FaHeart } from '@react-icons/all-files/fa/FaHeart';
 import useUserStore from '@/store/useUsersStore';
 import { getDocument, setDocument } from '@/lib/firebaseQuery';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
 
 interface LikePokemonProps {
   pokemonId: string | number;
@@ -15,6 +16,7 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
   const [animate, setAnimate] = useState(false);
 
   const { user } = useUserStore();
+  const windowWidth = useCalculateInnerWidth();
 
   const fetchLikeState = async () => {
     if (!user?.uid) return;
@@ -68,7 +70,11 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
   }, [pokemonId, user?.uid]);
 
   return (
-    <div className={styles.stats__like__box}>
+    <div
+      className={`${styles.stats__like__box} ${
+        windowWidth <= 768 ? styles.mobile : ''
+      }`}
+    >
       <button
         className={styles.stats__like}
         onClick={onToggleLike}

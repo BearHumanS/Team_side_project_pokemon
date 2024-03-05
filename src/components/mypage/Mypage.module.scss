@@ -1,8 +1,20 @@
+.mypage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: 769px) {
+    padding: 0 20px;
+  }
+}
+
 // Introduce
 
 .intro {
   &__container {
-    width: 1200px;
+    width: 100%;
     height: 222px;
     flex-shrink: 0;
     border-radius: 10px;
@@ -10,8 +22,12 @@
     background: #fff;
     display: flex;
     align-items: center;
-    padding-left: 20px;
-    margin-top: 36px;
+    padding: 0 20px;
+
+    @media (max-width: 769px) {
+      height: 187px;
+      margin-top: 21px;
+    }
   }
 
   &__profile__img {
@@ -19,16 +35,45 @@
     height: 162px;
     flex-shrink: 0;
     position: relative;
-    margin-right: 30px;
+    margin-right: 28px;
     display: flex;
     align-items: flex-end;
     flex-direction: row-reverse;
+
+    @media (max-width: 769px) {
+      width: 80px;
+      height: 80px;
+      top: -83px;
+    }
 
     img {
       position: absolute;
       left: 0;
       border-radius: 50%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+      @media (max-width: 769px) {
+        width: 80px;
+        height: 80px;
+        background: #fff;
+      }
+    }
+
+    button {
+      padding: 0;
+
+      @media (max-width: 769px) {
+        padding: 0;
+        background: black;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #fff;
+        z-index: 11;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     &__edit {
@@ -62,7 +107,14 @@
     justify-content: center;
     gap: 15px;
     width: 100%;
-    height: 100%;
+    height: auto;
+
+    @media (max-width: 769px) {
+      gap: 8px;
+      position: relative;
+      left: -108px;
+      margin-top: 28px;
+    }
 
     &__name {
       color: #000;
@@ -71,17 +123,35 @@
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+
+      @media (max-width: 769px) {
+        font-size: 24px;
+        max-width: 350px;
+        width: 80vw;
+        margin-top: 28px;
+      }
     }
 
-    .editModeOn input {
+    input {
       border: none;
       outline: none;
       border-bottom: 1px solid #000;
+
+      @media (max-width: 769px) {
+        width: 100%;
+        background-color: transparent;
+        color: #000;
+        font-family: Gmarket Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding: 0;
+      }
     }
 
     &__talk {
-      width: 278px;
-      height: 33px;
+      height: 56px;
       flex-shrink: 0;
       color: #000;
       font-family: Gmarket Sans;
@@ -92,41 +162,78 @@
       white-space: pre-wrap;
       display: flex;
       width: 100%;
-      gap: 10px;
+
+      @media (max-width: 769px) {
+        line-height: 18px;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+      }
 
       div {
         display: flex;
         height: 70px;
         align-items: flex-end;
+        width: 92px;
+
+        @media (max-width: 769px) {
+          height: auto;
+          width: 100%;
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .editModeOn {
+      @media (max-width: 769px) {
+        height: 56px;
+        max-width: 350px;
+        width: 80vw;
       }
     }
 
     .editModeOn textarea {
       resize: none;
-      width: 400px;
+      width: 100%;
       height: 70px;
       outline: none;
       white-space: pre-wrap;
+      max-width: 400px;
+      border-radius: 8px;
+      padding: 2px;
     }
   }
 
   &__info__edit {
     position: relative;
-    right: 19px;
+    padding-top: 15px;
     height: 100%;
-    top: 15px;
+    right: 158px;
 
     &__btn {
       width: 80px;
       height: 25px;
       flex-shrink: 0;
       border-radius: 4px;
-      border: 1px solid #c6c6c6;
-      background: #fff;
+      background-color: #fff;
       cursor: pointer;
+
+      @media (max-width: 769px) {
+        width: 50px;
+      }
     }
 
     .editModeOff {
+      border: 1px solid #e3e3e3;
+
+      &:hover {
+        background-color: #e3e3e3;
+
+        span {
+          color: #fff;
+        }
+      }
+
       span {
         width: 54px;
         height: 10px;
@@ -143,6 +250,14 @@
 
     .editModeOn {
       border: 1px solid #ff612c;
+
+      &:hover {
+        background-color: #ff612c;
+
+        span {
+          color: #fff;
+        }
+      }
 
       span {
         color: #ff612c;
@@ -161,7 +276,7 @@
 
 .mycard {
   &__container {
-    width: 1200px;
+    width: 100%;
     height: 392px;
     flex-shrink: 0;
     border-radius: 10px;
@@ -173,10 +288,17 @@
     flex-direction: column;
     justify-content: center;
   }
+
   &__top__box {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
+
+    @media (max-width: 769px) {
+      margin: 0;
+      text-align: center;
+      padding: 30px 36px;
+    }
   }
 
   &__title {
@@ -195,14 +317,18 @@
     position: relative;
     top: 7px;
 
+    @media (max-width: 769px) {
+      display: none;
+    }
+
     button {
       width: 99px;
       height: 34px;
       flex-shrink: 0;
       border-radius: 8px;
-      background: #0f60ce;
+      background: #fff;
       border: none;
-      color: #fff;
+      color: #0f60ce;
       text-align: center;
       font-family: Gmarket Sans;
       font-size: 13px;
@@ -210,12 +336,23 @@
       font-weight: 600;
       line-height: normal;
       cursor: pointer;
+      border: 1px solid #0f60ce;
+
+      &:hover {
+        background-color: #0f60ce;
+        color: #fff;
+      }
     }
   }
 
   &__layout__box {
     display: flex;
     gap: 13px;
+
+    @media (max-width: 769px) {
+      max-width: 768px;
+      justify-content: center;
+    }
   }
 
   &__layout__data,
@@ -232,6 +369,18 @@
     cursor: pointer;
     position: relative;
 
+    &__slide {
+      @media (max-width: 769px) {
+        display: flex;
+        gap: 27px;
+      }
+    }
+
+    &__count {
+      margin: 20px 0;
+      text-align: center;
+    }
+
     div {
       color: #a5a5a5;
     }
@@ -241,6 +390,8 @@
     }
 
     &:hover {
+      transform: scale(1.02);
+
       .mycard__layout__data__delete {
         display: flex;
         position: absolute;
@@ -257,6 +408,10 @@
         align-items: center;
         background-color: inherit;
         transform: rotate(45deg);
+
+        &:hover {
+          background-color: #ff5050;
+        }
       }
     }
   }
@@ -268,27 +423,48 @@
   &__total__container {
     margin-top: 30px;
     display: flex;
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     height: 750px;
     gap: 38px;
+
+    @media (max-width: 769px) {
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+    }
   }
 
   &__left__container {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    width: 100%;
+
+    @media (max-width: 769px) {
+      gap: 20px;
+    }
   }
 
   &__posts {
-    width: 596px;
+    max-width: 596px;
     height: 360px;
     flex-shrink: 0;
     border-radius: 10px;
     border: 1px solid #ebebeb;
     background: #fff;
 
+    @media (max-width: 769px) {
+      max-width: 768px;
+    }
+
     &__title {
-      padding: 21px 394px 22px 22px;
+      padding: 22px 0 22px 22px;
+
+      @media (max-width: 769px) {
+        padding: 30px 36px;
+        text-align: center;
+      }
 
       span {
         color: #000;
@@ -307,6 +483,11 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
+      padding: 0 22px;
+
+      @media (max-width: 769px) {
+        padding: 0 20px;
+      }
 
       &__none {
         display: flex;
@@ -316,7 +497,7 @@
       }
 
       &__item {
-        width: 549px;
+        width: 100%;
         height: 52px;
         display: flex;
         align-items: center;
@@ -326,6 +507,11 @@
         border: 1px solid #e3e3e3;
         background-color: inherit;
         padding: 8px 10px 8px 16px;
+
+        &:hover {
+          background-color: #000;
+          color: #fff;
+        }
       }
 
       &__btn__group {
@@ -358,30 +544,43 @@
   }
 
   &__posts__favorite {
-    width: 596px;
+    max-width: 596px;
     height: 360px;
     flex-shrink: 0;
     border-radius: 10px;
     border: 1px solid #ebebeb;
     background: #fff;
+
+    @media (max-width: 769px) {
+      max-width: 768px;
+      height: 410px;
+    }
   }
 
   &__right__container {
-    width: 568px;
+    max-width: 568px;
+    width: 100%;
     height: 750px;
     flex-shrink: 0;
-    border-radius: 10.067px;
+    border-radius: 10px;
     border: 1px solid #ebebeb;
     background: #fff;
-    overflow: auto;
+
+    @media (max-width: 769px) {
+      max-width: 768px;
+      height: 436px;
+    }
   }
 
   &__liked__title {
     padding: 22px 33px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     background: #fff;
+    border-radius: 10px 10px 0 0;
+
+    @media (max-width: 769px) {
+      padding: 30px 36px;
+      text-align: center;
+    }
 
     span {
       color: #000;
@@ -394,11 +593,17 @@
   }
 
   &__liked__box {
-    padding: 0 29px 22px 29px;
-    height: auto;
+    padding: 10px 29px 22px 29px;
+    height: 75%;
     gap: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+    @media (max-width: 769px) {
+      gap: 2px;
+      padding: 0 20px;
+      height: 266px;
+    }
 
     span {
       color: #000;
@@ -426,6 +631,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @media (max-width: 769px) {
+      width: 98px;
+    }
   }
 
   &__liked__pokemon {
@@ -439,6 +648,23 @@
     justify-content: center;
     align-items: center;
     position: relative;
+
+    @media (max-width: 769px) {
+      width: 98px;
+      height: 98px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      border: 1px solid #090909;
+    }
+
+    img {
+      @media (max-width: 769px) {
+        height: 80px;
+        width: 80px;
+      }
+    }
   }
 
   &__liked__cancel {
@@ -455,7 +681,8 @@
   }
 
   &__liked__cancel:hover {
-    color: #000;
+    color: #ff5050;
+    transform: rotate(45deg) scale(1.05);
   }
 }
 
@@ -463,5 +690,23 @@
   display: flex;
   justify-content: flex-end;
   height: 46px;
-  align-items: end;
+
+  @media (max-width: 769px) {
+    justify-content: center;
+    margin-top: 20px;
+  }
+}
+
+.mobile {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1.5px);
+    z-index: 10;
+  }
 }

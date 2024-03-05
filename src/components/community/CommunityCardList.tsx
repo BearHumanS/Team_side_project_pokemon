@@ -1,21 +1,24 @@
 import { Pagination } from 'antd';
 import Search from 'antd/es/input/Search';
-import { Button } from '../button/Button';
 import { useState, useEffect } from 'react';
 import useUserStore from '@/store/useUsersStore';
 import CommunityCardItem from './CommunityCardItem';
 import styles from './CommunityCardList.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
+import { Button, ButtonCircle } from '../button/Button';
 import useCommunityDataList from '@/hook/useCommunityDataList';
 
 interface CommunityData {
   id: string;
-  category: string;
   title: string;
+  category: string;
 }
 
+const DEFAULT_ITEMS_PER_PAGE = 8;
+const DEFAULT_PLACEHOLDER_TEXT = '글 제목으로 검색해주세요.';
+const DEFAULT_BUTTON_TEXT = '글쓰기';
+
 const CommunityCardList = () => {
-  const itemsPerPage = 8;
   const [currentTab, setCurrentTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,7 +35,7 @@ const CommunityCardList = () => {
     setFilteredItems(dataList);
   }, [dataList]);
 
-  const CategoryList = [
+  const generateCategoryList = () => [
     '전체',
     '자유게시판',
     '공지사항',
@@ -42,11 +45,13 @@ const CommunityCardList = () => {
     '자랑하기',
   ];
 
+  const categoryList = generateCategoryList();
+
   const setTabHandler = (index: number) => {
     setCurrentTab(index);
-    const selectedCategory = CategoryList[index];
+    const selectedCategory = categoryList[index];
     let filteredData;
-  
+
     if (selectedCategory === '전체') {
       filteredData = communityList;
     } else {
@@ -54,13 +59,33 @@ const CommunityCardList = () => {
         (item) => item.category === selectedCategory,
       );
     }
-  
+
     setFilteredItems(filteredData);
     setCurrentPage(1);
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const handleSearch = (value: string) => {
+    setSearchQuery(value);
+    let filteredData;
+
+    if (categoryList[currentTab] === '전체') {
+      // 카테고리가 '전체'일 경우 모든 카테고리를 대상으로 검색
+      filteredData = communityList.filter((item) => item.title.includes(value));
+    } else {
+      // 아닐 경우 '카테고리'와 '제목'을 기반으로 필터링
+      filteredData = communityList.filter(
+        (item) =>
+          item.category === categoryList[currentTab] &&
+          item.title.includes(value),
+      );
+    }
+
+    setFilteredItems(filteredData);
+    setCurrentPage(1);
+  };
+
+  const indexOfLastItem = currentPage * DEFAULT_ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - DEFAULT_ITEMS_PER_PAGE;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
@@ -69,36 +94,34 @@ const CommunityCardList = () => {
 
   const handleLoginAlert = () => {
     alert('로그인이 필요합니다.');
-    navigate('/community'); // Navigate back to /community
-  };
-
-  const handleSearch = (value: string) => {
-    setSearchQuery(value);
-    const filteredData = communityList.filter(
-      (item) => item.category === CategoryList[currentTab] && item.title.includes(value)
-    );
-    setFilteredItems(filteredData);
-    setCurrentPage(1);
+    navigate('/community');
   };
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <div className={styles.CommunityHeader}>
-        {CategoryList.map((item, index) => (
+        {categoryList.map((item, index) => (
           <div
             key={index}
-            className={
-              index === currentTab
-                ? `${styles.CategoryButton} ${styles.Select}`
-                : styles.CategoryButton
-            }
-            onClick={() => {
-              setTabHandler(index);
-            }}
+            className={`${styles.CategoryButton} ${
+              index === currentTab ? styles.Select : ''
+            }`}
+            onClick={() => setTabHandler(index)}
           >
             {item}
           </div>
         ))}
+      </div>
+      <div className={styles.searchBoxTop}>
+        <Search
+          placeholder={DEFAULT_PLACEHOLDER_TEXT}
+          allowClear
+          height={34}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onSearch={handleSearch}
+          style={{ width: '100%' }}
+        />
       </div>
       <div className={styles.container}>
         {currentItems.map((item) => (
@@ -106,9 +129,9 @@ const CommunityCardList = () => {
         ))}
       </div>
       <div className={styles.searchWritingBox}>
-        <div>
+        <div className={styles.searchBoxBottom}>
           <Search
-            placeholder="글 제목으로 검색해주세요."
+            placeholder={DEFAULT_PLACEHOLDER_TEXT}
             allowClear
             height={34}
             value={searchQuery}
@@ -119,11 +142,11 @@ const CommunityCardList = () => {
         </div>
         {!user?.uid ? (
           <div onClick={() => handleLoginAlert()}>
-            <Button data={'글쓰기'} />
+            <Button data={DEFAULT_BUTTON_TEXT} />
           </div>
         ) : (
           <Link to={'/community/add'}>
-            <Button data={'글쓰기'} />
+            <Button data={DEFAULT_BUTTON_TEXT} />
           </Link>
         )}
       </div>
@@ -131,10 +154,15 @@ const CommunityCardList = () => {
         <Pagination
           defaultCurrent={currentPage}
           total={filteredItems.length}
-          pageSize={itemsPerPage}
+          pageSize={DEFAULT_ITEMS_PER_PAGE}
           onChange={handlePageChange}
           hideOnSinglePage={true}
         />
+      </div>
+      <div className={styles.buttonCircle}>
+      <Link to={'/community/add'}>
+        <ButtonCircle />
+      </Link>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+@import './mixin.scss';
 @font-face {
   font-family: 'GmarketSansMedium';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
@@ -141,10 +142,28 @@ table {
 
 body {
   background: #f7f7f7;
+
+  @include mobile {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 button {
   cursor: pointer;
   border: none;
   background-color: inherit;
+}
+
+section {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }

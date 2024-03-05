@@ -1,17 +1,17 @@
-import { ReactNode } from "react";
-import styles from "./CommunityLayout.module.scss"
+import { ReactNode } from 'react';
+import styles from './CommunityLayout.module.scss';
 // import TestLink from "./TestLink";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const CommunityLayout = ({children}: Props) => {
+const CommunityLayout = ({ children }: Props) => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       {children}
       {/* <TestLink /> */}
-    </div>
+    </section>
   );
 };
 

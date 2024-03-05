@@ -23,7 +23,10 @@ const RenderPokemon = memo(
             <FiPlus size={14} />
           </button>
           <img
-            src={pokemon.sprites.other?.['official-artwork'].front_default}
+            src={
+              pokemon.sprites.other?.['official-artwork'].front_default ||
+              '/pokemonImg/그우린차.webp'
+            }
             alt="찜한 포켓몬"
             width={100}
             height={100}

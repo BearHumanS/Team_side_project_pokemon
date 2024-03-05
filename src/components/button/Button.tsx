@@ -1,7 +1,8 @@
 import styles from './Button.module.scss';
+import { FaPen } from '@react-icons/all-files/fa/FaPen';
 
 interface Props {
-  data: string;
+  data?: string;
 }
 
 const Button = ({ data }: Props) => {
@@ -24,4 +25,8 @@ const ButtonDel = ({ data }: Props) => {
   return <div className={styles.ButtonDel}>{data}</div>;
 };
 
-export { Button, ButtonCategory, ButtonEdit, ButtonDel, ButtonLg };
+const ButtonCircle = () => {
+  return <div className={styles.ButtonCircle}><FaPen /></div>;
+};
+
+export { Button, ButtonCategory, ButtonEdit, ButtonDel, ButtonLg, ButtonCircle };

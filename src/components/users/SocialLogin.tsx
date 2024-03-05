@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { Dispatch, MouseEvent, SetStateAction, useEffect } from 'react';
 import { app } from '@/firebase';
 import {
   signInWithPopup,
@@ -6,23 +6,43 @@ import {
   GithubAuthProvider,
   getAuth,
   signOut,
+  browserSessionPersistence,
+  setPersistence,
 } from 'firebase/auth';
 import styles from './SocialLogin.module.scss';
 import useUserStore from '@/store/useUsersStore';
 import { useNavigate } from 'react-router-dom';
+import SelectLogin from './SelectLogin';
+import SelectMyInfo from './SelectMyInfo';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
+import MobileLogin from './MobileLogin';
+import MobileUserInfo from './MobileUserInfo';
 
 interface SocialLoginProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen?: boolean;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
   const auth = getAuth(app);
 
   const { user, setUser } = useUserStore();
+  const windowWidth = useCalculateInnerWidth();
   const navigate = useNavigate();
 
-  const onlLogin = async (e: MouseEvent<HTMLButtonElement>) => {
+  useEffect(() => {
+    const setAuthPersistence = async () => {
+      try {
+        await setPersistence(auth, browserSessionPersistence);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    setAuthPersistence();
+  }, [auth]);
+
+  const onLogin = async (e: MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     let name = target.name;
 
@@ -35,6 +55,9 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
 
     if (name === 'google') {
       provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: 'select_account',
+      });
     } else if (name === 'github') {
       provider = new GithubAuthProvider();
     } else {
@@ -44,7 +67,9 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
 
     try {
       const result = await signInWithPopup(auth, provider);
-      setIsOpen(false);
+      if (setIsOpen) {
+        setIsOpen(false);
+      }
       console.log('로그인 성공:', result);
     } catch (error) {
       console.error('로그인 중 오류 발생:', error);
@@ -71,65 +96,29 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
       {user ? (
         <>
           <div className={styles.socialLogin}>
-            <div className={styles.socialLogin__loginButton}>내 정보</div>
-            <div
-              className={`${styles.socialLogin__dropdown} ${
-                isOpen ? styles.socialLogin__dropdown__visible : ''
-              }`}
-            >
-              <button
-                type="button"
-                className={styles.socialLogin__dropdown__button__mypage}
-                onClick={onMoveMyPage}
-              >
-                마이페이지
-              </button>
-              <button
-                type="button"
-                className={styles.socialLogin__dropdown__button__logout}
-                onClick={onLogout}
-              >
-                로그아웃
-              </button>
-            </div>
+            {windowWidth <= 768 ? (
+              <MobileUserInfo
+                isOpen={isOpen}
+                onMoveMyPage={onMoveMyPage}
+                onLogout={onLogout}
+              />
+            ) : (
+              <SelectMyInfo
+                isOpen={isOpen}
+                onMoveMyPage={onMoveMyPage}
+                onLogout={onLogout}
+              />
+            )}
           </div>
         </>
       ) : (
         <>
           <div className={styles.socialLogin}>
-            <div className={styles.socialLogin__loginButton}>로그인</div>
-            <div
-              className={`${styles.socialLogin__dropdown} ${
-                isOpen ? styles.socialLogin__dropdown__visible : ''
-              }`}
-            >
-              <button
-                type="button"
-                className={styles.socialLogin__dropdown__button__google}
-                name="google"
-                onClick={onlLogin}
-              >
-                <img
-                  className={styles.socialLogin__icon}
-                  src="/src/assets/socialLoginIcons/google_icon.svg"
-                  alt="구글 로그인"
-                />
-                <span>구글 로그인 </span>
-              </button>
-              <button
-                type="button"
-                className={styles.socialLogin__dropdown__button__github}
-                name="github"
-                onClick={onlLogin}
-              >
-                <img
-                  className={styles.socialLogin__icon}
-                  src="/src/assets/socialLoginIcons/github_icon.svg"
-                  alt="깃허브 로그인"
-                />
-                <span>깃허브 로그인</span>
-              </button>
-            </div>
+            {windowWidth <= 768 ? (
+              <MobileLogin isOpen={isOpen} onLogin={onLogin} />
+            ) : (
+              <SelectLogin isOpen={isOpen} onLogin={onLogin} />
+            )}
           </div>
         </>
       )}

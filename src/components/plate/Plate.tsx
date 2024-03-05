@@ -22,14 +22,16 @@ const Plate = ({ pokemonTypeProp }: PlateProp) => {
       <img
         className={styles.type_image}
         loading="lazy"
-        src={`/src/assets/icons/${koreanType}_on.svg`}
+        src={`/icons/${koreanType}_on.svg`}
         alt={`${koreanType}타입 아이콘`}
       />
       <span>{koreanType}</span>
     </div>
   );
 
-  return <div className={styles.wrapper}>{renderTypes(pokemonTypeProp)}</div>;
+  return (
+    <div className={styles.plate_wrapper}>{renderTypes(pokemonTypeProp)}</div>
+  );
 };
 
 export default Plate;

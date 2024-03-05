@@ -1,50 +1,95 @@
+.mainContainer {
+  position: relative;
+  .buttonCircle {
+    display: none;
+    @media (max-width: 768px) {
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      position: fixed;
+    }
+  }
+}
+
 .container {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
+  display: grid;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  column-gap: 20px;
+  justify-items: center;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  @media (max-width: 768px) {
     display: grid;
-    justify-items: center;
-    column-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    flex-wrap: wrap;
-    margin-top: 30px;
-    justify-content: space-between;
+    grid-template-columns: 1fr;
+  }
+}
+
+.searchBoxTop {
+  display: none;
+  justify-content: center;
+  @media (max-width: 768px) {
+    display: flex;
+    margin: 30px 30px;
+  }
+}
+
+.searchBoxBottom {
+  display: flex;
+  justify-content: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .searchWritingBox {
-    width: 100%;
-    display: flex;
-    margin-top: 4px;
-    margin-bottom: 20px;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  justify-content: space-between;
 }
 
-.pagination{
-    display: flex;
-    justify-content: end;
+.pagination {
+  display: flex;
+  justify-content: end;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 }
 
 .CommunityHeader {
-    gap: 6px;
-    display: flex;
-    justify-content: center;
+  gap: 6px;
+  display: flex;
+  justify-content: center;
+  @media (max-width: 768px) {
+    place-items: center;
+    display: grid;
+    margin: 0 30px;
+    grid-template-columns: 1fr 1fr;
   }
-  
-  .CategoryButton {
-    width: 148px;
-    height: 28px;
-    display: flex;
-    font-size: 12px;
-    cursor: pointer;
-    transition: 0.2s;
-    overflow: hidden;
-    border-radius: 4px;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e3e3e3;
-    background-color: #ffffff;
+}
+
+.CategoryButton {
+  width: 148px;
+  height: 28px;
+  display: flex;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  overflow: hidden;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e3e3e3;
+  background-color: #ffffff;
+  @media (max-width: 768px) {
+    width: 100%;
   }
-  .Select {
-    color: #ffffff;
-    background-color: #0f60ce;
-  }
-  
+}
+.Select {
+  color: #ffffff;
+  background-color: #0f60ce;
+}

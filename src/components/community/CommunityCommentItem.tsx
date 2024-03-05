@@ -1,19 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { storage } from '@/firebase';
 import useUserStore from '@/store/useUsersStore';
 import { getDocument } from '@/lib/firebaseQuery';
 import { ConvertTimes } from '@/lib/util/convertTime';
 import styles from './CommunityCommentItem.module.scss';
 import useCommunityDataList from '@/hook/useCommunityDataList';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import CommunityCommentItemReply from './CommunityCommentItemReply';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import {
   addReplies,
   deleteCommunity,
   editComment,
 } from '@/lib/firebaseQueryCommunity';
-import { storage } from '@/firebase';
-import { ref, listAll, getDownloadURL } from 'firebase/storage';
+import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
 
 interface CommunityData {
   id: string;
@@ -47,7 +48,6 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
     };
     fetchImages();
   }, []);
-
 
   /** 대댓글 내용 받아오기 */
   const { repliesList } = useCommunityDataList(
@@ -165,7 +165,11 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
 
   /** 대댓글 토글 버튼 기능 */
   const toggleHandler = () => {
-    setToggleReplies((prevToggleReplies) => !prevToggleReplies);
+    if (user?.uid) {
+      setToggleReplies((prevToggleReplies) => !prevToggleReplies);
+    } else {
+      return alert('로그인이 필요합니다.');
+    }
   };
 
   /** 댓글 내용 상태 */
@@ -197,28 +201,43 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
     <div className={styles.container}>
       <div className={styles.infoBox}>
         <div className={styles.userBox}>
-          <div className={styles.usersImg}>
-            {/* 이미지 넣기 */}
-            <img src={imageUrl} alt="사용자 이미지" />
+          <div className={styles.userBoxMobile}>
+            <div className={styles.usersImg}>
+              {/* 이미지 넣기 */}
+              {imageUrl ? (
+                <img src={imageUrl.toString()} alt="유저 이미지" />
+              ) : (
+                <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+              )}
+            </div>
+            <div>{value.userName}</div>
           </div>
-          <div>{value.userName}</div>
+          <div className={styles.createdAtTextTop}>
+            <ConvertTimes data={value.createdAt} />
+          </div>
         </div>
         <div className={styles.userBox} style={{ display: 'flex', gap: '6px' }}>
           <div className={styles.createdAtText}>
             <ConvertTimes data={value.createdAt} />
           </div>
-          {communityId && user?.uid ? (
-            <div>
-              <div
-                className={styles.deleteText}
-                onClick={() => onDel(value)}
-              >
-                삭제
+          <div className={styles.editDelBox}>
+            {value.userId === user?.uid ? (
+              <div className={styles.editText} onClick={() => onEditModeOn()}>
+                수정
               </div>
-            </div>
-          ) : (
-            ''
-          )}
+            ) : (
+              ''
+            )}
+            {value.userId === user?.uid ? (
+              <>
+                <div className={styles.deleteText} onClick={() => onDel(value)}>
+                  삭제
+                </div>
+              </>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
       </div>
 
@@ -264,9 +283,6 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
           >
             답글 달기
           </div>
-          <div className={styles.editText} onClick={() => onEditModeOn()}>
-            수정
-          </div>
         </div>
       )}
 
@@ -275,7 +291,7 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
       {toggleReplies ? (
         <form onSubmit={onSubmit}>
           <div className={styles.formBox}>
-            <div className={styles.replyIcon}>L</div>
+            <div className={styles.replyIcon} />
             <div className={styles.commentTextBox}>
               <textarea
                 onChange={handleChangeComment}
@@ -295,17 +311,17 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
       {/* 대댓글 리스트 영역 */}
       <div className={styles.replyListBox}>
         {replyList?.map((val: any) => (
-          <div className={styles.container}>
+          <div key={val.id} className={styles.container}>
             <div className={styles.infoBox}>
               <div className={styles.replyBox}>
-                <div className={styles.replyIcons}>L</div>
+                <div className={styles.replyIcons} />
               </div>
-            <CommunityCommentItemReply
-              data={val}
-              val={value.id}
-              setReplyList={handleSetReplyList}
-              onDel={onDelete}
-            />
+              <CommunityCommentItemReply
+                data={val}
+                val={value.id}
+                setReplyList={handleSetReplyList}
+                onDel={onDelete}
+              />
             </div>
           </div>
         ))}

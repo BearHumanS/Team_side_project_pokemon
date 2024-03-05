@@ -1,0 +1,109 @@
+@import 'src/styles/mixin.scss';
+
+.wrapper {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 485px;
+
+  @include mobile {
+    height: 100%;
+  }
+}
+
+.wrapper__top,
+.wrapper__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+
+  ul {
+    margin-left: 10%;
+  }
+}
+
+.wrapper__bottom {
+  @include mobile {
+    display: none;
+  }
+}
+
+.name_editor {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 0.8;
+  justify-content: space-between;
+
+  @include mobile {
+    gap: 30px;
+    flex: none;
+  }
+
+  > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      width: 51px;
+      height: 34px;
+      border-radius: 8px;
+    }
+
+    > div {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+  }
+}
+
+.name_input {
+  cursor: text;
+  text-align: end;
+  outline: none;
+  border: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: GmarketSansMedium;
+  width: auto;
+  max-width: 150px;
+}
+
+.status_title {
+  display: flex;
+  justify-content: space-between;
+
+  > div {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.status_bar_container {
+  display: flex;
+  flex-direction: column;
+
+  > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > div {
+      width: 70%;
+    }
+  }
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.list_name {
+  font-size: 18px;
+}

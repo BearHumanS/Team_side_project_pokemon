@@ -117,7 +117,7 @@ export const POKEMON_NICKNAME2 = [
   '무책임한',
 ];
 
-export const PROFILE_DEFAULT_IMG = '/src/assets/default_profile.svg';
+export const PROFILE_DEFAULT_IMG = '/default_profile.svg';
 
 export const STORAGE_DOWNLOAD_URL = 'https://firebasestorage.googleapis.com';
 

@@ -5,23 +5,43 @@ import { useNavigate } from 'react-router-dom';
 import useLikedStore from '@/store/useLikedStore';
 import RenderPokemon from './RenderPokemon';
 import { updateDocument } from '@/lib/firebaseQuery';
+import { Pagination } from 'antd';
+import { useState } from 'react';
+import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
 
 const MyLikedPokemon = () => {
   const { user } = useUserStore();
   const { pokemonData } = useLikedStore();
+  const [currentPage, setCurrentPage] = useState(1);
+  const windowWidth = useCalculateInnerWidth();
+  const itemsPerPage = windowWidth <= 768 ? 6 : 12;
 
   const navigate = useNavigate();
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = pokemonData.slice(indexOfFirstItem, indexOfLastItem);
 
   const onCancelLiked = async (pokemonId: string | number) => {
     if (user?.uid) {
       await updateDocument(`/likes/${user.uid}`, {
         pokemons: arrayRemove(pokemonId),
       });
+
+      const newTotal = pokemonData.length - 1;
+      const maxPage = Math.ceil(newTotal / itemsPerPage);
+      if (currentPage > maxPage) {
+        setCurrentPage(maxPage > 0 ? maxPage : 1);
+      }
     }
   };
 
   const onMoveToPokemonDetail = (pokemonId: string | number) => {
     navigate(`/pokemon/${pokemonId}`);
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -39,7 +59,7 @@ const MyLikedPokemon = () => {
         ) : (
           <>
             <div className={styles.myactive__liked__box}>
-              {pokemonData.map((pokemon) => (
+              {currentItems.map((pokemon) => (
                 <RenderPokemon
                   key={pokemon.id}
                   pokemon={pokemon}
@@ -50,6 +70,16 @@ const MyLikedPokemon = () => {
             </div>
           </>
         )}
+
+        <div className={styles.pagination}>
+          <Pagination
+            defaultCurrent={currentPage}
+            total={pokemonData.length}
+            pageSize={itemsPerPage}
+            onChange={handlePageChange}
+            hideOnSinglePage={true}
+          />
+        </div>
       </div>
     </>
   );

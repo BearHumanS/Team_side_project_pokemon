@@ -1,5 +1,5 @@
 import { PokemonType } from '@/lib/type';
-import PokemonListElementLayout from '../list/PokemonListElementLayout';
+import PokemonDexElementLayout from '../dex/PokemonDexElementLayout';
 import styles from './Detail.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
@@ -90,14 +90,13 @@ const EvolutionChain = ({
               <EvolutionImgSkeleton />
             ) : (
               <>
-                {' '}
                 {evolvesChain.length > 1 && commonEvolution.length < 2 ? (
                   <>
                     <div className={styles.evolves}>
                       {preEvolutionPokemon && (
                         <>
                           <div className={styles.evolves__pre__evolution}>
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={preEvolutionPokemon}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -114,7 +113,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__pre__evolution__name}
                             >
@@ -126,7 +125,7 @@ const EvolutionChain = ({
                             </div>
                             <img
                               className={styles.evolves__pre__evolution__arrow}
-                              src="/src/assets/arrow.svg"
+                              src="/arrow.svg"
                               alt="우측 화살표"
                               width={24}
                               height={38}
@@ -140,7 +139,7 @@ const EvolutionChain = ({
                             className={styles.evolves__final__evolution__box}
                             key={pokemonData.id}
                           >
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -157,7 +156,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__final__evolution__name}
                             >
@@ -179,7 +178,7 @@ const EvolutionChain = ({
                             key={pokemonData.id}
                             className={styles.evolves__common__evolution}
                           >
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -196,7 +195,7 @@ const EvolutionChain = ({
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__pre__evolution__name}
                             >
@@ -207,7 +206,7 @@ const EvolutionChain = ({
                                 className={
                                   styles.evolves__pre__evolution__arrow
                                 }
-                                src="/src/assets/arrow.svg"
+                                src="/arrow.svg"
                                 alt="우측 화살표"
                                 width={24}
                                 height={38}
@@ -224,7 +223,7 @@ const EvolutionChain = ({
                               key={pokemonData.id}
                               className={styles.evolves__pre__evolution}
                             >
-                              <PokemonListElementLayout
+                              <PokemonDexElementLayout
                                 data={pokemonData}
                                 className={styles.evolves__list}
                                 onClick={() =>
@@ -241,7 +240,7 @@ const EvolutionChain = ({
                                   width={141}
                                   height={141}
                                 />
-                              </PokemonListElementLayout>
+                              </PokemonDexElementLayout>
                               <div
                                 className={styles.evolves__pre__evolution__name}
                               >
@@ -262,7 +261,7 @@ const EvolutionChain = ({
                           className={styles.evolves__pre__evolution__box}
                         >
                           <div className={styles.evolves__pre__evolution}>
-                            <PokemonListElementLayout
+                            <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
@@ -273,13 +272,13 @@ const EvolutionChain = ({
                                 src={
                                   pokemonData.sprites?.other?.[
                                     'official-artwork'
-                                  ].front_default
+                                  ].front_default || '/pokemonImg/그우린차.webp'
                                 }
                                 alt={`${pokemonData.name} 포켓몬 이미지`}
                                 width={141}
                                 height={141}
                               />
-                            </PokemonListElementLayout>
+                            </PokemonDexElementLayout>
                             <div
                               className={styles.evolves__pre__evolution__name}
                             >
@@ -288,7 +287,8 @@ const EvolutionChain = ({
                           </div>
                           {index < evovlutionPokemonData.length - 1 && (
                             <img
-                              src="/src/assets/arrow.svg"
+                              className={styles.arrow}
+                              src="/arrow.svg"
                               alt="우측 화살표"
                               width={24}
                               height={38}

@@ -3,12 +3,17 @@ import styles from './Plate.module.scss';
 import useSelectedStore from '@/store/useSelectedStore';
 import PlateHideButton from './PlateHideButton';
 import { useState } from 'react';
-import Inner from '../Inner';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const FilterPlates = () => {
   const koreanTypes = Object.values(POKEMON_TYPES);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { selectedPlate, setSelectedPlate } = useSelectedStore();
+
+  const variants = {
+    open: { height: '200px' },
+    closed: { height: 0 },
+  };
 
   const renderTypes = (types: string[]) =>
     types.map((koreanType) => {
@@ -28,9 +33,7 @@ const FilterPlates = () => {
         >
           <img
             className={styles.type_image}
-            src={`/src/assets/icons/${koreanType}_${
-              isPlateSelected ? 'on' : 'off'
-            }.svg`}
+            src={`/icons/${koreanType}_${isPlateSelected ? 'on' : 'off'}.svg`}
             alt={`${koreanType}타입 아이콘`}
           />
           <span>{koreanType}</span>
@@ -40,19 +43,30 @@ const FilterPlates = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.type_outer_container}>
-        <Inner>
-          <div
-            className={`${styles.type_container} ${
-              isOpen ? '' : styles.closed
-            }`}
+      <AnimatePresence>
+        {isOpen ? (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={variants}
+            transition={{ duration: 0.3 }}
+            className={styles.container}
           >
-            <span>*속성을 선택해주세요.</span>
-            <div className={styles.type_plates}>{renderTypes(koreanTypes)}</div>
-          </div>
-        </Inner>
-      </div>
-      <PlateHideButton setIsOpen={setIsOpen} />
+            <div className={styles.inner}>
+              <motion.span className={styles.description}>
+                속성을 선택해주세요. (중복 선택 가능)
+              </motion.span>
+              <motion.div className={styles.type_plates}>
+                {renderTypes(koreanTypes)}
+              </motion.div>
+            </div>
+          </motion.div>
+        ) : (
+          <div></div>
+        )}
+      </AnimatePresence>
+      <PlateHideButton isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

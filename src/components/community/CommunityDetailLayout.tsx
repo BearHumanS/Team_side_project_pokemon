@@ -7,7 +7,7 @@ interface Prop {
 
 const CommunityDetailLayout = ({children}: Prop) => {
   return (
-    <div className={styles.Container}>
+    <div className={styles.container}>
     {children}
     </div>
   )

@@ -7,6 +7,8 @@ import {
   getCountFromServer,
   getDoc,
   getDocs,
+  orderBy,
+  query,
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
@@ -54,7 +56,9 @@ export const setDocument = async (documentPath: string, data: DataObject) => {
 
 export const getAllDocument = async (collectionPath: string) => {
   const ref = collection(db, collectionPath);
-  const querySnapshot = await getDocs(ref);
+
+  const refQuery = query(ref, orderBy('createdAt', 'desc'));
+  const querySnapshot = await getDocs(refQuery);
 
   const documents = querySnapshot.docs.map((doc) => ({
     id: doc.id,

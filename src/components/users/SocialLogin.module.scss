@@ -2,6 +2,11 @@
 .socialLogin {
   position: relative;
 
+  @media (max-width: 769px) {
+    width: 100%;
+    height: 100%;
+  }
+
   &__loginButton {
     cursor: pointer;
   }
@@ -18,6 +23,20 @@
     z-index: 100;
     margin-top: 20px;
 
+    &__box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      height: 194px;
+    }
+
+    &__title {
+      width: 138px;
+      height: 40px;
+    }
+
     &__visible {
       display: block;
       height: 81px;
@@ -28,6 +47,29 @@
       gap: 4px;
       align-items: center;
       justify-content: center;
+
+      @media (max-width: 769px) {
+        width: 100%;
+        height: auto;
+        border: none;
+        top: 0;
+        position: relative;
+        right: 0;
+        margin: 0;
+        gap: 12px;
+      }
+    }
+
+    &__button__box {
+      height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      @media (max-width: 769px) {
+        gap: 12px;
+      }
     }
 
     &__button__mypage,
@@ -49,21 +91,87 @@
     &__button__mypage {
       color: #000;
 
+      @media (max-width: 769px) {
+        width: 180px;
+        height: 40px;
+        flex-shrink: 0;
+        border-radius: 5px;
+        font-size: 18px;
+        background-color: #000;
+        color: #fff;
+      }
+
+      &__go,
+      &__cancel {
+        width: 180px;
+        height: 40px;
+        flex-shrink: 0;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        font-family: 'Gmarket Sans';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      &__go {
+        border: 1px solid #0f60ce;
+        background: #0f60ce;
+
+        &:hover {
+          background-color: #fff;
+          color: #0f60ce;
+        }
+      }
+
+      &__cancel {
+        border: 1px solid #ff5454;
+        background: #ff5454;
+
+        &:hover {
+          background-color: #fff;
+          color: #ff5454;
+        }
+      }
+
       &:hover {
         border-radius: 5px;
         border: 1px solid #f5f5f5;
         background: #f5f5f5;
+
+        @media (max-width: 769px) {
+          border: 1px solid #000;
+          background-color: #fff;
+          color: #000;
+        }
       }
     }
 
     &__button__logout {
       color: #ff5454;
 
+      @media (max-width: 769px) {
+        width: 180px;
+        height: 40px;
+        flex-shrink: 0;
+        font-size: 18px;
+        background-color: #ff5454;
+        color: #fff;
+        border-radius: 5px;
+      }
+
       &:hover {
         border-radius: 5px;
         border: 1px solid #ff5454;
         background: #ff5454;
         color: #fff;
+
+        @media (max-width: 769px) {
+          background-color: #fff;
+          color: #ff5454;
+        }
       }
     }
 
@@ -77,6 +185,7 @@
       font-family: Gmarket Sans;
       font-size: 12px;
       font-style: normal;
+      font-family: 'Gmarket Sans';
       font-weight: 600;
       line-height: normal;
       display: flex;
@@ -87,12 +196,6 @@
       box-shadow: 0px 18px 30px 0px rgba(14, 13, 15, 0.11);
       cursor: pointer;
 
-      &__button__google span,
-      &__button__github span {
-        width: 100%;
-        text-align: center;
-      }
-
       &:hover span {
         display: none;
       }
@@ -100,16 +203,99 @@
 
     &__button__google {
       background: #fff;
+
+      @media (max-width: 769px) {
+        width: 180px;
+        height: 40px;
+        flex-shrink: 0;
+        border: 1px solid #e0e0e0;
+        font-size: 18px;
+      }
     }
 
     &__button__github {
       background: #000;
       color: #fff;
+
+      @media (max-width: 769px) {
+        width: 180px;
+        height: 40px;
+        flex-shrink: 0;
+        font-size: 18px;
+      }
     }
   }
 
   &__icon {
     width: 20px;
     height: 20px;
+  }
+}
+
+// mobile
+
+.mobile {
+  &__container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  &__overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+  }
+
+  &__overlay.mypage {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1.5px);
+    z-index: 10;
+  }
+
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    z-index: 1010;
+    height: auto;
+    width: 220px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  &__login {
+    &__top {
+      width: 220px;
+      height: 50px;
+      flex-shrink: 0;
+      border-radius: 8px 8px 0px 0px;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffca06;
+      text-align: center;
+      font-family: 'Gmarket Sans';
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
   }
 }
