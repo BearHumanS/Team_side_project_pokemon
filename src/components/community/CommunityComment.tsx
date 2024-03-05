@@ -49,25 +49,6 @@ export const useCommunityCommentQuery = (id: any) => {
   );
 };
 
-// 커뮤니티 좋아요를 쿼리하는 커스텀 훅
-export const useCommunityHeartQuery = (id: any) => {
-  return useQuery(
-    ['heart', id.id],
-    async () => {
-      const snapshot = await getDocs(collection(db, `heart`));
-      const heartData: CommunityData[] = snapshot.docs.map(
-        (doc) =>
-          ({
-            id: doc.id,
-            ...doc.data(),
-          }) as CommunityData,
-      );
-      return heartData;
-    },
-    { suspense: true },
-  );
-};
-
 const CommunityComment = ({ id, data }: any) => {
   const { user } = useUserStore();
   const queryClient = useQueryClient();

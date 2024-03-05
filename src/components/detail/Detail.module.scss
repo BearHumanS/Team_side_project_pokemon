@@ -189,6 +189,10 @@
     line-height: normal;
   }
 
+  &:disabled {
+    border: 2px solid #999;
+  }
+
   &:disabled,
   &:disabled span {
     color: #999;
@@ -413,7 +417,7 @@
 
     &.shortName {
       font-size: 36px;
-      top: -56px;
+      top: -52px;
     }
 
     @media (max-width: 768px) {
@@ -552,7 +556,7 @@
 
     &__text {
       position: absolute;
-      top: -32px;
+      top: -28px;
       left: 50%;
       transform: translateX(-50%);
       color: #fff;
@@ -565,7 +569,7 @@
       line-height: normal;
 
       @media (max-width: 768px) {
-        top: -44px;
+        top: -40px;
         font-size: 28px;
       }
     }
@@ -720,7 +724,7 @@
       }
 
       &.shortName {
-        top: -47px;
+        top: -41px;
         font-size: 28px;
       }
     }

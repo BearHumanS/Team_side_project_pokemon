@@ -4,7 +4,7 @@ import '@/styles/global.scss';
 import AuthGuard from './provider/AuthGuard';
 import Meta from './Meta.tsx';
 import { HelmetProvider } from 'react-helmet-async';
-import { createRoot, hydrateRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 
 const rootElement = document.getElementById('root');
 
@@ -20,10 +20,6 @@ if (rootElement) {
     </React.StrictMode>
   );
 
-  if (rootElement.hasChildNodes()) {
-    hydrateRoot(rootElement, app);
-  } else {
-    const root = createRoot(rootElement);
-    root.render(app);
-  }
+  const root = createRoot(rootElement);
+  root.render(app);
 }

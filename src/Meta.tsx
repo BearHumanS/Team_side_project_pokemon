@@ -12,7 +12,22 @@ interface MetaProps {
 }
 
 const Meta = (props: MetaProps) => {
-  console.log(props);
+  const schemaOrgWebPage = {
+    '@context': 'http://schema.org',
+    '@type': 'WebPage',
+    url: props.url,
+    headline: props.title,
+    image: props.image,
+    description: props.description,
+    author: {
+      '@type': 'Person',
+      name: props.author,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': props.url,
+    },
+  };
   return (
     <Helmet>
       <title>{props.title}</title>
@@ -30,6 +45,10 @@ const Meta = (props: MetaProps) => {
       <meta property="og:title" content={props.title} />
       <meta property="og:description" content={props.description} />
       <meta property="og:image" content={props.image} />
+
+      <script type="application/ld+json">
+        {JSON.stringify(schemaOrgWebPage)}
+      </script>
     </Helmet>
   );
 };

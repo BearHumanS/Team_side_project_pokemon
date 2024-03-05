@@ -153,7 +153,7 @@
       height: 56px;
       flex-shrink: 0;
       color: #000;
-
+      gap: 10px;
       font-size: 12px;
       font-style: normal;
       font-weight: 400;
@@ -187,7 +187,6 @@
       @media (max-width: 769px) {
         height: 56px;
         max-width: 350px;
-        width: 80vw;
       }
     }
 
