@@ -12,16 +12,38 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - run: npm install
       - run: npm run lint
+
   build:
     name: Build
     runs-on: ubuntu-latest
+    needs: lint
 
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - run: npm install
       - run: CI='false' npm run build
+      - name: Merge Pull Request
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: pascalgn/automerge-action@v0.14.3
+        with:
+          mergeMethod: squash
+          token: ${{ secrets.MY_TOKEN }}
+          commitMessageTemplate: "automerge: (pull_request_title)"
+          pullRequestFilterLabels: "automerge"
