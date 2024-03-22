@@ -70,7 +70,7 @@ Meta.defaultProps = {
   subject: '포케허브: 포켓몬 커뮤니티, 도감, 카드제작 및 토론',
   copyright: 'PokeHub_Team',
   keywords:
-    '포켓몬, 포켓몬 도감, 포켓몬 카드, 포켓몬 게임, 포켓몬 커뮤니티, 포켓몬 공략, 포켓몬 이벤트, 포켓몬 최신 뉴스, 포켓몬 교환, 포켓몬 카드 제작',
+    '포케허브, pokehub, 포켓몬, 포켓몬 도감, 포켓몬 카드, 포켓몬 게임, 포켓몬 커뮤니티, 포켓몬 공략, 포켓몬 이벤트, 포켓몬 최신 뉴스, 포켓몬 교환, 포켓몬 카드 제작',
   url: window.location.href,
   image:
     'https://github.com/side-project-pokehub/my-pokemon/assets/115094069/20de534c-814b-441d-8b74-6cfc9347c66c',

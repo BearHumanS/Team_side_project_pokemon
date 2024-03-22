@@ -81,7 +81,6 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
       await signOut(auth);
       setUser(null);
       console.log('로그아웃');
-      navigate('/');
     } catch (error) {
       console.error('로그아웃 중 오류 발생:', error);
     }

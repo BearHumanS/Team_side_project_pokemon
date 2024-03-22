@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import styles from './PokemonDex.module.scss';
 import { PokemonType } from '@/lib/type';
 import { motion } from 'framer-motion';
+import { useParams } from 'react-router-dom';
 
 interface PokemonDexElementLayoutProp {
   children: ReactNode;
@@ -16,15 +17,24 @@ const PokemonDexElementLayout = ({
   onClick,
   className,
 }: PokemonDexElementLayoutProp) => {
+  const { id } = useParams();
+
   const number = () => {
     if (data.id < 10) {
-      return '00' + data.id
+      return '00' + data.id;
     } else if (data.id < 100) {
-      return '0' + data.id
+      return '0' + data.id;
     } else {
-      return data.id
+      return data.id;
     }
-  }
+  };
+
+  const getHighlightClass = () => {
+    return data.id.toString() === id ? styles.highlighted : '';
+  };
+
+  console.log(data.id.toString() === id);
+
   return (
     <motion.li
       whileHover={{
@@ -32,7 +42,9 @@ const PokemonDexElementLayout = ({
         boxShadow: `rgba(0, 0, 0, 0.10) 0px 3px 20px`,
       }}
       transition={{ duration: 0.2 }}
-      className={`${styles.pokemon_list_element} ${className || ''}`}
+      className={`${styles.pokemon_list_element} ${getHighlightClass()} ${
+        className || ''
+      }`}
       onClick={onClick}
     >
       <div className={styles.pokemon_number}>

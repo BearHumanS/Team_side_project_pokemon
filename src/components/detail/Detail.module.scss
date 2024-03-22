@@ -96,7 +96,7 @@
   flex-direction: column;
   justify-content: space-around;
   transition: 0.3s;
-  transform: rotateY(30deg);
+  transform: rotateY(15deg);
   border-radius: 0px 4px 4px 0px;
   border: 3px solid #000;
   background: #fff;
@@ -182,22 +182,19 @@
 
   span {
     color: #ff5050;
-
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
 
-  &:disabled {
-    border: 2px solid #999;
-  }
-
-  &:disabled,
-  &:disabled span {
+  .disabledText {
     color: #999;
-    cursor: not-allowed;
   }
+}
+
+.disabledButton {
+  border: 2px solid #999;
 }
 
 .stats__like__animate.animateHeart {
@@ -225,7 +222,7 @@
   background: #fff;
   padding: 20px;
   transition: 0.3s;
-  transform: rotateY(-30deg);
+  transform: rotateY(-15deg);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -595,7 +592,6 @@
     height: 226px;
     flex-shrink: 0;
     border-radius: 15px;
-    border: 2px solid #000;
     background: #fff;
     display: flex;
     justify-content: center;

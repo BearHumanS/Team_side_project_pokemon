@@ -34,7 +34,9 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
   };
 
   const onToggleLike = async () => {
-    if (!user?.uid) return;
+    if (!user?.uid) {
+      return alert('로그인이 필요합니다.');
+    }
     setAnimate(true);
     try {
       const docSnap = await getDocument(`/likes/${user.uid}`);
@@ -76,9 +78,11 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
       }`}
     >
       <button
-        className={styles.stats__like}
+        className={`${styles.stats__like} ${
+          !user ? styles.disabledButton : ''
+        }`}
         onClick={onToggleLike}
-        disabled={isLoading || !user}
+        disabled={isLoading}
       >
         {isLiked ? (
           <FaHeart
@@ -94,7 +98,7 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
             color={isLoading || !user ? '#999' : '#FF5050'}
           />
         )}
-        <span>찜하기</span>
+        <span className={`${!user ? styles.disabledText : ''}`}>찜하기</span>
       </button>
     </div>
   );
