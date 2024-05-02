@@ -1,4 +1,6 @@
-import { useState } from 'react';
+// 사용되지 않는 컴포넌트?
+
+/* import { useState } from 'react';
 import styles from './CommunityHeader.module.scss';
 
 const CommunityHeader = () => {
@@ -38,3 +40,4 @@ const CommunityHeader = () => {
 };
 
 export default CommunityHeader;
+ */

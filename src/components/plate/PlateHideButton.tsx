@@ -27,7 +27,7 @@ const PlateHideButton = ({ isOpen, setIsOpen }: PlateHideButtonProp) => {
       >
         <IoChevronUp />
       </motion.div>
-      <span className={styles.mobile_button}>속성 선택</span>
+      <span className={styles.mobile_button}>타입 선택</span>
     </button>
   );
 };

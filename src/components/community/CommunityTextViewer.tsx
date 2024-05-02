@@ -8,10 +8,10 @@ const CommunityTextViewer = ({ data }: any) => {
     <div>
       {content && (
         <>
-          <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(content)}}
+          <div
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
             style={{
               marginTop: '30px',
-              overflow: 'hidden',
               whiteSpace: 'pre-wrap',
             }}
           />

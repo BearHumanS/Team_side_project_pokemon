@@ -138,3 +138,9 @@ export const FORMDATE = (date: string) => {
 //   ) => (2 * baseStat + talentStat + effortStat / 4 + 100) * (level / 100) + 10,
 //   ATTACK: () => {},
 // };
+
+export const ADMINS = [
+  import.meta.env.VITE_ADMIN_UID_1,
+  import.meta.env.VITE_ADMIN_UID_2,
+  import.meta.env.VITE_ADMIN_UID_3,
+];

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import useUserStore from '@/store/useUsersStore';
 import styles from './CommunityTextEditor.module.scss';
 import { addCommunity } from '@/lib/firebaseQueryCommunity';
+import { ADMINS } from '@/lib/constants';
 
 const CommunityTextEditor = () => {
   const { user } = useUserStore();
@@ -14,9 +15,17 @@ const CommunityTextEditor = () => {
   const [loading, setLoading] = useState(false);
   const [editorRef, setEditorRef] = useState('');
   const [category, setCategory] = useState('자유게시판');
-  const [title, setTitle] = useState('제목을 작성해주세요.');
+  const [title, setTitle] = useState('');
+
+  const isAdmin = ADMINS.includes(user?.uid);
+
+  console.log(isAdmin);
 
   const handleChange = (value: string) => {
+    if (!isAdmin && value === '공지사항') {
+      alert('관리자만 선택 가능합니다.');
+      return;
+    }
     setCategory(value);
   };
 
@@ -31,6 +40,12 @@ const CommunityTextEditor = () => {
 
     if (!user?.uid) {
       alert('로그인이 필요합니다.');
+      return;
+    } else if (!editorRef) {
+      alert('게시글을 저장하려면 내용을 채워주세요.');
+      return;
+    } else if (!title) {
+      alert('게시글을 저장하려면 제목을 채워주세요.');
       return;
     }
 
@@ -74,7 +89,8 @@ const CommunityTextEditor = () => {
             <div className={styles.inputTitle}>카테고리</div>
             <Select
               className={styles.inputSelect}
-              defaultValue="자유게시판"
+              defaultValue={category}
+              value={category}
               style={{ width: 130 }}
               onChange={handleChange}
               options={[
@@ -94,6 +110,7 @@ const CommunityTextEditor = () => {
               count={{ show: true, max: 50 }}
               value={title}
               onChange={handleChangeTitle}
+              placeholder="제목을 작성해주세요."
             />
           </div>
         </div>

@@ -33,8 +33,6 @@ const PokemonDexElementLayout = ({
     return data.id.toString() === id ? styles.highlighted : '';
   };
 
-  console.log(data.id.toString() === id);
-
   return (
     <motion.li
       whileHover={{

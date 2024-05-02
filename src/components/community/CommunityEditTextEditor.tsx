@@ -40,6 +40,12 @@ const CommunityEditTextEditor = () => {
     if (!user?.uid) {
       alert('로그인이 필요합니다.');
       return;
+    } else if (!editorRef) {
+      alert('게시글을 저장하려면 내용을 채워주세요');
+      return;
+    } else if (!title) {
+      alert('게시글을 저장하려면 제목을 채워주세요.');
+      return;
     }
 
     try {

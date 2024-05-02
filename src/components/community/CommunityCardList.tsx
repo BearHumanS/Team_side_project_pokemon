@@ -37,8 +37,8 @@ const CommunityCardList = () => {
 
   const generateCategoryList = () => [
     '전체',
-    '자유게시판',
     '공지사항',
+    '자유게시판',
     '질문/답변',
     '팁/정보',
     '거래게시판',
@@ -160,9 +160,9 @@ const CommunityCardList = () => {
         />
       </div>
       <div className={styles.buttonCircle}>
-      <Link to={'/community/add'}>
-        <ButtonCircle />
-      </Link>
+        <Link to={'/community/add'}>
+          <ButtonCircle />
+        </Link>
       </div>
     </div>
   );
