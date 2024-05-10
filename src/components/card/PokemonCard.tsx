@@ -1,9 +1,10 @@
+import Image from 'next/image';
 import { TypesType, filteredPokemonData } from '@/lib/type';
 import styles from './pokemonCard.module.scss';
 import Plate from '../plate/Plate';
 import { POKEMON_STATS, POKEMON_TYPES } from '@/lib/constants';
 import StatusBar from '../detail/StatusBar';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 interface PokemonCardProp {
   pokemonCardData: filteredPokemonData;
@@ -20,8 +21,8 @@ const PokemonCard = ({
   pokemonCardData: data,
   isOpen,
 }: PokemonCardProp) => {
-  const location = useLocation();
-  const isMyPage = location.pathname.includes('mypage');
+  const pathName = usePathname();
+  const isMyPage = pathName.includes('mypage');
 
   if (!data || Object.keys(data).length === 0) {
     // 임시로 null처리
@@ -76,15 +77,19 @@ const PokemonCard = ({
     <div className={setClassName('wrapper')}>
       <div className={setClassName('pokemon_number')}>{`No.${data?.id}`}</div>
       <div className={styles.white_block}>
-        <img
+        <Image
           className={setMyClassName('monster_ball_left')}
           src="/monster-ball1.svg"
           alt=""
+          width={137}
+          height={159}
         />
-        <img
+        <Image
           className={setMyClassName('monster_ball_right')}
           src="/monster-ball2.svg"
           alt=""
+          width={87}
+          height={158}
         />
         <div className={setClassName('container')}>
           <div className={setMyClassName('container__top')}>
@@ -96,12 +101,16 @@ const PokemonCard = ({
                 />
               ))}
             </div>
-            <img
+            <Image
               className={setMyClassName('pokemon_image')}
               src={
-                data.id !== 1013 ? data.sprites : '/pokemonImg/그우린차.webp'
+                data.id !== 1013
+                  ? data.sprites || ''
+                  : '/pokemonImg/그우린차.webp'
               }
               alt="포켓몬 이미지"
+              height={150}
+              width={150}
             />
             <div className={styles.pokemon_intro}>
               <div className={setMyClassName('pokemon_name')}>
@@ -120,10 +129,12 @@ const PokemonCard = ({
           <div className={setMyClassName('container__bottom')}>
             {renderStatus()}
             <div>
-              <img
+              <Image
                 className={setMyClassName('logo')}
                 src="/logo-pokehub.png"
                 alt="PoketHub"
+                width={70}
+                height={32}
               />
               <div className={styles.total_stat}>
                 <span className={setMyClassName('text_small')}>Total</span>

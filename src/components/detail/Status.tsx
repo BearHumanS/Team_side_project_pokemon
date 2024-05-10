@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './Detail.module.scss';
 import LikePokemon from './LikePokemon';
 import { PokemonInfoExtendsProps } from './PokemonInfo';
@@ -19,7 +20,7 @@ const Status = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
             <div className={styles.stats__top}>
               <span>스탯</span>
             </div>
-            <img src="/Rectangle 47.png" alt="" width={13} height={425} />
+            <Image src="/Rectangle 47.png" alt="" width={13} height={425} />
             <StatusDisplay pokemon={pokemon} isLoading={isLoading} />
             <div className={styles.stats__total}>
               Total:{' '}

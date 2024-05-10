@@ -14,7 +14,6 @@ const useCommunityDataList = (val: string) => {
         const q = query(collectionRef, orderBy('createdAt', 'desc'));
         const querySnapshot = await getDocs(q);
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data: any = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

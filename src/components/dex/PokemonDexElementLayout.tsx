@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styles from './PokemonDex.module.scss';
 import { PokemonType } from '@/lib/type';
 import { motion } from 'framer-motion';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 
 interface PokemonDexElementLayoutProp {
   children: ReactNode;
@@ -17,7 +17,7 @@ const PokemonDexElementLayout = ({
   onClick,
   className,
 }: PokemonDexElementLayoutProp) => {
-  const { id } = useParams();
+  const id = useParams();
 
   const number = () => {
     if (data.id < 10) {
@@ -30,26 +30,28 @@ const PokemonDexElementLayout = ({
   };
 
   const getHighlightClass = () => {
-    return data.id.toString() === id ? styles.highlighted : '';
+    return data.id.toString() === id.pokemonId ? styles.highlighted : '';
   };
 
   return (
-    <motion.li
-      whileHover={{
-        scale: 1.02,
-        boxShadow: `rgba(0, 0, 0, 0.10) 0px 3px 20px`,
-      }}
-      transition={{ duration: 0.2 }}
-      className={`${styles.pokemon_list_element} ${getHighlightClass()} ${
-        className || ''
-      }`}
-      onClick={onClick}
-    >
-      <div className={styles.pokemon_number}>
-        <span>{`${number()}`}</span>
-      </div>
-      {children}
-    </motion.li>
+    <ul>
+      <motion.li
+        whileHover={{
+          scale: 1.02,
+          boxShadow: `rgba(0, 0, 0, 0.10) 0px 3px 20px`,
+        }}
+        transition={{ duration: 0.2 }}
+        className={`${styles.pokemon_list_element} ${getHighlightClass()} ${
+          className || ''
+        }`}
+        onClick={onClick}
+      >
+        <div className={styles.pokemon_number}>
+          <span>{`${number()}`}</span>
+        </div>
+        {children}
+      </motion.li>
+    </ul>
   );
 };
 

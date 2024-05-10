@@ -1,3 +1,6 @@
+'use client';
+
+import Image from 'next/image';
 import { POKEMON_TYPES } from '@/lib/constants';
 import styles from './Plate.module.scss';
 import useSelectedStore from '@/store/useSelectedStore';
@@ -33,10 +36,12 @@ const FilterPlates = () => {
           key={koreanType}
           data-type={koreanType}
         >
-          <img
+          <Image
             className={styles.type_image}
             src={`/icons/${koreanType}_${isPlateSelected ? 'on' : 'off'}.svg`}
             alt={`${koreanType}타입 아이콘`}
+            width={20}
+            height={20}
           />
           <span>{koreanType}</span>
         </div>
@@ -46,7 +51,7 @@ const FilterPlates = () => {
   return (
     <div className={styles.wrapper}>
       <AnimatePresence>
-        {isOpen && (
+        {isOpen ? (
           <motion.div
             initial="closed"
             animate="open"
@@ -63,9 +68,10 @@ const FilterPlates = () => {
               </motion.div>
             </div>
           </motion.div>
+        ) : (
+          <div></div>
         )}
       </AnimatePresence>
-      {!isOpen && <div></div>}
       <PlateHideButton isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );

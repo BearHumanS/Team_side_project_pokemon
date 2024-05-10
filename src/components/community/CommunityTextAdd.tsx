@@ -1,4 +1,4 @@
-import CommunityTextEditor from "./CommunityTextEditor";
+import CommunityTextEditor from './CommunityTextEditor';
 
 const CommunityTextAdd = () => {
   return (

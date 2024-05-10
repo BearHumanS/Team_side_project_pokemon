@@ -1,10 +1,13 @@
+'use client';
+
 import { Pagination } from 'antd';
 import Search from 'antd/es/input/Search';
 import { useState, useEffect } from 'react';
 import useUserStore from '@/store/useUsersStore';
 import CommunityCardItem from './CommunityCardItem';
 import styles from './CommunityCardList.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Button, ButtonCircle } from '../button/Button';
 import useCommunityDataList from '@/hook/useCommunityDataList';
 
@@ -25,7 +28,7 @@ const CommunityCardList = () => {
   const [communityList, setCommunityList] = useState<CommunityData[]>([]);
   const [filteredItems, setFilteredItems] = useState<CommunityData[]>([]);
   const { user } = useUserStore();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   // 파이어스토어 데이터 가져오기
   const { dataList } = useCommunityDataList(`/community`);
@@ -94,7 +97,7 @@ const CommunityCardList = () => {
 
   const handleLoginAlert = () => {
     alert('로그인이 필요합니다.');
-    navigate('/community');
+    router.push('/community');
   };
 
   return (
@@ -145,7 +148,7 @@ const CommunityCardList = () => {
             <Button data={DEFAULT_BUTTON_TEXT} />
           </div>
         ) : (
-          <Link to={'/community/add'}>
+          <Link href="/community/add">
             <Button data={DEFAULT_BUTTON_TEXT} />
           </Link>
         )}
@@ -160,7 +163,7 @@ const CommunityCardList = () => {
         />
       </div>
       <div className={styles.buttonCircle}>
-        <Link to={'/community/add'}>
+        <Link href="/community/add">
           <ButtonCircle />
         </Link>
       </div>

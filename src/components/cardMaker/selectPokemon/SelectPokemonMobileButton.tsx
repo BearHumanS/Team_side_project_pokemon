@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import styles from './select.module.scss';
 import { Modalportal } from '@/portal';
 import SelectModal from '@/components/modal/SelectModal';
@@ -27,7 +28,7 @@ const SelectPokemonMobileButton = ({
     <>
       <button className={styles.selector_button} onClick={onClick}>
         <div className={styles.img_wrapper}>
-          <img src={url} alt="포켓몬 이미지" />
+          <Image src={url} alt="포켓몬 이미지" width={100} height={100} />
         </div>
         <div className={styles.text_wrapper}>
           <span>{title}</span>

@@ -9,6 +9,7 @@ interface RenderPostProps {
   onMovetoDocument: (postId: string) => void;
 }
 
+// eslint-disable-next-line react/display-name
 const RenderPost = memo(
   ({ post, onDelete, onEdit, onMovetoDocument }: RenderPostProps) => {
     return (

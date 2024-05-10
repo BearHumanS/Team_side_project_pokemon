@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import styles from './Detail.module.scss';
 import { FORM_NAMES } from '@/lib/pokemonFormNames';
@@ -69,16 +70,17 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
             <DetailImgSkeleton />
           ) : (
             <>
-              <img
+              <Image
                 className={styles.official__img}
                 src={
                   pokemonOfficialImage
                     ? pokemonOfficialImage
-                    : getLocalImagePath(selectedFormName || koreanName)
+                    : getLocalImagePath(selectedFormName || koreanName) || ''
                 }
                 alt="Official Artwork"
                 width={280}
                 height={280}
+                priority
               />
             </>
           )}
@@ -96,11 +98,15 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
                     key={index}
                     className={`${styles.detail__plate} ${styles[koreanPokemonName]}`}
                   >
-                    <img
+                    <Image
                       src={`/icons/${koreanPokemonName}_on.svg`}
                       alt={`${koreanPokemonName}타입 아이콘`}
+                      width={20}
+                      height={20}
                     />
-                    <div className={styles.plate__name}>{koreanPokemonName}</div>
+                    <div className={styles.plate__name}>
+                      {koreanPokemonName}
+                    </div>
                   </div>
                 );
               })}
@@ -125,12 +131,13 @@ const PokemonImg = ({ pokemonState, isLoading }: PokemonInfoExtendsProps) => {
                 <DetailImgSkeleton />
               ) : (
                 <div className={styles.mobile__official__img}>
-                  <img
+                  <Image
                     className={styles.mobile__official__img}
                     src={
                       pokemonOfficialImage
                         ? pokemonOfficialImage
-                        : getLocalImagePath(selectedFormName || koreanName)
+                        : getLocalImagePath(selectedFormName || koreanName) ||
+                          ''
                     }
                     alt="Official Artwork"
                     width={204}

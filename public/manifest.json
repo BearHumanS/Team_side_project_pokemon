@@ -1,0 +1,30 @@
+{
+  "theme_color": "#000",
+  "background_color": "#fff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "포케허브",
+  "short_name": "포케허브",
+  "description": "포켓몬 도감, 토론, 커뮤니티, 카드제작 등 포케허브는 여러 컨텐츠를 이용하고 서로 공유할 수 있는 포켓몬 커뮤니티 사이트 입니다.",
+  "icons": [
+    {
+      "src": "/icon-152.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

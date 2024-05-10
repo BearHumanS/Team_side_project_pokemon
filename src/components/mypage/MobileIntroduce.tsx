@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import Image from 'next/image';
 import styles from './Mypage.module.scss';
 import { IoCloseSharp } from '@react-icons/all-files/io5/IoCloseSharp';
 import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
@@ -36,11 +37,12 @@ const MobileIntroduce = ({ props }: DesktopIntroduceProps) => {
   return (
     <div className={styles.intro__container}>
       <div className={styles.intro__profile__img}>
-        <img
+        <Image
           src={imgUrl || PROFILE_DEFAULT_IMG}
           alt="프로필 이미지"
           width={80}
           height={80}
+          priority
         />
         {editMode ? (
           <>

@@ -1,7 +1,7 @@
 import { arrayRemove } from 'firebase/firestore';
 import styles from './Mypage.module.scss';
 import useUserStore from '@/store/useUsersStore';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import useLikedStore from '@/store/useLikedStore';
 import RenderPokemon from './RenderPokemon';
 import { updateDocument } from '@/lib/firebaseQuery';
@@ -16,7 +16,7 @@ const MyLikedPokemon = () => {
   const windowWidth = useCalculateInnerWidth();
   const itemsPerPage = windowWidth <= 768 ? 6 : 12;
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -37,7 +37,7 @@ const MyLikedPokemon = () => {
   };
 
   const onMoveToPokemonDetail = (pokemonId: string | number) => {
-    navigate(`/pokemon/${pokemonId}`);
+    router.push(`/pokemon/${pokemonId}`);
   };
 
   const handlePageChange = (pageNumber: number) => {

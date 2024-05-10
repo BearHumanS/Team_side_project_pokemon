@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './search.module.scss';
 import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
 import { PokemonType } from '@/lib/type';
@@ -89,14 +90,16 @@ const SearchDropdown = ({ searchResults, setIsOpen }: SearchDropdownProps) => {
             onClick={() => handleClick(pokemon ? pokemon : null)}
           >
             <div className={styles.img_wrapper}>
-              <img
+              <Image
                 src={
                   pokemon?.id !== 1013
                     ? pokemon?.sprites?.other?.['official-artwork']
-                        ?.front_default
+                        ?.front_default || ''
                     : '/pokemonImg/그우린차.webp'
                 }
                 alt="포켓몬 이미지"
+                width={106}
+                height={106}
               />
             </div>
             <span>{pokemon && reverseObject(POKEMON_NAME)[pokemon.name]}</span>

@@ -1,4 +1,5 @@
 import { MouseEvent } from 'react';
+import Image from 'next/image';
 import styles from './SocialLogin.module.scss';
 
 const SelectLogin = ({
@@ -21,10 +22,12 @@ const SelectLogin = ({
           name="google"
           onClick={onLogin}
         >
-          <img
+          <Image
             className={styles.socialLogin__icon}
             src="/socialLoginIcons/google_icon.svg"
             alt="구글 로그인"
+            width={20}
+            height={20}
           />
           <span>구글 로그인 </span>
         </button>
@@ -34,10 +37,12 @@ const SelectLogin = ({
           name="github"
           onClick={onLogin}
         >
-          <img
+          <Image
             className={styles.socialLogin__icon}
             src="/socialLoginIcons/github_icon.svg"
             alt="깃허브 로그인"
+            width={20}
+            height={20}
           />
           <span>깃허브 로그인</span>
         </button>

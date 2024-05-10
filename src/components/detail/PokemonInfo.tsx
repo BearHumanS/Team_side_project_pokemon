@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { PokemonInfoProps } from '@/lib/type';
 import styles from './Detail.module.scss';
 import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
@@ -21,7 +22,7 @@ const PokemonInfo = ({
           <div className={styles.pokemon__info__top}>
             <span>정보</span>
           </div>
-          <img src="/Rectangle 47.png" alt="" width={13} height={425} />
+          <Image src="/Rectangle 47.png" alt="" width={13} height={425} />
           <PokemonInfoDisplay
             pokemonState={pokemonState}
             onFormChange={onFormChange}

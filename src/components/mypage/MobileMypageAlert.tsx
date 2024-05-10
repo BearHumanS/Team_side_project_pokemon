@@ -1,11 +1,11 @@
 import styles from '@/components/users/SocialLogin.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const MobileMypageAlert = ({ isOpen }: { isOpen: boolean }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const onMovetoMakecard = () => {
-    navigate('/cardedit');
+    router.push('/cardedit');
   };
   return (
     <>

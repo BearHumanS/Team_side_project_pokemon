@@ -1,3 +1,6 @@
+'use client';
+
+import Image from 'next/image';
 import {
   Dispatch,
   FormEvent,
@@ -6,7 +9,7 @@ import {
   useState,
 } from 'react';
 import styles from './Search.module.scss';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import useSearchInputText from '@/store/useSearchInputText';
 import useSelectedStore from '@/store/useSelectedStore';
 
@@ -15,7 +18,7 @@ const SearchInput = ({
 }: {
   isOpen?: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const location = useLocation();
+  const pathName = usePathname();
   const [text, setText] = useState<string>('');
   const { setInputText } = useSearchInputText();
   const { clearSelectedPlate } = useSelectedStore();
@@ -35,7 +38,7 @@ const SearchInput = ({
     }
   };
 
-  if (location.pathname !== '/') {
+  if (pathName !== '/') {
     return null;
   }
 
@@ -52,7 +55,14 @@ const SearchInput = ({
           className={styles.main__search__bar}
         />
         <button type="submit" className={styles.search__btn}>
-          <img src="/monster-ball.svg" alt="검색버튼" />
+          <div className={styles.search__btn__img}>
+            <Image
+              src="/monster-ball.svg"
+              alt="검색버튼"
+              width={32}
+              height={32}
+            />
+          </div>
         </button>
       </label>
     </form>

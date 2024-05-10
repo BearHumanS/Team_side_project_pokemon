@@ -10,6 +10,7 @@ interface RenderLikedPostsProps {
   onMoveToDocument: (likeId: string) => void;
 }
 
+// eslint-disable-next-line react/display-name
 const RenderLikedPosts = memo(
   ({ like, onCancleLikedPost, onMoveToDocument }: RenderLikedPostsProps) => {
     return (

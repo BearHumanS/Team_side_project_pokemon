@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { memo } from 'react';
@@ -11,6 +12,7 @@ interface RenderPokemonProps {
   onMoveToPokemonDetail: (pokemonId: string | number) => void;
 }
 
+// eslint-disable-next-line react/display-name
 const RenderPokemon = memo(
   ({ pokemon, onCancelLiked, onMoveToPokemonDetail }: RenderPokemonProps) => {
     return (
@@ -22,7 +24,7 @@ const RenderPokemon = memo(
           >
             <FiPlus size={14} />
           </button>
-          <img
+          <Image
             src={
               pokemon.sprites.other?.['official-artwork'].front_default ||
               '/pokemonImg/그우린차.webp'

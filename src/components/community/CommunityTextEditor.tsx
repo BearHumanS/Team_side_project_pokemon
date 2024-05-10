@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
+
 import ReactQuill from 'react-quill';
 import { Input, Select } from 'antd';
 import 'react-quill/dist/quill.snow.css';
 import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/useUsersStore';
 import styles from './CommunityTextEditor.module.scss';
 import { addCommunity } from '@/lib/firebaseQueryCommunity';
@@ -11,15 +12,13 @@ import { ADMINS } from '@/lib/constants';
 
 const CommunityTextEditor = () => {
   const { user } = useUserStore();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [editorRef, setEditorRef] = useState('');
   const [category, setCategory] = useState('자유게시판');
   const [title, setTitle] = useState('');
 
   const isAdmin = ADMINS.includes(user?.uid);
-
-  console.log(isAdmin);
 
   const handleChange = (value: string) => {
     if (!isAdmin && value === '공지사항') {
@@ -72,7 +71,7 @@ const CommunityTextEditor = () => {
       console.error(error);
     } finally {
       setLoading(false);
-      navigate(`/community`);
+      router.push(`/community`);
     }
   };
 

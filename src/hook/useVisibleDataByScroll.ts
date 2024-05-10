@@ -1,3 +1,5 @@
+'use client';
+
 import { PokemonType } from '@/lib/type';
 import { useEffect, useState } from 'react';
 

@@ -140,7 +140,7 @@ export const FORMDATE = (date: string) => {
 // };
 
 export const ADMINS = [
-  import.meta.env.VITE_ADMIN_UID_1,
-  import.meta.env.VITE_ADMIN_UID_2,
-  import.meta.env.VITE_ADMIN_UID_3,
+  process.env.NEXT_PUBLIC_ADMIN_UID_1,
+  process.env.NEXT_PUBLIC_ADMIN_UID_2,
+  process.env.NEXT_PUBLIC_ADMIN_UID_3,
 ];

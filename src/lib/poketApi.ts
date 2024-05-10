@@ -5,7 +5,7 @@ export const getAllPokemonDatas = async (limit: number) => {
   return fetchData(`pokemon?limit=${limit}`, 'get');
 };
 
-export const getPokemonData = async (pokemon: number | string) => {
+export const getPokemonData = async (pokemon: number | string | string[]) => {
   return fetchData(`pokemon/${pokemon}/`, 'get');
 };
 

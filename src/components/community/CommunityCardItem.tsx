@@ -1,8 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from 'next/image';
 import { storage } from '@/firebase';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import styles from './CommunityCardItem.module.scss';
 import { ConvertTime } from '@/lib/util/convertTime';
 import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
@@ -21,7 +20,7 @@ export const fetchProfileImages = async (userId: string) => {
 };
 
 const CommunityCardItem = ({ data }: any) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { data: imageUrl }: any = useQuery(
     ['profileImages', data.userId],
     async () => {
@@ -33,7 +32,7 @@ const CommunityCardItem = ({ data }: any) => {
   const likeCount = data.likes ? data.likes.length : 0;
 
   const handleToDetail = () => {
-    navigate(`/community/detail/${data.id}`);
+    router.push(`/community/detail/${data.id}`);
   };
 
   const maxLength = 15;
@@ -41,7 +40,7 @@ const CommunityCardItem = ({ data }: any) => {
   return (
     <div className={styles.container} onClick={handleToDetail}>
       <div className={styles.titleImg}>
-        <img src={`/${data.postImg}`} />
+        <Image src={`/${data.postImg}`} alt="." width={280} height={140} />
       </div>
       <div className={styles.innerBox}>
         <div className={styles.titleItem}>
@@ -52,9 +51,19 @@ const CommunityCardItem = ({ data }: any) => {
         <div className={styles.userBox}>
           <div className={styles.usersImg}>
             {imageUrl ? (
-              <img src={imageUrl.toString()} alt="유저 이미지" />
+              <Image
+                src={imageUrl.toString()}
+                alt="유저 이미지"
+                width={21}
+                height={21}
+              />
             ) : (
-              <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+              <Image
+                src={PROFILE_DEFAULT_IMG}
+                alt="유저 이미지"
+                width={21}
+                height={21}
+              />
             )}
           </div>
           <div>{data.userName}</div>

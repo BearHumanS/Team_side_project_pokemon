@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import Image from 'next/image';
 import styles from './Mypage.module.scss';
 import { IoIosCloseCircle } from '@react-icons/all-files/io/IoIosCloseCircle';
 import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
@@ -36,11 +37,12 @@ const DesktopIntroduce = ({ props }: DesktopIntroduceProps) => {
   return (
     <div className={styles.intro__container}>
       <div className={styles.intro__profile__img}>
-        <img
+        <Image
           src={imgUrl || PROFILE_DEFAULT_IMG}
           alt="프로필 이미지"
           width={162}
           height={162}
+          priority
         />
         {editMode ? (
           <>

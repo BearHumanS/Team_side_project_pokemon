@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from 'next/image';
 import { storage } from '@/firebase';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import useUserStore from '@/store/useUsersStore';
 import { ConvertTimes } from '@/lib/util/convertTime';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -34,6 +33,7 @@ const CommunityCommentItemReply = ({ data, val, setReplyList, onDel }: any) => {
       }
     };
     fetchImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** 대댓글 수정 요청 */
@@ -86,9 +86,19 @@ const CommunityCommentItemReply = ({ data, val, setReplyList, onDel }: any) => {
               <div className={styles.userBoxMobile}>
                 <div className={styles.usersImg}>
                   {imageUrl ? (
-                    <img src={imageUrl.toString()} alt="유저 이미지" />
+                    <Image
+                      src={imageUrl.toString()}
+                      alt="유저 이미지"
+                      width={21}
+                      height={21}
+                    />
                   ) : (
-                    <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+                    <Image
+                      src={PROFILE_DEFAULT_IMG}
+                      alt="유저 이미지"
+                      width={21}
+                      height={21}
+                    />
                   )}
                 </div>
                 <div>{value.userName}</div>

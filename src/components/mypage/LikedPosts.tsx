@@ -1,7 +1,7 @@
 import { deleteDocument, getAllDocument } from '@/lib/firebaseQuery';
 import useUserStore from '@/store/useUsersStore';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import RenderLikedPosts from './RenderLikedPosts';
 import styles from './Mypage.module.scss';
 import { Pagination } from 'antd';
@@ -17,7 +17,7 @@ const MyPosts = () => {
   const itemsPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
   const { likes, setLikes, removeLike } = useLikesPostStore();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const { user } = useUserStore();
 
@@ -69,7 +69,7 @@ const MyPosts = () => {
   };
 
   const onMoveToDocument = (likeId: string) => {
-    navigate(`/community/detail/${likeId}`);
+    router.push(`/community/detail/${likeId}`);
   };
 
   return (

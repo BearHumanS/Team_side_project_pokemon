@@ -5,7 +5,6 @@ interface Props extends SVGMotionProps<SVGSVGElement> {
   color?: string;
   strokeWidth?: string | number;
   transition?: Transition;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   lineProps?: any;
 }
 

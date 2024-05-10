@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { FaRegAddressCard } from '@react-icons/all-files/fa/FaRegAddressCard';
 // import { BsFilePlus } from '@react-icons/all-files/bs/BsFilePlus';
 // import { RiUserVoiceFill } from '@react-icons/all-files/ri/RiUserVoiceFill';
@@ -10,11 +12,21 @@ import { MdRecordVoiceOver } from '@react-icons/all-files/md/MdRecordVoiceOver';
 import styles from './Header.module.scss';
 import useUserStore from '@/store/useUsersStore';
 import { Modalportal } from '@/portal';
-import SocialLogin from '../users/SocialLogin';
 import MobileModal from '../modal/MobileModal';
+import dynamic from 'next/dynamic';
+
+const SocialLogin = dynamic(() => import('../users/SocialLogin'), {
+  ssr: false,
+});
 
 const MobileNavMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const pathName = usePathname();
+
+  const getClassName = (path: string): string => {
+    return pathName === path ? styles.active : '';
+  };
+
   const { user } = useUserStore();
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -28,41 +40,32 @@ const MobileNavMenu = () => {
   return (
     <>
       <nav className={styles.mobile__Navmenu__container} onClick={onClick}>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-        >
+        <Link href="/" className={getClassName('/')}>
           <div className={styles.nav__item__mobile}>
             <FaRegAddressCard size={24} />
             도감
           </div>
-        </NavLink>
-        <NavLink
-          to="cardedit"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-        >
+        </Link>
+        <Link href="/cardedit" className={getClassName('/cardedit')}>
           <div className={styles.nav__item__mobile}>
             <FiPlusSquare size={24} />
             카드 제작
           </div>
-        </NavLink>
-        <NavLink
-          to="community"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-        >
+        </Link>
+        <Link href="/community" className={getClassName('/community')}>
           <div className={styles.nav__item__mobile}>
             <MdRecordVoiceOver size={24} />
             커뮤니티
           </div>
-        </NavLink>
+        </Link>
 
         <div className={styles.nav__item__mobile} onClick={onToggleModal}>
           {user ? (
             <>
               <div className={styles.nav__profile__img}>
-                <img
+                <Image
                   style={{ borderRadius: '50%' }}
-                  src={user?.photoURL || undefined}
+                  src={user?.photoURL || undefined || ''}
                   alt="프로필 사진"
                   width={31}
                   height={31}

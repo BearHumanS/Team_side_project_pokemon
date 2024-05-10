@@ -5,9 +5,10 @@ import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { useEffect, useState } from 'react';
 import { getPokemonData } from '@/lib/poketApi';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { PokemonInfoExtendsProps } from './PokemonInfo';
 import EvolutionImgSkeleton from '../skeleton/EvolutionImgSkeleton';
+import Image from 'next/image';
 
 const EvolutionChain = ({
   pokemonState,
@@ -19,7 +20,7 @@ const EvolutionChain = ({
     PokemonType[]
   >([]);
 
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const fetchData = async (evolvesChain: string[][]) => {
     const evolvesChainFlat =
@@ -100,14 +101,16 @@ const EvolutionChain = ({
                               data={preEvolutionPokemon}
                               className={styles.evolves__list}
                               onClick={() =>
-                                navigate(`/pokemon/${preEvolutionPokemon.id}`)
+                                router.push(
+                                  `/pokemon/${preEvolutionPokemon.id}`,
+                                )
                               }
                             >
-                              <img
+                              <Image
                                 src={
                                   preEvolutionPokemon.sprites?.other?.[
                                     'official-artwork'
-                                  ].front_default
+                                  ].front_default as string
                                 }
                                 alt={`${preEvolutionPokemon.name} 포켓몬 이미지`}
                                 width={141}
@@ -123,7 +126,7 @@ const EvolutionChain = ({
                                 ]
                               }
                             </div>
-                            <img
+                            <Image
                               className={styles.evolves__pre__evolution__arrow}
                               src="/arrow.svg"
                               alt="우측 화살표"
@@ -137,20 +140,20 @@ const EvolutionChain = ({
                         {finalEvolutionPokemons.map((pokemonData) => (
                           <div
                             className={styles.evolves__final__evolution__box}
-                            key={pokemonData.id}
+                            key={pokemonData.name}
                           >
                             <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
-                                navigate(`/pokemon/${pokemonData.id}`)
+                                router.push(`/pokemon/${pokemonData.id}`)
                               }
                             >
-                              <img
+                              <Image
                                 src={
                                   pokemonData.sprites?.other?.[
                                     'official-artwork'
-                                  ].front_default
+                                  ].front_default as string
                                 }
                                 alt={`${pokemonData.name} 포켓몬 이미지`}
                                 width={141}
@@ -175,21 +178,21 @@ const EvolutionChain = ({
                       {commonEvolutionPokemonData?.map((pokemonData, index) => {
                         return (
                           <div
-                            key={pokemonData.id}
+                            key={pokemonData.name}
                             className={styles.evolves__common__evolution}
                           >
                             <PokemonDexElementLayout
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
-                                navigate(`/pokemon/${pokemonData.id}`)
+                                router.push(`/pokemon/${pokemonData.id}`)
                               }
                             >
-                              <img
+                              <Image
                                 src={
                                   pokemonData.sprites?.other?.[
                                     'official-artwork'
-                                  ].front_default
+                                  ].front_default as string
                                 }
                                 alt={`${pokemonData.name} 포켓몬 이미지`}
                                 width={141}
@@ -202,7 +205,7 @@ const EvolutionChain = ({
                               {reverseObject(POKEMON_NAME)[pokemonData.name]}
                             </div>
                             {index < evovlutionPokemonData.length - 1 && (
-                              <img
+                              <Image
                                 className={
                                   styles.evolves__pre__evolution__arrow
                                 }
@@ -220,21 +223,21 @@ const EvolutionChain = ({
                         {otherFinalEvolutionPokemonData?.map((pokemonData) => {
                           return (
                             <div
-                              key={pokemonData.id}
+                              key={pokemonData.name}
                               className={styles.evolves__pre__evolution}
                             >
                               <PokemonDexElementLayout
                                 data={pokemonData}
                                 className={styles.evolves__list}
                                 onClick={() =>
-                                  navigate(`/pokemon/${pokemonData.id}`)
+                                  router.push(`/pokemon/${pokemonData.id}`)
                                 }
                               >
-                                <img
+                                <Image
                                   src={
                                     pokemonData.sprites?.other?.[
                                       'official-artwork'
-                                    ].front_default
+                                    ].front_default as string
                                   }
                                   alt={`${pokemonData.name} 포켓몬 이미지`}
                                   width={141}
@@ -257,7 +260,7 @@ const EvolutionChain = ({
                     {evovlutionPokemonData?.map((pokemonData, index) => {
                       return (
                         <div
-                          key={pokemonData.id}
+                          key={pokemonData.name}
                           className={styles.evolves__pre__evolution__box}
                         >
                           <div className={styles.evolves__pre__evolution}>
@@ -265,10 +268,10 @@ const EvolutionChain = ({
                               data={pokemonData}
                               className={styles.evolves__list}
                               onClick={() =>
-                                navigate(`/pokemon/${pokemonData.id}`)
+                                router.push(`/pokemon/${pokemonData.id}`)
                               }
                             >
-                              <img
+                              <Image
                                 src={
                                   pokemonData.sprites?.other?.[
                                     'official-artwork'
@@ -286,7 +289,7 @@ const EvolutionChain = ({
                             </div>
                           </div>
                           {index < evovlutionPokemonData.length - 1 && (
-                            <img
+                            <Image
                               className={styles.arrow}
                               src="/arrow.svg"
                               alt="우측 화살표"

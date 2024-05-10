@@ -26,7 +26,18 @@ const ButtonDel = ({ data }: Props) => {
 };
 
 const ButtonCircle = () => {
-  return <div className={styles.ButtonCircle}><FaPen /></div>;
+  return (
+    <div className={styles.ButtonCircle}>
+      <FaPen />
+    </div>
+  );
 };
 
-export { Button, ButtonCategory, ButtonEdit, ButtonDel, ButtonLg, ButtonCircle };
+export {
+  Button,
+  ButtonCategory,
+  ButtonEdit,
+  ButtonDel,
+  ButtonLg,
+  ButtonCircle,
+};

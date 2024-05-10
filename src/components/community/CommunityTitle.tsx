@@ -1,7 +1,7 @@
-import styles from "./CommunityTitle.module.scss"
+import styles from './CommunityTitle.module.scss';
 
 interface Props {
-  title: string
+  title: string;
 }
 
 const CommunityTitle = (item: Props) => {

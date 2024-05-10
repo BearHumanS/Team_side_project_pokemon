@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styles from './PokemonDex.module.scss';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { POKEMON_NAME } from '@/lib/pokemonName';
@@ -12,24 +13,25 @@ interface PokemonDexElementProp {
 }
 
 const PokemonDexElement = ({ data }: PokemonDexElementProp) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   return (
     <PokemonDexElementLayout
       data={data}
       onClick={() => {
-        navigate(`/pokemon/${data.id}`);
+        router.push(`/pokemon/${data.id}`);
       }}
       className={styles.padding_bottom_35px}
     >
-      <img
-        loading="lazy"
+      <Image
         className={styles.pokemon_image}
         src={
           data.id !== 1013
-            ? data.sprites?.other?.['official-artwork']?.front_default
+            ? data.sprites?.other?.['official-artwork']?.front_default || ''
             : '/pokemonImg/그우린차.webp'
         }
         alt="포켓몬 이미지"
+        width={141}
+        height={141}
       />
       <span className={styles.pokemon_name}>
         {reverseObject(POKEMON_NAME)[data.name]}

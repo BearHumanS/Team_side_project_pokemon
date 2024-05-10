@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/useUsersStore';
 import { ConvertTimes } from '@/lib/util/convertTime';
 import { PROFILE_DEFAULT_IMG } from '@/lib/constants';
@@ -17,22 +18,11 @@ import {
 import { MdRemoveRedEye } from '@react-icons/all-files/md/MdRemoveRedEye';
 import { FetchProfileImages } from '@/lib/util/fetchProfileImages';
 import useLikesPostStore from '@/store/useLikesPostStore';
+import usePostDataStore from '@/store/usePostDataStore';
+import { PostData } from '../mypage/MyPosts';
 
-interface DetailHeaderProps {
-  data: {
-    category?: string;
-    createdAt?: string;
-    description?: string;
-    id?: string;
-    likes?: string[];
-    postImg?: string;
-    title?: string;
-    updateAt?: string;
-    userId?: string;
-    userImg?: string;
-    userName?: string;
-    views?: number;
-  };
+export interface DetailHeaderProps {
+  data: PostData;
   id: {
     id?: string;
   };
@@ -40,8 +30,10 @@ interface DetailHeaderProps {
 
 const CommunityDetailHeader = ({ data, id }: DetailHeaderProps) => {
   const { user } = useUserStore();
-  const navigate = useNavigate();
+  const router = useRouter();
   const { removeLike } = useLikesPostStore();
+
+  const { setPostData } = usePostDataStore();
 
   const { data: imageUrl } = useQuery(
     ['profileImages', data.userId],
@@ -78,18 +70,17 @@ const CommunityDetailHeader = ({ data, id }: DetailHeaderProps) => {
   const onDelete = async () => {
     const confirm = window.confirm('해당 글을 삭제하시겠습니까?');
 
-    try {
-      if (confirm && user) {
+    if (confirm && user?.uid) {
+      try {
         await deleteCommunity(`community/${id.id}`);
+        await deleteDocument(`/heart/${user.uid}/like/${id.id}`);
+
+        removeLike(id.id);
+
+        router.push(`/community`);
+      } catch (error) {
+        console.error(error);
       }
-
-      await deleteDocument(`/heart/${user?.uid}/like/${id.id}`);
-
-      removeLike(id.id);
-
-      navigate(`/community`);
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -101,9 +92,19 @@ const CommunityDetailHeader = ({ data, id }: DetailHeaderProps) => {
         <div className={styles.userBox}>
           <div className={styles.usersImg}>
             {imageUrl ? (
-              <img src={imageUrl.toString()} alt="유저 이미지" />
+              <Image
+                src={imageUrl.toString()}
+                alt="유저 이미지"
+                width={21}
+                height={21}
+              />
             ) : (
-              <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+              <Image
+                src={PROFILE_DEFAULT_IMG}
+                alt="유저 이미지"
+                width={21}
+                height={21}
+              />
             )}
           </div>
           <div>{data.userName}</div>
@@ -113,7 +114,8 @@ const CommunityDetailHeader = ({ data, id }: DetailHeaderProps) => {
           <div className={styles.editDelBox}>
             <div
               onClick={() => {
-                navigate(`/community/edit`, { state: { data, id } });
+                setPostData(data);
+                router.push(`/community/edit`);
               }}
             >
               <ButtonEdit data="글 수정" />

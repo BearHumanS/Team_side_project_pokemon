@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import PokemonInfo from './PokemonInfo';
 import Status from './Status';
@@ -8,7 +10,7 @@ import {
 } from '@/lib/poketApi';
 import { PokemonState } from '@/lib/type';
 import PokemonImg from './PokemonImg';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import { FORM_NAMES } from '@/lib/pokemonFormNames';
 import Comments from '@/components/comment/Comments';
 import styles from './Detail.module.scss';
@@ -61,7 +63,7 @@ const Detail = () => {
     const fetchDataAPI = async () => {
       setIsLoading(true);
       try {
-        const pokemonData = await getPokemonData(params.id ?? '');
+        const pokemonData = await getPokemonData(params.pokemonId);
         const speciesData = await getPokemonSpecies(pokemonData.species.url);
         const evolvesChainData = await getEvolvesDatas(
           speciesData.evolution_chain.url,
@@ -94,9 +96,10 @@ const Detail = () => {
       }
     };
 
-    if (pokemonState.pokemon?.id !== params.id) {
+    if (pokemonState.pokemon?.id !== Number(params.id)) {
       fetchDataAPI();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id, pokemonState.pokemon?.id]);
 
   const onFormChange = async (formName: string) => {

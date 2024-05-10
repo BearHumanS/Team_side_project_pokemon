@@ -1,3 +1,5 @@
+'use client';
+
 import Introduce from '@/components/mypage/Introduce';
 import MyActive from '@/components/mypage/MyActive';
 import Mycard from '@/components/mypage/Mycard';

@@ -1,6 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { db } from '@/firebase';
 import useUserStore from '@/store/useUsersStore';
 import styles from './CommunityComment.module.scss';
@@ -78,6 +75,7 @@ const CommunityComment = ({ id, data }: any) => {
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id.id]);
 
   /** 댓글 상태값 setComment 전달 */

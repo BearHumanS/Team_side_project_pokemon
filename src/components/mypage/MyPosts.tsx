@@ -2,11 +2,12 @@ import { deleteDocument, getAllDocument } from '@/lib/firebaseQuery';
 import { deleteCommunity } from '@/lib/firebaseQueryCommunity';
 import useUserStore from '@/store/useUsersStore';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import RenderPost from './RenderPost';
 import styles from './Mypage.module.scss';
 import { Pagination } from 'antd';
 import useLikesPostStore from '@/store/useLikesPostStore';
+import usePostDataStore from '@/store/usePostDataStore';
 
 export interface Posts {
   id: string;
@@ -14,17 +15,17 @@ export interface Posts {
 }
 
 export interface PostData {
-  id: string;
-  category: string;
-  createdAt: string;
-  description: string;
-  likes: number;
-  postImg: string;
-  title: string;
-  userId: string;
-  userImg: string;
-  userName: string;
-  views: number;
+  id?: string;
+  category?: string;
+  createdAt?: string;
+  description?: string;
+  likes?: string[];
+  postImg?: string;
+  title?: string;
+  userId?: string;
+  userImg?: string;
+  userName?: string;
+  views?: number;
 }
 
 const MyPosts = () => {
@@ -32,9 +33,10 @@ const MyPosts = () => {
   const [posts, setPosts] = useState<Posts[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { removeLike } = useLikesPostStore();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const { user } = useUserStore();
+  const { setPostData } = usePostDataStore();
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -57,7 +59,8 @@ const MyPosts = () => {
   }, [user?.uid]);
 
   const onEdit = (data: PostData, id: string) => {
-    navigate(`/community/edit`, { state: { data, id } });
+    setPostData(data);
+    router.push(`/community/edit/${id}`);
   };
 
   const onDelete = async (postId: string) => {
@@ -92,7 +95,7 @@ const MyPosts = () => {
   };
 
   const onMovetoDocument = (postId: string) => {
-    navigate(`/community/detail/${postId}`);
+    router.push(`/community/detail/${postId}`);
   };
 
   return (

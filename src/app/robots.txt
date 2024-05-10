@@ -1,0 +1,3 @@
+User-Agent: *
+Allow: /
+Sitemap: https://my-pokehub.vercel.app/sitemap.xml

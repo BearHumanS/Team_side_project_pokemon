@@ -1,16 +1,12 @@
-import styles from "./CommunityDetailLayout.module.scss"
-import { ReactNode } from "react"
+import styles from './CommunityDetailLayout.module.scss';
+import { ReactNode } from 'react';
 
 interface Prop {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const CommunityDetailLayout = ({children}: Prop) => {
-  return (
-    <div className={styles.container}>
-    {children}
-    </div>
-  )
-}
+const CommunityDetailLayout = ({ children }: Prop) => {
+  return <div className={styles.container}>{children}</div>;
+};
 
-export default CommunityDetailLayout
+export default CommunityDetailLayout;

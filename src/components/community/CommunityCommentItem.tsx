@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from 'next/image';
 import { storage } from '@/firebase';
 import useUserStore from '@/store/useUsersStore';
 import { getDocument } from '@/lib/firebaseQuery';
@@ -47,6 +46,7 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
       }
     };
     fetchImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /** 대댓글 내용 받아오기 */
@@ -205,9 +205,19 @@ const CommunityCommentItem = ({ value, id, onDel }: any) => {
             <div className={styles.usersImg}>
               {/* 이미지 넣기 */}
               {imageUrl ? (
-                <img src={imageUrl.toString()} alt="유저 이미지" />
+                <Image
+                  src={imageUrl.toString()}
+                  alt="유저 이미지"
+                  width={21}
+                  height={21}
+                />
               ) : (
-                <img src={PROFILE_DEFAULT_IMG} alt="유저 이미지" />
+                <Image
+                  src={PROFILE_DEFAULT_IMG}
+                  alt="유저 이미지"
+                  width={21}
+                  height={21}
+                />
               )}
             </div>
             <div>{value.userName}</div>

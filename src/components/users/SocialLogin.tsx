@@ -11,7 +11,7 @@ import {
 } from 'firebase/auth';
 import styles from './SocialLogin.module.scss';
 import useUserStore from '@/store/useUsersStore';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import SelectLogin from './SelectLogin';
 import SelectMyInfo from './SelectMyInfo';
 import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
@@ -28,7 +28,7 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
 
   const { user, setUser } = useUserStore();
   const windowWidth = useCalculateInnerWidth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     const setAuthPersistence = async () => {
@@ -87,7 +87,7 @@ const SocialLogin = ({ isOpen, setIsOpen }: SocialLoginProps) => {
   };
 
   const onMoveMyPage = () => {
-    navigate('/mypage');
+    router.push('/mypage');
   };
 
   return (

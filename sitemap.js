@@ -2,9 +2,8 @@ import * as fs from 'fs';
 import { create } from 'xmlbuilder2';
 import moment from 'moment';
 
-const pages = ['/', '/community'];
+const pages = ['/', '/community', '/cardEdit', '/mypage'];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const addPath = (root, path, freq) => {
   root
     .ele('url')
@@ -24,7 +23,7 @@ const generateSitemapXml = () => {
   const root = create({ version: '1.0', encoding: 'UTF-8' }).ele('urlset', {
     xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
   });
-  const BASE = 'https://my-poke-hub.vercel.app';
+  const BASE = 'https://my-pokehub.vercel.app';
 
   addPath(root, BASE + pages[0], 'weekly');
 
@@ -36,7 +35,7 @@ const generateSitemapXml = () => {
 };
 
 const sitemapXml = generateSitemapXml();
-const filename = './public/sitemap.xml';
+const filename = './src/app/sitemap.xml';
 fs.writeFileSync(filename, sitemapXml);
 
 console.log('사이트맵 생성 완료');

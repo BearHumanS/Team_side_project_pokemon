@@ -118,7 +118,7 @@
 .commentButtonBox {
   display: flex;
   margin-top: 10px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .ButtonStyle {
@@ -187,5 +187,5 @@
 
 .ButtonStyleBox {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }

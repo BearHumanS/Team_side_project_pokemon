@@ -2,7 +2,7 @@ import { POKEMON_TYPES } from '@/lib/constants';
 import styles from './Detail.module.scss';
 import { useEffect, useState } from 'react';
 import { Stat, TypesType } from '@/lib/type';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 
 interface StatusBarProp {
   baseStat: Stat;
@@ -10,8 +10,8 @@ interface StatusBarProp {
 }
 
 const StatusBar = ({ baseStat, pokemonTypes }: StatusBarProp) => {
-  const location = useLocation();
-  const isMyPage = location.pathname.includes('mypage');
+  const pathName = usePathname();
+  const isMyPage = pathName.includes('mypage');
   const [percentages, setPercentages] = useState<Record<string, number>>({});
 
   const typeColor = pokemonTypes?.map((typeInfo) => {

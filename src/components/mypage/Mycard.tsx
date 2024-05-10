@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import styles from './Mypage.module.scss';
 import { FiPlus } from '@react-icons/all-files/fi/FiPlus';
 import { Modalportal } from '@/portal';
@@ -28,7 +28,7 @@ const Mycard = () => {
   const [selectedCard, setSelectedCard] = useState<Card | null | undefined>(
     null,
   );
-  const navigate = useNavigate();
+  const router = useRouter();
   const { user } = useUserStore();
   const windowWidth = useCalculateInnerWidth();
   const { index, prevSlide, nextSlide } = useSlide(6, 1);
@@ -86,7 +86,7 @@ const Mycard = () => {
   const onMoveMakeCard = () => {
     if (windowWidth <= 768) {
       setIsAlert((prev) => !prev);
-    } else navigate('/cardedit');
+    } else router.push('/cardedit');
   };
 
   const onModalToggle = (card?: Card) => {

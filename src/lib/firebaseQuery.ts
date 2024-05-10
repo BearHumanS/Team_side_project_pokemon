@@ -36,7 +36,6 @@ export const deleteDocument = async (documentPath: string) => {
 
 export const updateDocument = async (
   collectionPath: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: { [x: string]: any },
 ) => {
   const ref = doc(db, collectionPath);

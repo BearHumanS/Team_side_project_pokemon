@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { PokemonType } from '@/lib/type';
 import styles from './select.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
@@ -34,14 +35,16 @@ const SelectPokemonLayout = ({
         >
           <div className={styles.image}>
             {pokemonArray[index] ? (
-              <img
+              <Image
                 src={
                   pokemonArray[index]?.id !== 1013
                     ? pokemonArray[index]?.sprites?.other?.['official-artwork']
-                        ?.front_default
+                        ?.front_default || ''
                     : '/pokemonImg/그우린차.webp'
                 }
                 alt="포켓몬 이미지"
+                width={100}
+                height={100}
               />
             ) : null}
           </div>

@@ -1,3 +1,5 @@
+'use client';
+
 import useSelectedPokemonForCard from '@/store/useSelectedPokemonForCard';
 import SelectPokemonLike from '@/components/cardMaker/selectPokemon/SelectPokemonLike';
 import SelectPokemonRandom from '@/components/cardMaker/selectPokemon/SelectPokemonRandom';
@@ -13,12 +15,12 @@ import { useGetAllPokemon } from '@/query/qeuries';
 import SearchPokemon from './searchPokemon/SearchPokemon';
 import { useEffect } from 'react';
 import SelectPokemonMobile from './selectPokemon/SelectPokemonMobile';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const CardEditPage = () => {
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const { user } = useUserStore();
-  const navigate = useNavigate();
+  const router = useRouter();
   const {
     pokemonData,
     pokemonNickName1,
@@ -71,7 +73,7 @@ const CardEditPage = () => {
     }
 
     setIsSaving(false);
-    navigate('/mypage');
+    router.push('/mypage');
   };
 
   const pokemonNickName = {
