@@ -5,7 +5,7 @@ const MobileMypageAlert = ({ isOpen }: { isOpen: boolean }) => {
   const router = useRouter();
 
   const onMovetoMakecard = () => {
-    router.push('/cardedit');
+    router.push('/cardEdit');
   };
   return (
     <>

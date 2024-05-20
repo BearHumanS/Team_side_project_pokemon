@@ -61,7 +61,7 @@ const FilterPlates = () => {
           >
             <div className={styles.inner}>
               <motion.span className={styles.description}>
-                *속성을 선택해주세요. (중복 선택 가능)
+                *타입을 선택해주세요. (중복 선택 가능)
               </motion.span>
               <motion.div className={styles.type_plates}>
                 {renderTypes(koreanTypes)}

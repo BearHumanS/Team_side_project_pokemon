@@ -86,7 +86,7 @@ const Mycard = () => {
   const onMoveMakeCard = () => {
     if (windowWidth <= 768) {
       setIsAlert((prev) => !prev);
-    } else router.push('/cardedit');
+    } else router.push('/cardEdit');
   };
 
   const onModalToggle = (card?: Card) => {

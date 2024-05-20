@@ -46,7 +46,7 @@ const MobileNavMenu = () => {
             도감
           </div>
         </Link>
-        <Link href="/cardedit" className={getClassName('/cardedit')}>
+        <Link href="/cardEdit" className={getClassName('/cardEdit')}>
           <div className={styles.nav__item__mobile}>
             <FiPlusSquare size={24} />
             카드 제작
