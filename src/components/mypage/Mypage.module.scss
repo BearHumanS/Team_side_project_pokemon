@@ -686,6 +686,7 @@
 .pagination {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   height: 46px;
 
   @media (max-width: 769px) {

@@ -58,9 +58,9 @@ const MyPosts = () => {
     fetchData();
   }, [user?.uid]);
 
-  const onEdit = (data: PostData, id: string) => {
+  const onEdit = (data: PostData) => {
     setPostData(data);
-    router.push(`/community/edit/${id}`);
+    router.push(`/community/edit`);
   };
 
   const onDelete = async (postId: string) => {
