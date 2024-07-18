@@ -34,24 +34,22 @@ const PokemonDexElementLayout = ({
   };
 
   return (
-    <ul>
-      <motion.li
-        whileHover={{
-          scale: 1.02,
-          boxShadow: `rgba(0, 0, 0, 0.10) 0px 3px 20px`,
-        }}
-        transition={{ duration: 0.2 }}
-        className={`${styles.pokemon_list_element} ${getHighlightClass()} ${
-          className || ''
-        }`}
-        onClick={onClick}
-      >
-        <div className={styles.pokemon_number}>
-          <span>{`${number()}`}</span>
-        </div>
-        {children}
-      </motion.li>
-    </ul>
+    <motion.li
+      whileHover={{
+        scale: 1.02,
+        boxShadow: `rgba(0, 0, 0, 0.10) 0px 3px 20px`,
+      }}
+      transition={{ duration: 0.2 }}
+      className={`${styles.pokemon_list_element} ${getHighlightClass()} ${
+        className || ''
+      }`}
+      onClick={onClick}
+    >
+      <div className={styles.pokemon_number}>
+        <span>{`${number()}`}</span>
+      </div>
+      {children}
+    </motion.li>
   );
 };
 

@@ -3,10 +3,12 @@ import styles from './search.module.scss';
 import { POKEMON_NAME } from '@/lib/pokemonName';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { POKEMON_TYPES } from '@/lib/constants';
-import { useGetAllPokemon } from '@/query/qeuries';
+import { usePokemonQueries } from '@/query/qeuries';
 import { IoSearch } from '@react-icons/all-files/io5/IoSearch';
 import { PokemonType, TypesType } from '@/lib/type';
 import SearchDropdown from './SearchDropdown';
+import useFlatData from '@/hook/useFlatData';
+import { UseQueryResult } from 'react-query';
 
 const SearchPokemon = () => {
   const [text, setText] = useState<string>('');
@@ -15,7 +17,8 @@ const SearchPokemon = () => {
   const [foundPokemon, setFoundPokemon] = useState<
     (PokemonType | undefined)[] | null
   >(null);
-  const { data } = useGetAllPokemon(1017);
+  const queries = usePokemonQueries(1017);
+  const data = useFlatData(queries as UseQueryResult<PokemonType>[]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

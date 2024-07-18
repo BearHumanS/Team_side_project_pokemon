@@ -3,20 +3,22 @@ import { POKEMON_NAME } from '@/lib/pokemonName';
 import { PokemonType, TypesType } from '@/lib/type';
 import { reverseObject } from '@/lib/util/reverseObject';
 import { useMemo } from 'react';
-import { useGetAllPokemon } from '@/query/qeuries';
+import { usePokemonQueries } from '@/query/qeuries';
 import useSelectedStore from '@/store/useSelectedStore';
 import useSearchInputText from '@/store/useSearchInputText';
+import useFlatData from './useFlatData';
+import { UseQueryResult } from 'react-query';
 
 const useFilteredPokemonData = () => {
-  const { data: allPokemonData, isLoading } = useGetAllPokemon(1017);
+  const queries = usePokemonQueries(1017);
+  const allData = useFlatData(queries as UseQueryResult<PokemonType>[]);
   const { selectedPlate } = useSelectedStore();
   const { inputText } = useSearchInputText();
   const reversedPokemonNameObject = reverseObject(POKEMON_NAME);
 
   const filteredData = useMemo(() => {
-    if (!allPokemonData) return [];
-
-    return allPokemonData.filter((data: PokemonType) => {
+    if (!allData.length) return [];
+    return allData.filter((data: PokemonType) => {
       if (inputText) {
         return reversedPokemonNameObject[data?.name]?.includes(inputText);
       }
@@ -30,8 +32,9 @@ const useFilteredPokemonData = () => {
         ),
       );
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allPokemonData, inputText, selectedPlate]);
+  }, [allData, inputText, selectedPlate]);
+
+  const isLoading = !allData.length;
 
   return { filteredData, isLoading };
 };

@@ -23,6 +23,10 @@ const nextConfig = {
         hostname: 'firebasestorage.googleapis.com',
         // 필요한 경우 port와 pathname을 추가할 수 있습니다.
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
     ],
   },
 };

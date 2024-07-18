@@ -1,12 +1,15 @@
 import { PokemonType } from '@/lib/type';
-import { useGetAllPokemon } from '@/query/qeuries';
+import { usePokemonQueries } from '@/query/qeuries';
 import { useCallback, useEffect, useState } from 'react';
 import SelectPokemonLayout from './SelectPokemonLayout';
 import styles from './select.module.scss';
 import useCalculateInnerWidth from '@/hook/useCalculateInnerWidth';
+import useFlatData from '@/hook/useFlatData';
+import { UseQueryResult } from 'react-query';
 
 const SelectPokemonRandom = () => {
-  const { data } = useGetAllPokemon(1017);
+  const queries = usePokemonQueries(1017);
+  const data = useFlatData(queries as UseQueryResult<PokemonType>[]);
   const [randomPokemons, setRandomPokemons] = useState<PokemonType[]>([]);
   const windowWidth = useCalculateInnerWidth();
   let POKEMONS_PER_PAGE = 3;

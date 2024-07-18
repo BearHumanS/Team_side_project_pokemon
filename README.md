@@ -9,7 +9,7 @@
 
 |<a href="https://github.com/cdm1263"><img src="https://avatars.githubusercontent.com/u/122417731?v=4" width=150px alt="차동민" />|<a href="https://github.com/BearHumanS"><img src="https://avatars.githubusercontent.com/u/115094069?v=4" width=150px alt="남기훈" />|<a href="https://github.com/DICEPT"><img src="https://avatars.githubusercontent.com/u/106785596?v=4" width=150px alt="박철민" />|
 |:---------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------:|
-|                                             **[차동민](https://github.com/ChoEun-Sang)**                                             |                                             **[남기훈](https://github.com/BearHumanS)**                                             |                                             **[박철민](https://github.com/DICEPT)**                                             |
+|                                             **[차동민](https://github.com/cdm1263)**                                             |                                             **[남기훈](https://github.com/BearHumanS)**                                             |                                             **[박철민](https://github.com/DICEPT)**                                             |
 |메인 도감 페이지 <br/> 카드 제작 페이지 <br/> 포켓몬 카드 제작| 도감 상세 페이지 <br/> 마이 페이지 <br/> SEO 최적화| 커뮤니티 페이지 <br/> 데스크탑, 모바일 UX/UI 디자인 <br/> 로딩 애니메이션 UI 제작 |
 <br/>
 

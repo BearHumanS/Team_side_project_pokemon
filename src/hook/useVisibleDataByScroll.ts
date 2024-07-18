@@ -3,13 +3,16 @@
 import { PokemonType } from '@/lib/type';
 import { useEffect, useState } from 'react';
 
-const useVisibleDataByScroll = (filteredData: PokemonType[]) => {
+const useVisibleDataByScroll = (
+  filteredData: PokemonType[],
+  itemsPerPage: number,
+) => {
   const [visibleData, setVisibleData] = useState<PokemonType[]>([]);
   const [pageNum, setPageNum] = useState(1);
 
   useEffect(() => {
-    setVisibleData(filteredData.slice(0, pageNum * 20));
-  }, [filteredData, pageNum]);
+    setVisibleData(filteredData.slice(0, pageNum * itemsPerPage));
+  }, [filteredData, pageNum, itemsPerPage]);
 
   const handleScroll = () => {
     const { scrollTop, clientHeight, scrollHeight } = document.documentElement;

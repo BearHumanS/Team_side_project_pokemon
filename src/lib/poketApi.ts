@@ -25,14 +25,10 @@ export const getPokemonSpecies = async (url: string) => {
   return fetchData(`${url}`, 'get');
 };
 
-export const getAllPokemonDetails = async (limit: number) => {
-  const data = await fetchData(`pokemon?limit=${limit}`, 'get');
-  const pokemonDetailDatas: PokemonType[] = await Promise.all(
-    data.results.map((item: Pokemon) => fetchData(item.url, 'get')),
-  );
-  return pokemonDetailDatas;
-};
-
 export const getEvolvesDatas = async (url: string) => {
   return fetchData(`${url}`, 'get');
+};
+
+export const getPokemonDetails = async (url: string) => {
+  return fetchData(url, 'get');
 };

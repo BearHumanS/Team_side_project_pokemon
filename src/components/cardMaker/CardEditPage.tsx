@@ -10,12 +10,14 @@ import Inner from '../Inner';
 import { addDocument, getCountDocument } from '@/lib/firebaseQuery';
 import useUserStore from '@/store/useUsersStore';
 import { MouseEvent, useState } from 'react';
-import { filteredPokemonData } from '@/lib/type';
-import { useGetAllPokemon } from '@/query/qeuries';
+import { PokemonType, filteredPokemonData } from '@/lib/type';
+import { usePokemonQueries } from '@/query/qeuries';
 import SearchPokemon from './searchPokemon/SearchPokemon';
 import { useEffect } from 'react';
 import SelectPokemonMobile from './selectPokemon/SelectPokemonMobile';
 import { useRouter } from 'next/navigation';
+import { UseQueryResult } from 'react-query';
+import useFlatData from '@/hook/useFlatData';
 
 const CardEditPage = () => {
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -28,7 +30,8 @@ const CardEditPage = () => {
     setPokemonData,
     pokemonName,
   } = useSelectedPokemonForCard();
-  const { data } = useGetAllPokemon(1017);
+  const queries = usePokemonQueries(1017);
+  const data = useFlatData(queries as UseQueryResult<PokemonType>[]);
   const filteredPokemonData = {} as filteredPokemonData;
 
   useEffect(() => {
