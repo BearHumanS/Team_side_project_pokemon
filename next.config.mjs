@@ -16,7 +16,6 @@ const withPWA = withPWAInit({
 
 const nextConfig = {
   images: {
-    domains: ['raw.githubusercontent.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -26,6 +25,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
       },
     ],
   },
