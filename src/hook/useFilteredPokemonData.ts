@@ -27,7 +27,7 @@ const useFilteredPokemonData = () => {
       }
       const { types } = data;
       return selectedPlate.every((plate: string) =>
-        types.some(
+        types?.some(
           (type: TypesType) => POKEMON_TYPES[type.type.name] === plate,
         ),
       );
