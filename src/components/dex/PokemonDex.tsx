@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './PokemonDex.module.scss';
 import PokemonDexElement from './PokemonDexElement';
 import Inner from '../Inner';
