@@ -37,7 +37,10 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
     if (!user?.uid) {
       return alert('로그인이 필요합니다.');
     }
+
+    setIsLiked((prev) => !prev);
     setAnimate(true);
+
     try {
       const docSnap = await getDocument(`/likes/${user.uid}`);
       let likes = [];
@@ -61,7 +64,6 @@ const LikePokemon = ({ pokemonId, isLoading }: LikePokemonProps) => {
       });
     } catch (error) {
       console.log(error);
-    } finally {
       setIsLiked((prev) => !prev);
     }
   };
