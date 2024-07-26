@@ -37,7 +37,7 @@ const PokemonDexElement = ({ data }: PokemonDexElementProp) => {
         {reverseObject(POKEMON_NAME)[data.name]}
       </span>
       <div className={styles.pokemon_type}>
-        {data.types.map((typeData: TypesType) => (
+        {data.types?.map((typeData: TypesType) => (
           <Plate
             key={typeData.type.name}
             pokemonTypeProp={POKEMON_TYPES[typeData.type.name]}
