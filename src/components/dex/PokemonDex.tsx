@@ -48,7 +48,7 @@ const PokemonDex = () => {
     <Inner>
       <ul className={styles.pokemon_grid} ref={ulRef}>
         {visibleData.length
-          ? visibleData.map((data) => (
+          ? visibleData?.map((data) => (
               <PokemonDexElement data={data} key={data.name} />
             ))
           : null}
