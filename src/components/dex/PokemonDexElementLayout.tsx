@@ -30,7 +30,7 @@ const PokemonDexElementLayout = ({
   };
 
   const getHighlightClass = () => {
-    return data?.id.toString() === id.pokemonId ? styles.highlighted : '';
+    return data?.id?.toString() === id.pokemonId ? styles.highlighted : '';
   };
 
   return (
